@@ -5,6 +5,10 @@ import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import authRoutes from './Routes/authRoutes'
 import postRoutes from './Routes/postRoutes'
+import profileRoutes from './Routes/profileRoutes'
+import followRoutes from './Routes/followRoutes'
+import feedRoutes from './Routes/feedRoute'
+import countRoutes from './Routes/countRoutes'
 
 dotenv.config()
 
@@ -19,7 +23,11 @@ app.use(cors({
 app.use(cookieParser())
 
 app.use('/api/auth', authRoutes)
-app.use('/api/posts', postRoutes)
+app.use('/api/posts',postRoutes)
+app.use(profileRoutes)
+app.use(followRoutes)
+app.use(feedRoutes)
+app.use(countRoutes)
 
 const PORT = process.env.PORT || 5000
 

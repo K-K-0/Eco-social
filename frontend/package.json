@@ -12,8 +12,10 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",
     "axios": "^1.9.0",
+    "maplibre-gl": "^5.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-map-gl": "^8.0.4",
     "react-router-dom": "^7.5.2",
     "tailwindcss": "^4.1.4"
   },

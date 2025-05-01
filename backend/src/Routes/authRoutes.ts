@@ -12,12 +12,12 @@ const prisma = new PrismaClient()
 dotenv.config()
 
 router.post('/register', async (req, res) => {
-    const { email, password } = req.body
+    const { email, username, password } = req.body
     const hashedPassword = await bcrypt.hash(password, 10)
 
     try {
         const newUser = await prisma.user.create({
-            data: { email, password: hashedPassword }
+            data: { email, username, password: hashedPassword }
         })
         res.status(201).json(newUser)
     } catch (error) {

@@ -4,6 +4,7 @@ import Home from "./pages/home"
 import Login from "./pages/login"
 import Dashboard from "./pages/dashboard"
 import LogoutButton from "./pages/Logout"
+import CreatePost from "./pages/createPost"
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/logout" element={<LogoutButton />} />
+          <Route path="/create-post" element={<CreatePost />} />
         </Routes>
       </Router>
     </AuthProvider>

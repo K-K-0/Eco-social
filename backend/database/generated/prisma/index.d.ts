@@ -1121,6 +1121,7 @@ export namespace Prisma {
 
   export type UserMinAggregateOutputType = {
     id: number | null
+    username: string | null
     email: string | null
     password: string | null
     createdAt: Date | null
@@ -1128,6 +1129,7 @@ export namespace Prisma {
 
   export type UserMaxAggregateOutputType = {
     id: number | null
+    username: string | null
     email: string | null
     password: string | null
     createdAt: Date | null
@@ -1135,6 +1137,7 @@ export namespace Prisma {
 
   export type UserCountAggregateOutputType = {
     id: number
+    username: number
     email: number
     password: number
     createdAt: number
@@ -1152,6 +1155,7 @@ export namespace Prisma {
 
   export type UserMinAggregateInputType = {
     id?: true
+    username?: true
     email?: true
     password?: true
     createdAt?: true
@@ -1159,6 +1163,7 @@ export namespace Prisma {
 
   export type UserMaxAggregateInputType = {
     id?: true
+    username?: true
     email?: true
     password?: true
     createdAt?: true
@@ -1166,6 +1171,7 @@ export namespace Prisma {
 
   export type UserCountAggregateInputType = {
     id?: true
+    username?: true
     email?: true
     password?: true
     createdAt?: true
@@ -1260,6 +1266,7 @@ export namespace Prisma {
 
   export type UserGroupByOutputType = {
     id: number
+    username: string
     email: string
     password: string
     createdAt: Date
@@ -1286,6 +1293,7 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    username?: boolean
     email?: boolean
     password?: boolean
     createdAt?: boolean
@@ -1297,6 +1305,7 @@ export namespace Prisma {
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    username?: boolean
     email?: boolean
     password?: boolean
     createdAt?: boolean
@@ -1304,6 +1313,7 @@ export namespace Prisma {
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    username?: boolean
     email?: boolean
     password?: boolean
     createdAt?: boolean
@@ -1311,12 +1321,13 @@ export namespace Prisma {
 
   export type UserSelectScalar = {
     id?: boolean
+    username?: boolean
     email?: boolean
     password?: boolean
     createdAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     followers?: boolean | User$followersArgs<ExtArgs>
     following?: boolean | User$followingArgs<ExtArgs>
@@ -1335,6 +1346,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      username: string
       email: string
       password: string
       createdAt: Date
@@ -1765,6 +1777,7 @@ export namespace Prisma {
    */
   interface UserFieldRefs {
     readonly id: FieldRef<"User", 'Int'>
+    readonly username: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -2272,6 +2285,8 @@ export namespace Prisma {
     id: number | null
     title: string | null
     content: string | null
+    mediaUrl: string | null
+    mediaType: string | null
     createdAt: Date | null
     userId: number | null
   }
@@ -2280,6 +2295,8 @@ export namespace Prisma {
     id: number | null
     title: string | null
     content: string | null
+    mediaUrl: string | null
+    mediaType: string | null
     createdAt: Date | null
     userId: number | null
   }
@@ -2288,6 +2305,8 @@ export namespace Prisma {
     id: number
     title: number
     content: number
+    mediaUrl: number
+    mediaType: number
     createdAt: number
     userId: number
     _all: number
@@ -2308,6 +2327,8 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    mediaUrl?: true
+    mediaType?: true
     createdAt?: true
     userId?: true
   }
@@ -2316,6 +2337,8 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    mediaUrl?: true
+    mediaType?: true
     createdAt?: true
     userId?: true
   }
@@ -2324,6 +2347,8 @@ export namespace Prisma {
     id?: true
     title?: true
     content?: true
+    mediaUrl?: true
+    mediaType?: true
     createdAt?: true
     userId?: true
     _all?: true
@@ -2419,6 +2444,8 @@ export namespace Prisma {
     id: number
     title: string
     content: string
+    mediaUrl: string
+    mediaType: string
     createdAt: Date
     userId: number
     _count: PostCountAggregateOutputType | null
@@ -2446,6 +2473,8 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    mediaUrl?: boolean
+    mediaType?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2455,6 +2484,8 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    mediaUrl?: boolean
+    mediaType?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2464,6 +2495,8 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    mediaUrl?: boolean
+    mediaType?: boolean
     createdAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2473,11 +2506,13 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     content?: boolean
+    mediaUrl?: boolean
+    mediaType?: boolean
     createdAt?: boolean
     userId?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "createdAt" | "userId", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "mediaUrl" | "mediaType" | "createdAt" | "userId", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2497,6 +2532,8 @@ export namespace Prisma {
       id: number
       title: string
       content: string
+      mediaUrl: string
+      mediaType: string
       createdAt: Date
       userId: number
     }, ExtArgs["result"]["post"]>
@@ -2926,6 +2963,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Post", 'Int'>
     readonly title: FieldRef<"Post", 'String'>
     readonly content: FieldRef<"Post", 'String'>
+    readonly mediaUrl: FieldRef<"Post", 'String'>
+    readonly mediaType: FieldRef<"Post", 'String'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly userId: FieldRef<"Post", 'Int'>
   }
@@ -4440,6 +4479,7 @@ export namespace Prisma {
 
   export const UserScalarFieldEnum: {
     id: 'id',
+    username: 'username',
     email: 'email',
     password: 'password',
     createdAt: 'createdAt'
@@ -4452,6 +4492,8 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     content: 'content',
+    mediaUrl: 'mediaUrl',
+    mediaType: 'mediaType',
     createdAt: 'createdAt',
     userId: 'userId'
   };
@@ -4553,6 +4595,7 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     id?: IntFilter<"User"> | number
+    username?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -4563,6 +4606,7 @@ export namespace Prisma {
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -4573,6 +4617,7 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    username?: string
     email?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -4582,10 +4627,11 @@ export namespace Prisma {
     followers?: FollowListRelationFilter
     following?: FollowListRelationFilter
     posts?: PostListRelationFilter
-  }, "id" | "email">
+  }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -4601,6 +4647,7 @@ export namespace Prisma {
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"User"> | number
+    username?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -4613,6 +4660,8 @@ export namespace Prisma {
     id?: IntFilter<"Post"> | number
     title?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    mediaUrl?: StringFilter<"Post"> | string
+    mediaType?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     userId?: IntFilter<"Post"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -4622,6 +4671,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    mediaUrl?: SortOrder
+    mediaType?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -4634,6 +4685,8 @@ export namespace Prisma {
     NOT?: PostWhereInput | PostWhereInput[]
     title?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    mediaUrl?: StringFilter<"Post"> | string
+    mediaType?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     userId?: IntFilter<"Post"> | number
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -4643,6 +4696,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    mediaUrl?: SortOrder
+    mediaType?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     _count?: PostCountOrderByAggregateInput
@@ -4659,6 +4714,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Post"> | number
     title?: StringWithAggregatesFilter<"Post"> | string
     content?: StringWithAggregatesFilter<"Post"> | string
+    mediaUrl?: StringWithAggregatesFilter<"Post"> | string
+    mediaType?: StringWithAggregatesFilter<"Post"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     userId?: IntWithAggregatesFilter<"Post"> | number
   }
@@ -4715,6 +4772,7 @@ export namespace Prisma {
   }
 
   export type UserCreateInput = {
+    username: string
     email: string
     password: string
     createdAt?: Date | string
@@ -4725,6 +4783,7 @@ export namespace Prisma {
 
   export type UserUncheckedCreateInput = {
     id?: number
+    username: string
     email: string
     password: string
     createdAt?: Date | string
@@ -4734,6 +4793,7 @@ export namespace Prisma {
   }
 
   export type UserUpdateInput = {
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4744,6 +4804,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4754,12 +4815,14 @@ export namespace Prisma {
 
   export type UserCreateManyInput = {
     id?: number
+    username: string
     email: string
     password: string
     createdAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4767,6 +4830,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4775,6 +4839,8 @@ export namespace Prisma {
   export type PostCreateInput = {
     title: string
     content: string
+    mediaUrl: string
+    mediaType: string
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutPostsInput
   }
@@ -4783,6 +4849,8 @@ export namespace Prisma {
     id?: number
     title: string
     content: string
+    mediaUrl: string
+    mediaType: string
     createdAt?: Date | string
     userId: number
   }
@@ -4790,6 +4858,8 @@ export namespace Prisma {
   export type PostUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    mediaUrl?: StringFieldUpdateOperationsInput | string
+    mediaType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPostsNestedInput
   }
@@ -4798,6 +4868,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    mediaUrl?: StringFieldUpdateOperationsInput | string
+    mediaType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
   }
@@ -4806,6 +4878,8 @@ export namespace Prisma {
     id?: number
     title: string
     content: string
+    mediaUrl: string
+    mediaType: string
     createdAt?: Date | string
     userId: number
   }
@@ -4813,6 +4887,8 @@ export namespace Prisma {
   export type PostUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    mediaUrl?: StringFieldUpdateOperationsInput | string
+    mediaType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -4820,6 +4896,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    mediaUrl?: StringFieldUpdateOperationsInput | string
+    mediaType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
   }
@@ -4921,6 +4999,7 @@ export namespace Prisma {
 
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -4932,6 +5011,7 @@ export namespace Prisma {
 
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -4939,6 +5019,7 @@ export namespace Prisma {
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
+    username?: SortOrder
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
@@ -5005,6 +5086,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    mediaUrl?: SortOrder
+    mediaType?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -5018,6 +5101,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    mediaUrl?: SortOrder
+    mediaType?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -5026,6 +5111,8 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     content?: SortOrder
+    mediaUrl?: SortOrder
+    mediaType?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
   }
@@ -5389,6 +5476,8 @@ export namespace Prisma {
   export type PostCreateWithoutUserInput = {
     title: string
     content: string
+    mediaUrl: string
+    mediaType: string
     createdAt?: Date | string
   }
 
@@ -5396,6 +5485,8 @@ export namespace Prisma {
     id?: number
     title: string
     content: string
+    mediaUrl: string
+    mediaType: string
     createdAt?: Date | string
   }
 
@@ -5473,11 +5564,14 @@ export namespace Prisma {
     id?: IntFilter<"Post"> | number
     title?: StringFilter<"Post"> | string
     content?: StringFilter<"Post"> | string
+    mediaUrl?: StringFilter<"Post"> | string
+    mediaType?: StringFilter<"Post"> | string
     createdAt?: DateTimeFilter<"Post"> | Date | string
     userId?: IntFilter<"Post"> | number
   }
 
   export type UserCreateWithoutPostsInput = {
+    username: string
     email: string
     password: string
     createdAt?: Date | string
@@ -5487,6 +5581,7 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutPostsInput = {
     id?: number
+    username: string
     email: string
     password: string
     createdAt?: Date | string
@@ -5511,6 +5606,7 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutPostsInput = {
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5520,6 +5616,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutPostsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5528,6 +5625,7 @@ export namespace Prisma {
   }
 
   export type UserCreateWithoutFollowingInput = {
+    username: string
     email: string
     password: string
     createdAt?: Date | string
@@ -5537,6 +5635,7 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutFollowingInput = {
     id?: number
+    username: string
     email: string
     password: string
     createdAt?: Date | string
@@ -5550,6 +5649,7 @@ export namespace Prisma {
   }
 
   export type UserCreateWithoutFollowersInput = {
+    username: string
     email: string
     password: string
     createdAt?: Date | string
@@ -5559,6 +5659,7 @@ export namespace Prisma {
 
   export type UserUncheckedCreateWithoutFollowersInput = {
     id?: number
+    username: string
     email: string
     password: string
     createdAt?: Date | string
@@ -5583,6 +5684,7 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutFollowingInput = {
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5592,6 +5694,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutFollowingInput = {
     id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5611,6 +5714,7 @@ export namespace Prisma {
   }
 
   export type UserUpdateWithoutFollowersInput = {
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5620,6 +5724,7 @@ export namespace Prisma {
 
   export type UserUncheckedUpdateWithoutFollowersInput = {
     id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5641,6 +5746,8 @@ export namespace Prisma {
     id?: number
     title: string
     content: string
+    mediaUrl: string
+    mediaType: string
     createdAt?: Date | string
   }
 
@@ -5675,6 +5782,8 @@ export namespace Prisma {
   export type PostUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    mediaUrl?: StringFieldUpdateOperationsInput | string
+    mediaType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -5682,6 +5791,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    mediaUrl?: StringFieldUpdateOperationsInput | string
+    mediaType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -5689,6 +5800,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    mediaUrl?: StringFieldUpdateOperationsInput | string
+    mediaType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

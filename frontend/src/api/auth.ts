@@ -15,3 +15,16 @@ export const getMe = async () => {
 export const logoutUser = async () => {
     return API.post('/auth/logout')
 }
+
+export const userStats = async () => {
+    return API.get('/posts/stats')
+}
+
+export const createPost = async (formData: FormData) => {
+    return API.post('posts/create', formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
+        withCredentials: true
+    })
+}
