@@ -122,7 +122,9 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   email: 'email',
   password: 'password',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  lat: 'lat',
+  lng: 'lng'
 };
 
 exports.Prisma.PostScalarFieldEnum = {
@@ -141,6 +143,15 @@ exports.Prisma.FollowScalarFieldEnum = {
   followingId: 'followingId'
 };
 
+exports.Prisma.OrganizationsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  description: 'description',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -151,11 +162,17 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
   Post: 'Post',
-  Follow: 'Follow'
+  Follow: 'Follow',
+  organizations: 'organizations'
 };
 
 /**

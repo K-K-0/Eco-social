@@ -1,6 +1,7 @@
 import {useRef, useEffect, useState} from "react";
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import axios from "axios";
 
 const MAPTILER_KEY = "bs0qTCbmXadT9ZH0pr9h"
 
@@ -9,12 +10,33 @@ const styles = {
     satellite: `https://api.maptiler.com/maps/hybrid/style.json?key=${MAPTILER_KEY}`,
 }
 
+type Org = { 
+    id: string;
+    name: string;
+    description: string;
+    latitude: number;
+    longitude: number;
+}
+
 
 const Map = () => {
     const mapContainer = useRef<HTMLDivElement>(null)
     const map = useRef<maplibregl.Map | null>(null)
     const [mapStyle, setMapStyle] = useState<"street" | "satellite">("street")
-
+    const [orgs, setOrgs] = useState<Org[]>([])
+ 
+    useEffect(() => {
+        const fetchOrg = async () => {
+            try {
+                const res = await axios.get('http://localhost:5000/api/eco-orgs')
+                console.log("fetch data", res.data)
+                setOrgs(res.data)
+            } catch (error) {
+                console.error("Error fetching orgs:", error);
+            }
+        }
+        fetchOrg()        
+    }, [])
 
     useEffect(() => {
         if(map.current) {
@@ -22,23 +44,49 @@ const Map = () => {
         }
     }, [mapStyle])
 
-
     useEffect(() => {
-        if(map.current || !mapContainer.current) return
+        
+        if (map.current || !mapContainer.current) return;
 
         map.current = new maplibregl.Map({
             container: mapContainer.current,
-            style: styles[mapStyle],
+            style: styles.street,
             center: [77.209, 28.6139],
             zoom: 9,
+        });
+    }, [orgs]);
+
+    useEffect(() => {
+        if (!map.current || orgs.length === 0) return
+        function createCustomMarker(imageUrl: string) {
+            const el = document.createElement("div");
+            el.style.backgroundImage = `url(${imageUrl})`
+            el.style.width = "40px";
+            el.style.height = "40px";
+            el.style.backgroundSize = "contain";
+            el.style.borderRadius = "50%";
+            return el;
+        }
+
+        orgs.forEach((org) => {
+            console.log("hello")
+
+            const marker = new maplibregl.Marker({ color: "#10B981"})
+            .setLngLat([org.longitude, org.latitude])
+            .setPopup( new maplibregl.Popup().setHTML(`<div><strong>${org.name}</strong><br/>
+                ${org.description || ""}   </div> 
+            `)).addTo(map.current!)       
         })
-    })
+    }, [orgs])
+
+
+
 
 
     return (
         <div className="relative">
             <div ref={mapContainer}
-            className="w-full h-[400px] rounded-lg shadow-md border"
+            className="w-full h-[600px] rounded-lg shadow-md border"
         />
 
             <button onClick={() => 

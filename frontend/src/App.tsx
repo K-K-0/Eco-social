@@ -5,6 +5,8 @@ import Login from "./pages/login"
 import Dashboard from "./pages/dashboard"
 import LogoutButton from "./pages/Logout"
 import CreatePost from "./pages/createPost"
+import OrgForm from "./components/orgRegistrationForm"
+import SetLocation from "./components/setLocation"
 
 
 function App() {
@@ -18,6 +20,10 @@ function App() {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/logout" element={<LogoutButton />} />
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/addOrg" element={<OrgForm/>} />
+          <Route path="/Hello" element={<SetLocation />} />
+
+
         </Routes>
       </Router>
     </AuthProvider>

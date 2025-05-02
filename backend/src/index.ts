@@ -9,6 +9,8 @@ import profileRoutes from './Routes/profileRoutes'
 import followRoutes from './Routes/followRoutes'
 import feedRoutes from './Routes/feedRoute'
 import countRoutes from './Routes/countRoutes'
+import ecoOrganizations from './Routes/ecoOrganizations'
+import setLocation from './Routes/setLocation'
 
 dotenv.config()
 
@@ -28,6 +30,9 @@ app.use(profileRoutes)
 app.use(followRoutes)
 app.use(feedRoutes)
 app.use(countRoutes)
+app.use("/api/eco-orgs", ecoOrganizations)
+app.use(setLocation)
+
 
 const PORT = process.env.PORT || 5000
 
