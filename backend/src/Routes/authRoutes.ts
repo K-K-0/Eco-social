@@ -1,10 +1,10 @@
 import { PrismaClient } from "../../database/generated/prisma";
 import { Router } from 'express'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { signToken } from '../utils/jwt'
 import { authMiddleware } from "../middleware/middleware";
+
 
 const router = Router()
 const prisma = new PrismaClient()
@@ -42,9 +42,10 @@ router.post('/login', async (req: any, res: any) => {
 
     res.cookie('token', token, {
         httpOnly: true,
-        secure: false,
+        secure: process.env.NODE_ENV === "production",
         sameSite: 'lax',
-        maxAge: 1000 * 60 * 60 * 24 * 7
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        path: "/"
     })
 
     res.status(200).json({ massage: 'Login Successfully' })
@@ -69,8 +70,8 @@ router.post('/logout', authMiddleware, (req, res) => {
     console.log(req.cookies)
     res.clearCookie('token', {
         httpOnly: true,
-        sameSite: "lax",
-        secure: false,
+        secure: process.env.NODE_ENV === "production", 
+        sameSite:'lax',
     })
     res.json({ massage: "logged out successfully" })    
 })

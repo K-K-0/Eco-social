@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 const router = Router()
 
 router.post('/follow/:userId', authMiddleware, async (req:any, res:any) => {
-    const currentUserId = req.body
+    const currentUserId = req.body.userId
     const targetUserId = parseInt(req.params.userId)
 
     if(currentUserId === targetUserId) {
@@ -21,7 +21,7 @@ router.post('/follow/:userId', authMiddleware, async (req:any, res:any) => {
             }
         })
 
-        return res.status(200).json({massage: "Followed successfully"})
+        return res.status(200).json({message: "Followed successfully"})
     } catch (error: any) {
         if (error.code === 'P2002') {
             return res.status(400).json({ error: "Already following this user" })
@@ -32,7 +32,7 @@ router.post('/follow/:userId', authMiddleware, async (req:any, res:any) => {
 })
 
 router.delete('/unfollow/:userId', authMiddleware, async (req:any, res:any) => {
-    const currentUserId = req.body
+    const currentUserId = req.body.userId
     const targetUserId = parseInt(req.params.userId)
 
     try {
