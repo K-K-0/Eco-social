@@ -68,17 +68,6 @@ const Map = () => {
             return el;
         }
 
-        const customPopupHTML = (org) => `
-            <div class="relative p-4 max-w-xs text-sm text-gray-800 rounded-lg bg-white shadow-lg">
-                <button class="absolute top-2 right-2 text-gray-400 hover:text-red-500" onclick="this.closest('div').remove()">
-                &times;
-                </button>
-                <div class="font-semibold text-green-700 text-base">${org.name}</div>
-                <p class="mt-1 text-gray-600">${org.description || "No description provided."}</p>
-            </div>
-            `;
-
-
         orgs.forEach((org) => {
             console.log("hello")
 
