@@ -1,19 +1,31 @@
 // src/context/AuthContext.tsx
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { getMe } from "../api/auth"; // Make sure this exists
+import { getMe } from "../api/auth";
 
-const AuthContext = createContext<any>(null);
+
+
+type AuthContextType = {
+    user: any;
+    setUser: (user: any) => void
+    isAuthenticated: boolean;
+    setIsAuthenticated: (value: boolean) => void;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState(null);
+    const [ isAuthenticated, setIsAuthenticated ] = useState(false)
 
     useEffect(() => {
         const checkUser = async () => {
             try {
                 const res = await getMe();
                 setUser(res.data);
-            } catch (err) {
+                setIsAuthenticated(true)
+            } catch (error) {
                 setUser(null);
+                console.log(error)
             }
         };
 
@@ -21,7 +33,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, setUser }}>
+        <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>
             {children}
         </AuthContext.Provider>
     );

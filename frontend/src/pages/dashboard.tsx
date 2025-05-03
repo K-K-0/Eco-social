@@ -1,8 +1,26 @@
-import Map from "../components/map";
+// src/components/layout/DashboardLayout.tsx
+import React from "react";
+import { Link } from "react-router-dom";
+import LogoutButton from "./Logout";
 
-export default function Dashboard() {
-    return <div className="p-4">
-        <h1 className="text-xl font-bold mb-4"> Nearby Eco Places</h1>
-        <Map/>        
-    </div>
-}
+const Dashboard = ({ children = "" }: { children?: React.ReactNode }) => {
+    return (
+        <div className="min-h-screen bg-zinc-800 text-gray-800">
+            <nav className="bg-zinc-500 shadow px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+                <div className="text-xl font-bold text-green-600">EcoSocial</div>
+                <div className="space-x-4">
+                    <Link to="/dashboard" className="hover:underline">Dashboard</Link>
+                    <Link to="/profile" className="hover:underline">Profile</Link>
+                    <Link to="/login" className="hover:underline">LogIn</Link>
+                    <Link to="/" className="hover:underline">map</Link>
+
+                    <LogoutButton>Logout</LogoutButton>
+                </div>
+            </nav>
+
+            <main className="p-6">{children}</main>
+        </div>
+    );
+};
+
+export default Dashboard;

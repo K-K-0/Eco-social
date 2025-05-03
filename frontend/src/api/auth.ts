@@ -5,15 +5,21 @@ export const registerUser = async (email: string, password: string) => {
 }
 
 export const loginUser = async (email: string, password: string) => {
-    return API.post('/auth/login', { email, password })
+    return API.post('/auth/login', { email, password} , {
+        withCredentials: true
+    })
 }
 
 export const getMe = async () => {
-    return API.get('/auth/me')
+    return API.get('/auth/me', {
+        withCredentials: true
+    })
 }
 
 export const logoutUser = async () => {
-    return API.post('/auth/logout')
+    return API.post('/auth/logout', {
+        withCredential: true
+    })
 }
 
 export const userStats = async () => {
