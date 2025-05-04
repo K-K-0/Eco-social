@@ -17,7 +17,7 @@ const Dashboard = ({ children = "" }: { children?: React.ReactNode }) => {
             <nav className="bg-zinc-500 shadow px-6 py-4 flex justify-between items-center sticky top-0 z-50">
                 <div className="text-xl font-bold text-green-600">EcoSocial</div>
                 <div className="space-x-4">
-                    <Link to="/dashboard" className="hover:underline">Dashboard</Link>
+                    <Link to="/posts" className="hover:underline">Posts</Link>
                     <Link to="/profile" className="hover:underline">Profile</Link>
                     <Link to="/login" className="hover:underline">LogIn</Link>
                     <Link to="/" className="hover:underline">map</Link>

@@ -1,6 +1,7 @@
 import { PrismaClient } from "../database/generated/prisma";
 import express from 'express'
 import cors from 'cors'
+import { authMiddleware } from "./middleware/middleware";
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import authRoutes from './Routes/authRoutes'

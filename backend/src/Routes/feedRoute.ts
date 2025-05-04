@@ -7,7 +7,19 @@ const prisma = new PrismaClient()
 
 
 routes.get('/', async (req, res) => {
-    const post = await prisma.post.findMany()
+    const post = await prisma.post.findMany({
+        include: {
+            user: {
+                select: {
+                    username: true,
+                    avatarUrl: true
+                }
+            }
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
+    })
 
     res.json(post)
 })

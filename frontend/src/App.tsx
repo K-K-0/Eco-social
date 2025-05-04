@@ -8,6 +8,8 @@ import CreatePost from "./pages/createPost"
 import OrgForm from "./components/orgRegistrationForm"
 import SetLocation from "./components/setLocation"
 import Protected from "./components/ProtectRoute"
+import Profile from "./pages/profilePage"
+import Feed from "./pages/feed"
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/addOrg" element={<OrgForm/>} />
           <Route path="/Hello" element={<SetLocation />} />
+          <Route path="/posts" element={<Feed />} />
+          <Route path="/profile" element={<Protected><Profile /></Protected>} />
         </Routes>
       </Router>
     </AuthProvider>
