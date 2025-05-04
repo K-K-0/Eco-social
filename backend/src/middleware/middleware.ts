@@ -9,7 +9,7 @@ export const authMiddleware = (req:Request, res:Response, next: NextFunction): v
     }
 
     try {
-        const decode =  jwt.verify(token,"All") as {id: string}
+        const decode =  jwt.verify(token,"All") as {id: number}
         console.log("Decoded token:", decode)
         // @ts-ignore
         req.userId = decode.userId
