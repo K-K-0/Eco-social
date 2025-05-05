@@ -1,6 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/Authcontext";
+import CommentSection from "../components/comments";
+
+type CommentType = {
+    id: string
+    content: string
+    createdAt: string
+    user: {
+        username: string
+        avatarUrl?: string
+    }
+}
 
 type FeedType = {
     id: string;
@@ -12,6 +23,7 @@ type FeedType = {
         avatarUrl?: string;
     };
     like: Like[]
+    comments: CommentType[]
     
 };
 
@@ -21,6 +33,9 @@ const Feed = () => {
     const [ loading, setLoading ] = useState(true)
     const { user } = useAuth()
     const currentUserId = user?.id
+    const [comment, setComment] = useState("")
+    const [posting, setPosting] = useState(false)
+
 
     useEffect(() => {
         const fetchFeed = async () => {
@@ -36,6 +51,9 @@ const Feed = () => {
         }
         fetchFeed()
     }, [])
+
+   
+
 
     if(loading) return <div className="text-center mt-10">Loading Feed...</div>
 
@@ -64,6 +82,25 @@ const Feed = () => {
 
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    const handleComment = async (postId: string) => {
+        if (!comment.trim()) return;
+
+        try {
+            setPosting(true)
+
+            await axios.post(`http://localhost:5000/api/posts/:${postId}/comment`, {
+                postId,
+                content: comment
+            }, { withCredentials: true })
+
+            setComment("")
+        } catch (error) {
+            console.log("error while commenting", error)
+        } finally {
+            setPosting(false)
         }
     }
 
@@ -108,9 +145,27 @@ const Feed = () => {
                             )
                         )}
 
-                        <button onClick={() => handleLike(feed.id)} className="text-sm text-blue-500">
+                        <button onClick={() => handleLike(feed.id)} className="text-sm text-blue-500 cursor-pointer">
                             {feed.like.some(like => like.userId === currentUserId) ? "❤️" : "🤍"} <span>{feed.like.length}</span>
                         </button>
+                        <div className="mt-2">
+                            <input
+                                type="text"
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                                placeholder="Add a comment..."
+                                className="border px-2 py-1 rounded w-full"
+                            />
+                            <button
+                                onClick={() => handleComment(feed.id)}
+                                disabled={posting}
+                                className="bg-green-600 text-white px-3 py-1 mt-1 rounded"
+                            >
+                                {posting ? "Posting..." : "Post"}
+                            </button>
+                        </div>
+
+                        <CommentSection postId={feed.id} /> 
 
                     </div>
                 ))}

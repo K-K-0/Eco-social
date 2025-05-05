@@ -111,4 +111,59 @@ routes.post('/:id/like', async (req:any, res:any) => {
 
 
 
+routes.post('/:postId/comment', authMiddleware, async (req:any, res:any) => {
+    // const  postId  = parseInt(req.params.id)
+    const { content, postId } = req.body
+
+    if(!content) return res.status(400).json({error: "comment is empty"})
+
+    try {
+        const comment = await prisma.comment.create({
+            data: {
+                content,
+                userId: req.userId,
+                postId
+            },
+            include: {
+                user: {
+                    select: {
+                        username: true,
+                        avatarUrl: true
+                    }
+                }
+            }
+        })
+
+        res.status(201).json({message: "comment created", comment})
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+routes.get('/:postId/comment', authMiddleware, async (req: any, res: any) => {
+    const postId  = parseInt(req.params.postId)
+    try {
+        const comment = await prisma.comment.findMany({
+            where: { postId },
+            include: {
+                user: {
+                    select: {
+                        username: true,
+                        avatarUrl: true
+                    }
+                }
+            },
+            orderBy: {
+                createdAt: "desc"
+            }
+        })
+
+        res.json({ comment })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: "failed to fetch comments" })
+    }
+})
+
+
 export default routes

@@ -22,20 +22,35 @@ model User {
   followers Follow[] @relation("followers")
   following Follow[] @relation("following")
 
-  posts Post[]
-  like  Like[]
+  posts   Post[]
+  like    Like[]
+  comment Comment[]
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   title     String
   content   String
   mediaUrl  String
   mediaType String
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
   like      Like[]
+  comment   Comment[]
+  likes     Int       @default(0)
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  postId Int
+  post   Post @relation(fields: [postId], references: [id])
 }
 
 model Follow {
