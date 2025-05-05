@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useAuth } from "../context/Authcontext";
 
 type FeedType = {
     id: string;
@@ -10,11 +11,16 @@ type FeedType = {
         username: string;
         avatarUrl?: string;
     };
+    like: Like[]
+    
 };
+
 
 const Feed = () => {
     const [ feeds, setFeeds ] = useState<FeedType[]>([])
     const [ loading, setLoading ] = useState(true)
+    const { user } = useAuth()
+    const currentUserId = user?.id
 
     useEffect(() => {
         const fetchFeed = async () => {
@@ -32,6 +38,34 @@ const Feed = () => {
     }, [])
 
     if(loading) return <div className="text-center mt-10">Loading Feed...</div>
+
+    const handleLike = async (postId: string) => {
+        try {
+            await axios.post(`http://localhost:5000/api/posts/${postId}/like`, {}, { withCredentials: true })
+
+
+            setFeeds((prevPosts) =>
+                prevPosts.map((post) => {
+                    if (post.id === postId) {
+                        let updatedLikes;
+                        if (post.like.some((l) => l.userId === currentUserId)) {
+                            // Unlike: remove user's like
+                            updatedLikes = post.like.filter((l) => l.userId !== currentUserId);
+                        } else {
+                            // Like: add new like
+                            updatedLikes = [...post.like, { userId: currentUserId, postId }]; // mock object
+                        }
+
+                        return { ...post, like: updatedLikes };
+                    }
+                    return post;
+                })
+            );
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <div className="max-w-xl mx-auto p-6 mt-5 rounded-4xl bg-sky-300">
@@ -73,6 +107,11 @@ const Feed = () => {
                                     />
                             )
                         )}
+
+                        <button onClick={() => handleLike(feed.id)} className="text-sm text-blue-500">
+                            {feed.like.some(like => like.userId === currentUserId) ? "❤️" : "🤍"} <span>{feed.like.length}</span>
+                        </button>
+
                     </div>
                 ))}
             </div>

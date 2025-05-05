@@ -58,4 +58,57 @@ routes.post('/create', authMiddleware, upload.single("media"), async (req:any, r
 
 
 
+routes.post('/:postId/like', authMiddleware, async (req:any, res:any) => {
+    const  postId  = parseInt(req.params.postId)
+    const userId = req.userId
+
+    try {
+        const exist = await prisma.like.findUnique({
+            where: {
+                userId_postId: {userId, postId}
+            }
+        })
+
+        if(exist) {
+            await prisma.like.delete({where: {id: exist.id}})
+            return res.json({message: "unlike"})
+        } else {
+            await prisma.like.create({
+                data: { postId, userId }
+            })
+        }
+
+        const likeCount = await prisma.like.count({
+            where: { postId: Number(postId) }
+        });
+
+        return res.status(200).json({ message: exist ? 'Unliked' : 'Liked', likeCount });
+
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ message: 'Something went wrong' });
+    }
+})
+
+routes.post('/:id/like', async (req:any, res:any) => {
+    const postId = req.params.id;
+
+    try {
+        const updatedPost = await prisma.post.update({
+            where: { id: postId },
+            data: {
+                likes: { increment: 1 }
+            }
+        });
+
+        return res.status(200).json({ message: 'Post liked', post: updatedPost });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: 'Something went wrong' });
+    }
+});
+
+
+
 export default routes

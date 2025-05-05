@@ -136,7 +136,8 @@ exports.Prisma.PostScalarFieldEnum = {
   mediaUrl: 'mediaUrl',
   mediaType: 'mediaType',
   createdAt: 'createdAt',
-  userId: 'userId'
+  userId: 'userId',
+  likes: 'likes'
 };
 
 exports.Prisma.FollowScalarFieldEnum = {
@@ -151,6 +152,13 @@ exports.Prisma.OrganizationsScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   description: 'description',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.LikeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  postId: 'postId',
   createdAt: 'createdAt'
 };
 
@@ -174,7 +182,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Post: 'Post',
   Follow: 'Follow',
-  organizations: 'organizations'
+  organizations: 'organizations',
+  Like: 'Like'
 };
 
 /**
