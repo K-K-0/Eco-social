@@ -21,6 +21,7 @@ const Dashboard = ({ children = "" }: { children?: React.ReactNode }) => {
                     <Link to="/profile" className="hover:underline">Profile</Link>
                     <Link to="/login" className="hover:underline">LogIn</Link>
                     <Link to="/" className="hover:underline">map</Link>
+                    <Link to="/signup" className="hover:underline">Signup</Link>
                     <LogoutButton>Logout</LogoutButton>
                 </div>
             </nav>
