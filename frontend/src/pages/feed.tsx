@@ -67,11 +67,9 @@ const Feed = () => {
                     if (post.id === postId) {
                         let updatedLikes;
                         if (post.like.some((l) => l.userId === currentUserId)) {
-                            // Unlike: remove user's like
                             updatedLikes = post.like.filter((l) => l.userId !== currentUserId);
                         } else {
-                            // Like: add new like
-                            updatedLikes = [...post.like, { userId: currentUserId, postId }]; // mock object
+                            updatedLikes = [...post.like, { userId: currentUserId, postId }];
                         }
 
                         return { ...post, like: updatedLikes };
