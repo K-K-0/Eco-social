@@ -10,8 +10,7 @@ import SetLocation from "./components/setLocation"
 import Protected from "./components/ProtectRoute"
 import Profile from "./pages/profilePage"
 import Feed from "./pages/feed"
-import SignUp from "./components/SignUp"
-import Button from "./components/Button"
+import { Signup } from "./components/SignUp"
 
 
 function App() {
@@ -29,8 +28,7 @@ function App() {
           <Route path="/Hello" element={<SetLocation />} />
           <Route path="/posts" element={<Protected><Feed /></Protected>} />
           <Route path="/profile" element={<Protected><Profile /></Protected>} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/button" element={<Button />} />
+          <Route path="/signup" element={<Signup />} />
 
         </Routes>
       </Router>

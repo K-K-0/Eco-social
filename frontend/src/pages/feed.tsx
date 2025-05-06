@@ -69,7 +69,7 @@ const Feed = () => {
                         if (post.like.some((l) => l.userId === currentUserId)) {
                             updatedLikes = post.like.filter((l) => l.userId !== currentUserId);
                         } else {
-                            updatedLikes = [...post.like, { userId: currentUserId, postId }];
+                            updatedLikes = [...post.like, { userId: currentUserId, postId }]; 
                         }
 
                         return { ...post, like: updatedLikes };
@@ -134,12 +134,18 @@ const Feed = () => {
                                     src={feed.mediaUrl}
                                     className="w-full rounded-2xl mt-2 object-cover"
                                 />
+                            ) : feed.mediaUrl.endsWith('.svg') ? (
+                                <object
+                                    data={feed.mediaUrl}
+                                    type="image/svg+xml"
+                                    className="w-full rounded-lg mt-2 object-cover"
+                                />
                             ) : (
-                                    <img
-                                        src={feed.mediaUrl}
-                                        alt="Post visual"
-                                        className="w-full rounded-lg mt-2 object-cover"
-                                    />
+                                <img
+                                    src={feed.mediaUrl}
+                                    alt="Post visual"
+                                    className="w-full rounded-lg mt-2 object-cover"
+                                />
                             )
                         )}
 

@@ -40,7 +40,7 @@ const Login = () => {
         
         <div className="font-inter max-h-screen flex items-center justify-center bg-gray-50">
             <section className="flex justify-center">
-                <div className="mx-auto max-w-lg px-6 lg:px-8 absolute py-20">
+                <div className=" px-6 lg:px-8 absolute py-20 w-[500px] h-[500px] items-center">
                     <div className=" max-h-screen rounded-2xl bg-white shadow-xl">
                         <form onSubmit={handleLogin} className="lg:p-11 p-7 mx-auto">
                             <div className="mb-11">
