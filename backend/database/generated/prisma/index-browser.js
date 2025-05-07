@@ -160,6 +160,10 @@ exports.Prisma.OrganizationsScalarFieldEnum = {
   latitude: 'latitude',
   longitude: 'longitude',
   description: 'description',
+  website: 'website',
+  Address: 'Address',
+  submittedBy: 'submittedBy',
+  verified: 'verified',
   createdAt: 'createdAt'
 };
 

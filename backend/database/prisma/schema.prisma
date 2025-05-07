@@ -26,6 +26,7 @@ model User {
   posts     Post[]
   like      Like[]
   comment   Comment[]
+  organization  organizations[]
 
 }
 
@@ -73,7 +74,13 @@ model organizations {
   latitude Float
   longitude Float
   description String?
+  website String?
+  Address   String?
+  submittedBy  Int
+  verified  Boolean @default(false)
   createdAt DateTime @default(now())
+
+  user  User @relation(fields: [submittedBy], references: [id])
 }
 
 

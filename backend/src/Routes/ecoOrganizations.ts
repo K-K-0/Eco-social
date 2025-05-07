@@ -1,5 +1,6 @@
 import { Router }   from "express";
 import { PrismaClient } from "../../database/generated/prisma";
+import { authMiddleware } from "../middleware/middleware";
 
 
 const prisma = new PrismaClient()
@@ -15,8 +16,9 @@ routes.get("/", async (req, res) => {
     }
 })
 
-routes.post('/register', async (req:any,res: any) => {
-    const { name, latitude, longitude, description } = req.body
+routes.post('/register', authMiddleware, async (req:any,res:any) => {
+    const { name, latitude, longitude, description, Address } = req.body
+    const userId = req.userId
 
     if(!name || !latitude || !longitude ) {
         return res.status(400).json({massage: "Something missing"})
@@ -27,10 +29,43 @@ routes.post('/register', async (req:any,res: any) => {
             name,
             description,
             latitude,
-            longitude
+            longitude,
+            Address,
+            submittedBy: userId
         }
     })
     res.status(201).json({organizations})
 })
+
+routes.get('/verified', async (req, res ) => {
+    const orgs = await prisma.organizations.findMany({
+        where: { verified: true }
+    })
+    res.json({ orgs })
+})
+
+routes.get('/unverified', authMiddleware, async (req, res) => {
+
+    const orgs = await prisma.organizations.findMany({
+        where: { verified: false }
+    })
+    res.json({ orgs })
+})
+
+routes.post('/verify/:id', authMiddleware, async (req, res) => {
+    const orgId = parseInt(req.params.id);
+
+    try {
+        await prisma.organizations.update({
+            where: { id: orgId },
+            data: { verified: true },
+        });
+
+        res.json({ message: 'Organization verified' });
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to verify org' });
+    }
+});
+
 
 export default routes

@@ -1329,6 +1329,7 @@ export namespace Prisma {
     posts: number
     like: number
     comment: number
+    organization: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1337,6 +1338,7 @@ export namespace Prisma {
     posts?: boolean | UserCountOutputTypeCountPostsArgs
     like?: boolean | UserCountOutputTypeCountLikeArgs
     comment?: boolean | UserCountOutputTypeCountCommentArgs
+    organization?: boolean | UserCountOutputTypeCountOrganizationArgs
   }
 
   // Custom InputTypes
@@ -1383,6 +1385,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountCommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOrganizationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: organizationsWhereInput
   }
 
 
@@ -1673,6 +1682,7 @@ export namespace Prisma {
     posts?: boolean | User$postsArgs<ExtArgs>
     like?: boolean | User$likeArgs<ExtArgs>
     comment?: boolean | User$commentArgs<ExtArgs>
+    organization?: boolean | User$organizationArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1719,6 +1729,7 @@ export namespace Prisma {
     posts?: boolean | User$postsArgs<ExtArgs>
     like?: boolean | User$likeArgs<ExtArgs>
     comment?: boolean | User$commentArgs<ExtArgs>
+    organization?: boolean | User$organizationArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1732,6 +1743,7 @@ export namespace Prisma {
       posts: Prisma.$PostPayload<ExtArgs>[]
       like: Prisma.$LikePayload<ExtArgs>[]
       comment: Prisma.$CommentPayload<ExtArgs>[]
+      organization: Prisma.$organizationsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2142,6 +2154,7 @@ export namespace Prisma {
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     like<T extends User$likeArgs<ExtArgs> = {}>(args?: Subset<T, User$likeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comment<T extends User$commentArgs<ExtArgs> = {}>(args?: Subset<T, User$commentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    organization<T extends User$organizationArgs<ExtArgs> = {}>(args?: Subset<T, User$organizationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2685,6 +2698,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
+   * User.organization
+   */
+  export type User$organizationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the organizations
+     */
+    select?: organizationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the organizations
+     */
+    omit?: organizationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
+    where?: organizationsWhereInput
+    orderBy?: organizationsOrderByWithRelationInput | organizationsOrderByWithRelationInput[]
+    cursor?: organizationsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrganizationsScalarFieldEnum | OrganizationsScalarFieldEnum[]
   }
 
   /**
@@ -6109,12 +6146,14 @@ export namespace Prisma {
     id: number | null
     latitude: number | null
     longitude: number | null
+    submittedBy: number | null
   }
 
   export type OrganizationsSumAggregateOutputType = {
     id: number | null
     latitude: number | null
     longitude: number | null
+    submittedBy: number | null
   }
 
   export type OrganizationsMinAggregateOutputType = {
@@ -6123,6 +6162,10 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     description: string | null
+    website: string | null
+    Address: string | null
+    submittedBy: number | null
+    verified: boolean | null
     createdAt: Date | null
   }
 
@@ -6132,6 +6175,10 @@ export namespace Prisma {
     latitude: number | null
     longitude: number | null
     description: string | null
+    website: string | null
+    Address: string | null
+    submittedBy: number | null
+    verified: boolean | null
     createdAt: Date | null
   }
 
@@ -6141,6 +6188,10 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description: number
+    website: number
+    Address: number
+    submittedBy: number
+    verified: number
     createdAt: number
     _all: number
   }
@@ -6150,12 +6201,14 @@ export namespace Prisma {
     id?: true
     latitude?: true
     longitude?: true
+    submittedBy?: true
   }
 
   export type OrganizationsSumAggregateInputType = {
     id?: true
     latitude?: true
     longitude?: true
+    submittedBy?: true
   }
 
   export type OrganizationsMinAggregateInputType = {
@@ -6164,6 +6217,10 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     description?: true
+    website?: true
+    Address?: true
+    submittedBy?: true
+    verified?: true
     createdAt?: true
   }
 
@@ -6173,6 +6230,10 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     description?: true
+    website?: true
+    Address?: true
+    submittedBy?: true
+    verified?: true
     createdAt?: true
   }
 
@@ -6182,6 +6243,10 @@ export namespace Prisma {
     latitude?: true
     longitude?: true
     description?: true
+    website?: true
+    Address?: true
+    submittedBy?: true
+    verified?: true
     createdAt?: true
     _all?: true
   }
@@ -6278,6 +6343,10 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description: string | null
+    website: string | null
+    Address: string | null
+    submittedBy: number
+    verified: boolean
     createdAt: Date
     _count: OrganizationsCountAggregateOutputType | null
     _avg: OrganizationsAvgAggregateOutputType | null
@@ -6306,7 +6375,12 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     description?: boolean
+    website?: boolean
+    Address?: boolean
+    submittedBy?: boolean
+    verified?: boolean
     createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organizations"]>
 
   export type organizationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6315,7 +6389,12 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     description?: boolean
+    website?: boolean
+    Address?: boolean
+    submittedBy?: boolean
+    verified?: boolean
     createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organizations"]>
 
   export type organizationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6324,7 +6403,12 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     description?: boolean
+    website?: boolean
+    Address?: boolean
+    submittedBy?: boolean
+    verified?: boolean
     createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organizations"]>
 
   export type organizationsSelectScalar = {
@@ -6333,20 +6417,39 @@ export namespace Prisma {
     latitude?: boolean
     longitude?: boolean
     description?: boolean
+    website?: boolean
+    Address?: boolean
+    submittedBy?: boolean
+    verified?: boolean
     createdAt?: boolean
   }
 
-  export type organizationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "latitude" | "longitude" | "description" | "createdAt", ExtArgs["result"]["organizations"]>
+  export type organizationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "latitude" | "longitude" | "description" | "website" | "Address" | "submittedBy" | "verified" | "createdAt", ExtArgs["result"]["organizations"]>
+  export type organizationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type organizationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type organizationsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $organizationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "organizations"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
       latitude: number
       longitude: number
       description: string | null
+      website: string | null
+      Address: string | null
+      submittedBy: number
+      verified: boolean
       createdAt: Date
     }, ExtArgs["result"]["organizations"]>
     composites: {}
@@ -6742,6 +6845,7 @@ export namespace Prisma {
    */
   export interface Prisma__organizationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6776,6 +6880,10 @@ export namespace Prisma {
     readonly latitude: FieldRef<"organizations", 'Float'>
     readonly longitude: FieldRef<"organizations", 'Float'>
     readonly description: FieldRef<"organizations", 'String'>
+    readonly website: FieldRef<"organizations", 'String'>
+    readonly Address: FieldRef<"organizations", 'String'>
+    readonly submittedBy: FieldRef<"organizations", 'Int'>
+    readonly verified: FieldRef<"organizations", 'Boolean'>
     readonly createdAt: FieldRef<"organizations", 'DateTime'>
   }
     
@@ -6793,6 +6901,10 @@ export namespace Prisma {
      * Omit specific fields from the organizations
      */
     omit?: organizationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
     /**
      * Filter, which organizations to fetch.
      */
@@ -6812,6 +6924,10 @@ export namespace Prisma {
      */
     omit?: organizationsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
+    /**
      * Filter, which organizations to fetch.
      */
     where: organizationsWhereUniqueInput
@@ -6829,6 +6945,10 @@ export namespace Prisma {
      * Omit specific fields from the organizations
      */
     omit?: organizationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
     /**
      * Filter, which organizations to fetch.
      */
@@ -6878,6 +6998,10 @@ export namespace Prisma {
      */
     omit?: organizationsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
+    /**
      * Filter, which organizations to fetch.
      */
     where?: organizationsWhereInput
@@ -6926,6 +7050,10 @@ export namespace Prisma {
      */
     omit?: organizationsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
+    /**
      * Filter, which organizations to fetch.
      */
     where?: organizationsWhereInput
@@ -6969,6 +7097,10 @@ export namespace Prisma {
      */
     omit?: organizationsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
+    /**
      * The data needed to create a organizations.
      */
     data: XOR<organizationsCreateInput, organizationsUncheckedCreateInput>
@@ -7002,6 +7134,10 @@ export namespace Prisma {
      */
     data: organizationsCreateManyInput | organizationsCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -7016,6 +7152,10 @@ export namespace Prisma {
      * Omit specific fields from the organizations
      */
     omit?: organizationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
     /**
      * The data needed to update a organizations.
      */
@@ -7068,6 +7208,10 @@ export namespace Prisma {
      * Limit how many organizations to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -7082,6 +7226,10 @@ export namespace Prisma {
      * Omit specific fields from the organizations
      */
     omit?: organizationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
     /**
      * The filter to search for the organizations to update in case it exists.
      */
@@ -7108,6 +7256,10 @@ export namespace Prisma {
      * Omit specific fields from the organizations
      */
     omit?: organizationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
     /**
      * Filter which organizations to delete.
      */
@@ -7140,6 +7292,10 @@ export namespace Prisma {
      * Omit specific fields from the organizations
      */
     omit?: organizationsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: organizationsInclude<ExtArgs> | null
   }
 
 
@@ -8307,6 +8463,10 @@ export namespace Prisma {
     latitude: 'latitude',
     longitude: 'longitude',
     description: 'description',
+    website: 'website',
+    Address: 'Address',
+    submittedBy: 'submittedBy',
+    verified: 'verified',
     createdAt: 'createdAt'
   };
 
@@ -8406,6 +8566,13 @@ export namespace Prisma {
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
   /**
    * Deep Input Types
    */
@@ -8429,6 +8596,7 @@ export namespace Prisma {
     posts?: PostListRelationFilter
     like?: LikeListRelationFilter
     comment?: CommentListRelationFilter
+    organization?: OrganizationsListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -8446,6 +8614,7 @@ export namespace Prisma {
     posts?: PostOrderByRelationAggregateInput
     like?: LikeOrderByRelationAggregateInput
     comment?: CommentOrderByRelationAggregateInput
+    organization?: organizationsOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -8466,6 +8635,7 @@ export namespace Prisma {
     posts?: PostListRelationFilter
     like?: LikeListRelationFilter
     comment?: CommentListRelationFilter
+    organization?: OrganizationsListRelationFilter
   }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -8698,7 +8868,12 @@ export namespace Prisma {
     latitude?: FloatFilter<"organizations"> | number
     longitude?: FloatFilter<"organizations"> | number
     description?: StringNullableFilter<"organizations"> | string | null
+    website?: StringNullableFilter<"organizations"> | string | null
+    Address?: StringNullableFilter<"organizations"> | string | null
+    submittedBy?: IntFilter<"organizations"> | number
+    verified?: BoolFilter<"organizations"> | boolean
     createdAt?: DateTimeFilter<"organizations"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type organizationsOrderByWithRelationInput = {
@@ -8707,7 +8882,12 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     description?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    Address?: SortOrderInput | SortOrder
+    submittedBy?: SortOrder
+    verified?: SortOrder
     createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type organizationsWhereUniqueInput = Prisma.AtLeast<{
@@ -8719,7 +8899,12 @@ export namespace Prisma {
     latitude?: FloatFilter<"organizations"> | number
     longitude?: FloatFilter<"organizations"> | number
     description?: StringNullableFilter<"organizations"> | string | null
+    website?: StringNullableFilter<"organizations"> | string | null
+    Address?: StringNullableFilter<"organizations"> | string | null
+    submittedBy?: IntFilter<"organizations"> | number
+    verified?: BoolFilter<"organizations"> | boolean
     createdAt?: DateTimeFilter<"organizations"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type organizationsOrderByWithAggregationInput = {
@@ -8728,6 +8913,10 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     description?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    Address?: SortOrderInput | SortOrder
+    submittedBy?: SortOrder
+    verified?: SortOrder
     createdAt?: SortOrder
     _count?: organizationsCountOrderByAggregateInput
     _avg?: organizationsAvgOrderByAggregateInput
@@ -8745,6 +8934,10 @@ export namespace Prisma {
     latitude?: FloatWithAggregatesFilter<"organizations"> | number
     longitude?: FloatWithAggregatesFilter<"organizations"> | number
     description?: StringNullableWithAggregatesFilter<"organizations"> | string | null
+    website?: StringNullableWithAggregatesFilter<"organizations"> | string | null
+    Address?: StringNullableWithAggregatesFilter<"organizations"> | string | null
+    submittedBy?: IntWithAggregatesFilter<"organizations"> | number
+    verified?: BoolWithAggregatesFilter<"organizations"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"organizations"> | Date | string
   }
 
@@ -8818,6 +9011,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
+    organization?: organizationsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -8835,6 +9029,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -8851,6 +9046,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
+    organization?: organizationsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -8868,6 +9064,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -9080,7 +9277,11 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description?: string | null
+    website?: string | null
+    Address?: string | null
+    verified?: boolean
     createdAt?: Date | string
+    user: UserCreateNestedOneWithoutOrganizationInput
   }
 
   export type organizationsUncheckedCreateInput = {
@@ -9089,6 +9290,10 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description?: string | null
+    website?: string | null
+    Address?: string | null
+    submittedBy: number
+    verified?: boolean
     createdAt?: Date | string
   }
 
@@ -9097,7 +9302,11 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    Address?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutOrganizationNestedInput
   }
 
   export type organizationsUncheckedUpdateInput = {
@@ -9106,6 +9315,10 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    Address?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedBy?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9115,6 +9328,10 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description?: string | null
+    website?: string | null
+    Address?: string | null
+    submittedBy: number
+    verified?: boolean
     createdAt?: Date | string
   }
 
@@ -9123,6 +9340,9 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    Address?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9132,6 +9352,10 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    Address?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedBy?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9266,6 +9490,12 @@ export namespace Prisma {
     none?: CommentWhereInput
   }
 
+  export type OrganizationsListRelationFilter = {
+    every?: organizationsWhereInput
+    some?: organizationsWhereInput
+    none?: organizationsWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -9284,6 +9514,10 @@ export namespace Prisma {
   }
 
   export type CommentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type organizationsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9554,12 +9788,21 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type organizationsCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
     description?: SortOrder
+    website?: SortOrder
+    Address?: SortOrder
+    submittedBy?: SortOrder
+    verified?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -9567,6 +9810,7 @@ export namespace Prisma {
     id?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    submittedBy?: SortOrder
   }
 
   export type organizationsMaxOrderByAggregateInput = {
@@ -9575,6 +9819,10 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     description?: SortOrder
+    website?: SortOrder
+    Address?: SortOrder
+    submittedBy?: SortOrder
+    verified?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -9584,6 +9832,10 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     description?: SortOrder
+    website?: SortOrder
+    Address?: SortOrder
+    submittedBy?: SortOrder
+    verified?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -9591,6 +9843,7 @@ export namespace Prisma {
     id?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    submittedBy?: SortOrder
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -9607,6 +9860,14 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type LikeUserIdPostIdCompoundUniqueInput = {
@@ -9682,6 +9943,13 @@ export namespace Prisma {
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
+  export type organizationsCreateNestedManyWithoutUserInput = {
+    create?: XOR<organizationsCreateWithoutUserInput, organizationsUncheckedCreateWithoutUserInput> | organizationsCreateWithoutUserInput[] | organizationsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: organizationsCreateOrConnectWithoutUserInput | organizationsCreateOrConnectWithoutUserInput[]
+    createMany?: organizationsCreateManyUserInputEnvelope
+    connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+  }
+
   export type FollowUncheckedCreateNestedManyWithoutFollowingInput = {
     create?: XOR<FollowCreateWithoutFollowingInput, FollowUncheckedCreateWithoutFollowingInput> | FollowCreateWithoutFollowingInput[] | FollowUncheckedCreateWithoutFollowingInput[]
     connectOrCreate?: FollowCreateOrConnectWithoutFollowingInput | FollowCreateOrConnectWithoutFollowingInput[]
@@ -9715,6 +9983,13 @@ export namespace Prisma {
     connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
     createMany?: CommentCreateManyUserInputEnvelope
     connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type organizationsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<organizationsCreateWithoutUserInput, organizationsUncheckedCreateWithoutUserInput> | organizationsCreateWithoutUserInput[] | organizationsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: organizationsCreateOrConnectWithoutUserInput | organizationsCreateOrConnectWithoutUserInput[]
+    createMany?: organizationsCreateManyUserInputEnvelope
+    connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -9807,6 +10082,20 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
+  export type organizationsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<organizationsCreateWithoutUserInput, organizationsUncheckedCreateWithoutUserInput> | organizationsCreateWithoutUserInput[] | organizationsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: organizationsCreateOrConnectWithoutUserInput | organizationsCreateOrConnectWithoutUserInput[]
+    upsert?: organizationsUpsertWithWhereUniqueWithoutUserInput | organizationsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: organizationsCreateManyUserInputEnvelope
+    set?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    disconnect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    delete?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    update?: organizationsUpdateWithWhereUniqueWithoutUserInput | organizationsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: organizationsUpdateManyWithWhereWithoutUserInput | organizationsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -9883,6 +10172,20 @@ export namespace Prisma {
     update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type organizationsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<organizationsCreateWithoutUserInput, organizationsUncheckedCreateWithoutUserInput> | organizationsCreateWithoutUserInput[] | organizationsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: organizationsCreateOrConnectWithoutUserInput | organizationsCreateOrConnectWithoutUserInput[]
+    upsert?: organizationsUpsertWithWhereUniqueWithoutUserInput | organizationsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: organizationsCreateManyUserInputEnvelope
+    set?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    disconnect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    delete?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+    update?: organizationsUpdateWithWhereUniqueWithoutUserInput | organizationsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: organizationsUpdateManyWithWhereWithoutUserInput | organizationsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPostsInput = {
@@ -10039,12 +10342,30 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFollowersInput, UserUpdateWithoutFollowersInput>, UserUncheckedUpdateWithoutFollowersInput>
   }
 
+  export type UserCreateNestedOneWithoutOrganizationInput = {
+    create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserUpdateOneRequiredWithoutOrganizationNestedInput = {
+    create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput
+    upsert?: UserUpsertWithoutOrganizationInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOrganizationInput, UserUpdateWithoutOrganizationInput>, UserUncheckedUpdateWithoutOrganizationInput>
   }
 
   export type UserCreateNestedOneWithoutLikeInput = {
@@ -10238,6 +10559,11 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -10252,6 +10578,14 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type FollowCreateWithoutFollowingInput = {
@@ -10366,6 +10700,39 @@ export namespace Prisma {
 
   export type CommentCreateManyUserInputEnvelope = {
     data: CommentCreateManyUserInput | CommentCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type organizationsCreateWithoutUserInput = {
+    name: string
+    latitude: number
+    longitude: number
+    description?: string | null
+    website?: string | null
+    Address?: string | null
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type organizationsUncheckedCreateWithoutUserInput = {
+    id?: number
+    name: string
+    latitude: number
+    longitude: number
+    description?: string | null
+    website?: string | null
+    Address?: string | null
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type organizationsCreateOrConnectWithoutUserInput = {
+    where: organizationsWhereUniqueInput
+    create: XOR<organizationsCreateWithoutUserInput, organizationsUncheckedCreateWithoutUserInput>
+  }
+
+  export type organizationsCreateManyUserInputEnvelope = {
+    data: organizationsCreateManyUserInput | organizationsCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -10493,6 +10860,38 @@ export namespace Prisma {
     postId?: IntFilter<"Comment"> | number
   }
 
+  export type organizationsUpsertWithWhereUniqueWithoutUserInput = {
+    where: organizationsWhereUniqueInput
+    update: XOR<organizationsUpdateWithoutUserInput, organizationsUncheckedUpdateWithoutUserInput>
+    create: XOR<organizationsCreateWithoutUserInput, organizationsUncheckedCreateWithoutUserInput>
+  }
+
+  export type organizationsUpdateWithWhereUniqueWithoutUserInput = {
+    where: organizationsWhereUniqueInput
+    data: XOR<organizationsUpdateWithoutUserInput, organizationsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type organizationsUpdateManyWithWhereWithoutUserInput = {
+    where: organizationsScalarWhereInput
+    data: XOR<organizationsUpdateManyMutationInput, organizationsUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type organizationsScalarWhereInput = {
+    AND?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
+    OR?: organizationsScalarWhereInput[]
+    NOT?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
+    id?: IntFilter<"organizations"> | number
+    name?: StringFilter<"organizations"> | string
+    latitude?: FloatFilter<"organizations"> | number
+    longitude?: FloatFilter<"organizations"> | number
+    description?: StringNullableFilter<"organizations"> | string | null
+    website?: StringNullableFilter<"organizations"> | string | null
+    Address?: StringNullableFilter<"organizations"> | string | null
+    submittedBy?: IntFilter<"organizations"> | number
+    verified?: BoolFilter<"organizations"> | boolean
+    createdAt?: DateTimeFilter<"organizations"> | Date | string
+  }
+
   export type UserCreateWithoutPostsInput = {
     username: string
     email: string
@@ -10506,6 +10905,7 @@ export namespace Prisma {
     following?: FollowCreateNestedManyWithoutFollowerInput
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
+    organization?: organizationsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -10522,6 +10922,7 @@ export namespace Prisma {
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -10597,6 +10998,7 @@ export namespace Prisma {
     following?: FollowUpdateManyWithoutFollowerNestedInput
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
+    organization?: organizationsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -10613,6 +11015,7 @@ export namespace Prisma {
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LikeUpsertWithWhereUniqueWithoutPostInput = {
@@ -10660,6 +11063,7 @@ export namespace Prisma {
     following?: FollowCreateNestedManyWithoutFollowerInput
     posts?: PostCreateNestedManyWithoutUserInput
     like?: LikeCreateNestedManyWithoutUserInput
+    organization?: organizationsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentInput = {
@@ -10676,6 +11080,7 @@ export namespace Prisma {
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentInput = {
@@ -10735,6 +11140,7 @@ export namespace Prisma {
     following?: FollowUpdateManyWithoutFollowerNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     like?: LikeUpdateManyWithoutUserNestedInput
+    organization?: organizationsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentInput = {
@@ -10751,6 +11157,7 @@ export namespace Prisma {
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutCommentInput = {
@@ -10800,6 +11207,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
+    organization?: organizationsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowingInput = {
@@ -10816,6 +11224,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowingInput = {
@@ -10836,6 +11245,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
+    organization?: organizationsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowersInput = {
@@ -10852,6 +11262,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowersInput = {
@@ -10883,6 +11294,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
+    organization?: organizationsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowingInput = {
@@ -10899,6 +11311,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutFollowersInput = {
@@ -10925,6 +11338,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
+    organization?: organizationsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -10937,6 +11351,89 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lat?: NullableFloatFieldUpdateOperationsInput | number | null
     lng?: NullableFloatFieldUpdateOperationsInput | number | null
+    following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutOrganizationInput = {
+    username: string
+    email: string
+    password: string
+    bio?: string | null
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    lat?: number | null
+    lng?: number | null
+    followers?: FollowCreateNestedManyWithoutFollowingInput
+    following?: FollowCreateNestedManyWithoutFollowerInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    like?: LikeCreateNestedManyWithoutUserInput
+    comment?: CommentCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutOrganizationInput = {
+    id?: number
+    username: string
+    email: string
+    password: string
+    bio?: string | null
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    lat?: number | null
+    lng?: number | null
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowingInput
+    following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutOrganizationInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type UserUpsertWithoutOrganizationInput = {
+    update: XOR<UserUpdateWithoutOrganizationInput, UserUncheckedUpdateWithoutOrganizationInput>
+    create: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOrganizationInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOrganizationInput, UserUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type UserUpdateWithoutOrganizationInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
+    followers?: FollowUpdateManyWithoutFollowingNestedInput
+    following?: FollowUpdateManyWithoutFollowerNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    like?: LikeUpdateManyWithoutUserNestedInput
+    comment?: CommentUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOrganizationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
+    followers?: FollowUncheckedUpdateManyWithoutFollowingNestedInput
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
@@ -10956,6 +11453,7 @@ export namespace Prisma {
     following?: FollowCreateNestedManyWithoutFollowerInput
     posts?: PostCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
+    organization?: organizationsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLikeInput = {
@@ -10972,6 +11470,7 @@ export namespace Prisma {
     following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLikeInput = {
@@ -11031,6 +11530,7 @@ export namespace Prisma {
     following?: FollowUpdateManyWithoutFollowerNestedInput
     posts?: PostUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
+    organization?: organizationsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikeInput = {
@@ -11047,6 +11547,7 @@ export namespace Prisma {
     following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutLikeInput = {
@@ -11114,6 +11615,18 @@ export namespace Prisma {
     content: string
     createdAt?: Date | string
     postId: number
+  }
+
+  export type organizationsCreateManyUserInput = {
+    id?: number
+    name: string
+    latitude: number
+    longitude: number
+    description?: string | null
+    website?: string | null
+    Address?: string | null
+    verified?: boolean
+    createdAt?: Date | string
   }
 
   export type FollowUpdateWithoutFollowingInput = {
@@ -11212,6 +11725,41 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     postId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type organizationsUpdateWithoutUserInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    Address?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type organizationsUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    Address?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type organizationsUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    Address?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LikeCreateManyPostInput = {

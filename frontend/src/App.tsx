@@ -25,7 +25,7 @@ function App() {
           <Route path="/Dashboard" element={<Protected><Dashboard /></Protected>} />
           <Route path="/logout" element={<LogoutButton />} />
           <Route path="/create-post" element={<CreatePost />} />
-          <Route path="/addOrg" element={<OrgForm/>} />
+          <Route path="/addOrg" element={<Protected><OrgForm /></Protected>} />
           <Route path="/Hello" element={<SetLocation />} />
           <Route path="/posts" element={<Protected><Feed /></Protected>} />
           <Route path="/profile" element={<Protected><Profile /></Protected>} />

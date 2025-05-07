@@ -22,9 +22,10 @@ model User {
   followers Follow[] @relation("followers")
   following Follow[] @relation("following")
 
-  posts   Post[]
-  like    Like[]
-  comment Comment[]
+  posts        Post[]
+  like         Like[]
+  comment      Comment[]
+  organization organizations[]
 }
 
 model Post {
@@ -70,7 +71,13 @@ model organizations {
   latitude    Float
   longitude   Float
   description String?
+  website     String?
+  Address     String?
+  submittedBy Int
+  verified    Boolean  @default(false)
   createdAt   DateTime @default(now())
+
+  user User @relation(fields: [submittedBy], references: [id])
 }
 
 model Like {

@@ -7,18 +7,20 @@ const OrgForm = () => {
         description: "",
         latitude: "",
         longitude: "",
+        Address: ""
     })
 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            const res = await axios.post("http://localhost:5000/api/eco-orgs/register", {
+            const res = await axios.post(" http://localhost:5000/api/eco-orgs/register", {
                 name: form.name,
                 description: form.description,
                 latitude: parseFloat(form.latitude),
                 longitude: parseFloat(form.longitude),
-            })
+                Address: form.Address
+            }, {withCredentials: true})
             alert("Organization is created")
         } catch (err) {
             console.log(err);
@@ -36,6 +38,8 @@ const OrgForm = () => {
                 value={form.latitude} onChange={(e) => setForm({ ...form, latitude: e.target.value })} />
             <input type="text" placeholder="Longitude" required
                 value={form.longitude} onChange={(e) => setForm({ ...form, longitude: e.target.value })} />
+            <input type="text" placeholder="Address" required
+                value={form.Address} onChange={(e) => setForm({ ...form, Address: e.target.value })} />
 
             <button type="submit" className="bg-green-600 cursor: pointer text-white px-4 py-2 rounded">Register</button>
         </form>
