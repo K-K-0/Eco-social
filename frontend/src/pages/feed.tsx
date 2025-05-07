@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/Authcontext";
 import CommentSection from "../components/comments";
+import Loader from "../components/loader";
 
 type CommentType = {
     id: string
@@ -55,7 +56,7 @@ const Feed = () => {
    
 
 
-    if(loading) return <div className="text-center mt-10">Loading Feed...</div>
+    if(loading) return <div className="text-center mt-10"><Loader /></div>
 
     const handleLike = async (postId: string) => {
         try {

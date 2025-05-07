@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { getMe } from "../api/auth";
+import Loader from "../components/loader";
 
 
 
