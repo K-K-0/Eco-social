@@ -2,6 +2,7 @@ import {useRef, useEffect, useState} from "react";
 import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import axios from "axios";
+import NavBar from "./NavBar";
 
 const MAPTILER_KEY = "bs0qTCbmXadT9ZH0pr9h"
 
@@ -77,7 +78,7 @@ const Map = () => {
                 
                 
                 
-                <div class="bg-green-100 border border-green-400 text-green-800 p-4 rounded py-2 px-2 w-full h-fit">
+                <div class="bg-green-100 border border-green-400 text-green-800 p-4 rounded ml-0 py-2 px-2 w-full h-fit">
                     <div class="text-green-800">${org.name}</div>
                     <div class="text-green-8">${org.description || ""}</div>   
                 </div> 
@@ -100,15 +101,16 @@ const Map = () => {
 
 
     return (
-        <div className="relative">
+        <div className="pl-0">
+            <NavBar/>
             <div ref={mapContainer}
-            className="w-full h-[600px] rounded-lg shadow-md border"
+            className="w-[1919px] h-[852px]"
         />
 
             <button onClick={() => 
                 setMapStyle((prev) => (prev === "street" ? "satellite" : "street"))
             }
-            className="absolute top-4 right-4 bg-white px-3 py-1 rounded shadow-md text-sm font-medium hover:bg-gray-100"
+            className="absolute top-4 mt-40 right-4 bg-white px-3 py-1 rounded shadow-md text-sm font-medium hover:bg-gray-100"
             >
                 {mapStyle === "street" ? "Satellite View" : "Street View"}
             </button>

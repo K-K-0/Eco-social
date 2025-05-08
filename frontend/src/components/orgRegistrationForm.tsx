@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 const OrgForm = () => {
     const [form, setForm] = useState({
@@ -29,7 +30,9 @@ const OrgForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4">
+        
+        <form onSubmit={handleSubmit} className="space-y-15">
+            <div><NavBar /></div>
             <input type="text" placeholder="Name" required
                 value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
             <textarea placeholder="Description"
