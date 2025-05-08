@@ -8,7 +8,14 @@ const routes = Router()
 
 routes.get("/", async (req, res) => {
     try {
-        const organizations = await prisma.organizations.findMany()
+        const organizations = await prisma.organizations.findMany({
+            include: {
+                _count: { select: {
+                    Followers: true
+                }
+            }
+        }
+        })
         res.json(organizations)
     } catch (error) {
         console.error(error);
@@ -66,6 +73,35 @@ routes.post('/verify/:id', authMiddleware, async (req, res) => {
         res.status(500).json({ error: 'Failed to verify org' });
     }
 });
+
+routes.post('/:orgId', authMiddleware, async (req:any, res: any) => {
+    const { orgId } = req.params
+    const userId = req.userId
+    
+    const follow = await prisma.followOrg.create({
+        data: {
+            userId,
+            orgId
+        }
+    })
+    res.json({follow})
+})
+
+routes.delete('/:orgId', authMiddleware, async (req: any, res: any) => {
+    const { orgId } = req.params
+    const userId = req.userId
+
+    const follow = await prisma.followOrg.delete({
+        where: {
+            userId_orgId: {
+                userId,orgId
+            }
+        }
+    })
+    res.json({ follow })
+})
+
+
 
 
 export default routes

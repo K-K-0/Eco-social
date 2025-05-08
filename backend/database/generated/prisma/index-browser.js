@@ -167,6 +167,12 @@ exports.Prisma.OrganizationsScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.FollowOrgScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  orgId: 'orgId'
+};
+
 exports.Prisma.LikeScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -196,6 +202,7 @@ exports.Prisma.ModelName = {
   Comment: 'Comment',
   Follow: 'Follow',
   organizations: 'organizations',
+  FollowOrg: 'FollowOrg',
   Like: 'Like'
 };
 

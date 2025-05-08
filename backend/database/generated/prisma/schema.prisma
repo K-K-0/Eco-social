@@ -26,6 +26,7 @@ model User {
   like         Like[]
   comment      Comment[]
   organization organizations[]
+  FollowOrg    FollowOrg[]
 }
 
 model Post {
@@ -77,7 +78,19 @@ model organizations {
   verified    Boolean  @default(false)
   createdAt   DateTime @default(now())
 
+  Followers FollowOrg[]
+
   user User @relation(fields: [submittedBy], references: [id])
+}
+
+model FollowOrg {
+  id            Int           @id @default(autoincrement())
+  userId        Int
+  user          User          @relation(fields: [userId], references: [id])
+  orgId         Int
+  Organizations organizations @relation(fields: [orgId], references: [id])
+
+  @@unique([userId, orgId])
 }
 
 model Like {

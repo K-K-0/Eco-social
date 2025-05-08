@@ -39,6 +39,11 @@ export type Follow = $Result.DefaultSelection<Prisma.$FollowPayload>
  */
 export type organizations = $Result.DefaultSelection<Prisma.$organizationsPayload>
 /**
+ * Model FollowOrg
+ * 
+ */
+export type FollowOrg = $Result.DefaultSelection<Prisma.$FollowOrgPayload>
+/**
  * Model Like
  * 
  */
@@ -218,6 +223,16 @@ export class PrismaClient<
     * ```
     */
   get organizations(): Prisma.organizationsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.followOrg`: Exposes CRUD operations for the **FollowOrg** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FollowOrgs
+    * const followOrgs = await prisma.followOrg.findMany()
+    * ```
+    */
+  get followOrg(): Prisma.FollowOrgDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.like`: Exposes CRUD operations for the **Like** model.
@@ -673,6 +688,7 @@ export namespace Prisma {
     Comment: 'Comment',
     Follow: 'Follow',
     organizations: 'organizations',
+    FollowOrg: 'FollowOrg',
     Like: 'Like'
   };
 
@@ -692,7 +708,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "post" | "comment" | "follow" | "organizations" | "like"
+      modelProps: "user" | "post" | "comment" | "follow" | "organizations" | "followOrg" | "like"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1066,6 +1082,80 @@ export namespace Prisma {
           }
         }
       }
+      FollowOrg: {
+        payload: Prisma.$FollowOrgPayload<ExtArgs>
+        fields: Prisma.FollowOrgFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FollowOrgFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FollowOrgFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload>
+          }
+          findFirst: {
+            args: Prisma.FollowOrgFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FollowOrgFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload>
+          }
+          findMany: {
+            args: Prisma.FollowOrgFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload>[]
+          }
+          create: {
+            args: Prisma.FollowOrgCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload>
+          }
+          createMany: {
+            args: Prisma.FollowOrgCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FollowOrgCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload>[]
+          }
+          delete: {
+            args: Prisma.FollowOrgDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload>
+          }
+          update: {
+            args: Prisma.FollowOrgUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload>
+          }
+          deleteMany: {
+            args: Prisma.FollowOrgDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FollowOrgUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FollowOrgUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload>[]
+          }
+          upsert: {
+            args: Prisma.FollowOrgUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FollowOrgPayload>
+          }
+          aggregate: {
+            args: Prisma.FollowOrgAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFollowOrg>
+          }
+          groupBy: {
+            args: Prisma.FollowOrgGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FollowOrgGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FollowOrgCountArgs<ExtArgs>
+            result: $Utils.Optional<FollowOrgCountAggregateOutputType> | number
+          }
+        }
+      }
       Like: {
         payload: Prisma.$LikePayload<ExtArgs>
         fields: Prisma.LikeFieldRefs
@@ -1229,6 +1319,7 @@ export namespace Prisma {
     comment?: CommentOmit
     follow?: FollowOmit
     organizations?: organizationsOmit
+    followOrg?: FollowOrgOmit
     like?: LikeOmit
   }
 
@@ -1330,6 +1421,7 @@ export namespace Prisma {
     like: number
     comment: number
     organization: number
+    FollowOrg: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1339,6 +1431,7 @@ export namespace Prisma {
     like?: boolean | UserCountOutputTypeCountLikeArgs
     comment?: boolean | UserCountOutputTypeCountCommentArgs
     organization?: boolean | UserCountOutputTypeCountOrganizationArgs
+    FollowOrg?: boolean | UserCountOutputTypeCountFollowOrgArgs
   }
 
   // Custom InputTypes
@@ -1394,6 +1487,13 @@ export namespace Prisma {
     where?: organizationsWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFollowOrgArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FollowOrgWhereInput
+  }
+
 
   /**
    * Count Type PostCountOutputType
@@ -1432,6 +1532,37 @@ export namespace Prisma {
    */
   export type PostCountOutputTypeCountCommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CommentWhereInput
+  }
+
+
+  /**
+   * Count Type OrganizationsCountOutputType
+   */
+
+  export type OrganizationsCountOutputType = {
+    Followers: number
+  }
+
+  export type OrganizationsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Followers?: boolean | OrganizationsCountOutputTypeCountFollowersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * OrganizationsCountOutputType without action
+   */
+  export type OrganizationsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrganizationsCountOutputType
+     */
+    select?: OrganizationsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * OrganizationsCountOutputType without action
+   */
+  export type OrganizationsCountOutputTypeCountFollowersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FollowOrgWhereInput
   }
 
 
@@ -1683,6 +1814,7 @@ export namespace Prisma {
     like?: boolean | User$likeArgs<ExtArgs>
     comment?: boolean | User$commentArgs<ExtArgs>
     organization?: boolean | User$organizationArgs<ExtArgs>
+    FollowOrg?: boolean | User$FollowOrgArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1730,6 +1862,7 @@ export namespace Prisma {
     like?: boolean | User$likeArgs<ExtArgs>
     comment?: boolean | User$commentArgs<ExtArgs>
     organization?: boolean | User$organizationArgs<ExtArgs>
+    FollowOrg?: boolean | User$FollowOrgArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1744,6 +1877,7 @@ export namespace Prisma {
       like: Prisma.$LikePayload<ExtArgs>[]
       comment: Prisma.$CommentPayload<ExtArgs>[]
       organization: Prisma.$organizationsPayload<ExtArgs>[]
+      FollowOrg: Prisma.$FollowOrgPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2155,6 +2289,7 @@ export namespace Prisma {
     like<T extends User$likeArgs<ExtArgs> = {}>(args?: Subset<T, User$likeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     comment<T extends User$commentArgs<ExtArgs> = {}>(args?: Subset<T, User$commentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     organization<T extends User$organizationArgs<ExtArgs> = {}>(args?: Subset<T, User$organizationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    FollowOrg<T extends User$FollowOrgArgs<ExtArgs> = {}>(args?: Subset<T, User$FollowOrgArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2722,6 +2857,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrganizationsScalarFieldEnum | OrganizationsScalarFieldEnum[]
+  }
+
+  /**
+   * User.FollowOrg
+   */
+  export type User$FollowOrgArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    where?: FollowOrgWhereInput
+    orderBy?: FollowOrgOrderByWithRelationInput | FollowOrgOrderByWithRelationInput[]
+    cursor?: FollowOrgWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FollowOrgScalarFieldEnum | FollowOrgScalarFieldEnum[]
   }
 
   /**
@@ -6380,7 +6539,9 @@ export namespace Prisma {
     submittedBy?: boolean
     verified?: boolean
     createdAt?: boolean
+    Followers?: boolean | organizations$FollowersArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    _count?: boolean | OrganizationsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["organizations"]>
 
   export type organizationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6426,7 +6587,9 @@ export namespace Prisma {
 
   export type organizationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "latitude" | "longitude" | "description" | "website" | "Address" | "submittedBy" | "verified" | "createdAt", ExtArgs["result"]["organizations"]>
   export type organizationsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Followers?: boolean | organizations$FollowersArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    _count?: boolean | OrganizationsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type organizationsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -6438,6 +6601,7 @@ export namespace Prisma {
   export type $organizationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "organizations"
     objects: {
+      Followers: Prisma.$FollowOrgPayload<ExtArgs>[]
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6845,6 +7009,7 @@ export namespace Prisma {
    */
   export interface Prisma__organizationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    Followers<T extends organizations$FollowersArgs<ExtArgs> = {}>(args?: Subset<T, organizations$FollowersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7281,6 +7446,30 @@ export namespace Prisma {
   }
 
   /**
+   * organizations.Followers
+   */
+  export type organizations$FollowersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    where?: FollowOrgWhereInput
+    orderBy?: FollowOrgOrderByWithRelationInput | FollowOrgOrderByWithRelationInput[]
+    cursor?: FollowOrgWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FollowOrgScalarFieldEnum | FollowOrgScalarFieldEnum[]
+  }
+
+  /**
    * organizations without action
    */
   export type organizationsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7296,6 +7485,1088 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: organizationsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FollowOrg
+   */
+
+  export type AggregateFollowOrg = {
+    _count: FollowOrgCountAggregateOutputType | null
+    _avg: FollowOrgAvgAggregateOutputType | null
+    _sum: FollowOrgSumAggregateOutputType | null
+    _min: FollowOrgMinAggregateOutputType | null
+    _max: FollowOrgMaxAggregateOutputType | null
+  }
+
+  export type FollowOrgAvgAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    orgId: number | null
+  }
+
+  export type FollowOrgSumAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    orgId: number | null
+  }
+
+  export type FollowOrgMinAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    orgId: number | null
+  }
+
+  export type FollowOrgMaxAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    orgId: number | null
+  }
+
+  export type FollowOrgCountAggregateOutputType = {
+    id: number
+    userId: number
+    orgId: number
+    _all: number
+  }
+
+
+  export type FollowOrgAvgAggregateInputType = {
+    id?: true
+    userId?: true
+    orgId?: true
+  }
+
+  export type FollowOrgSumAggregateInputType = {
+    id?: true
+    userId?: true
+    orgId?: true
+  }
+
+  export type FollowOrgMinAggregateInputType = {
+    id?: true
+    userId?: true
+    orgId?: true
+  }
+
+  export type FollowOrgMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    orgId?: true
+  }
+
+  export type FollowOrgCountAggregateInputType = {
+    id?: true
+    userId?: true
+    orgId?: true
+    _all?: true
+  }
+
+  export type FollowOrgAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FollowOrg to aggregate.
+     */
+    where?: FollowOrgWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FollowOrgs to fetch.
+     */
+    orderBy?: FollowOrgOrderByWithRelationInput | FollowOrgOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FollowOrgWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FollowOrgs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FollowOrgs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FollowOrgs
+    **/
+    _count?: true | FollowOrgCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FollowOrgAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FollowOrgSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FollowOrgMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FollowOrgMaxAggregateInputType
+  }
+
+  export type GetFollowOrgAggregateType<T extends FollowOrgAggregateArgs> = {
+        [P in keyof T & keyof AggregateFollowOrg]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFollowOrg[P]>
+      : GetScalarType<T[P], AggregateFollowOrg[P]>
+  }
+
+
+
+
+  export type FollowOrgGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FollowOrgWhereInput
+    orderBy?: FollowOrgOrderByWithAggregationInput | FollowOrgOrderByWithAggregationInput[]
+    by: FollowOrgScalarFieldEnum[] | FollowOrgScalarFieldEnum
+    having?: FollowOrgScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FollowOrgCountAggregateInputType | true
+    _avg?: FollowOrgAvgAggregateInputType
+    _sum?: FollowOrgSumAggregateInputType
+    _min?: FollowOrgMinAggregateInputType
+    _max?: FollowOrgMaxAggregateInputType
+  }
+
+  export type FollowOrgGroupByOutputType = {
+    id: number
+    userId: number
+    orgId: number
+    _count: FollowOrgCountAggregateOutputType | null
+    _avg: FollowOrgAvgAggregateOutputType | null
+    _sum: FollowOrgSumAggregateOutputType | null
+    _min: FollowOrgMinAggregateOutputType | null
+    _max: FollowOrgMaxAggregateOutputType | null
+  }
+
+  type GetFollowOrgGroupByPayload<T extends FollowOrgGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FollowOrgGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FollowOrgGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FollowOrgGroupByOutputType[P]>
+            : GetScalarType<T[P], FollowOrgGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FollowOrgSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    orgId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    Organizations?: boolean | organizationsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["followOrg"]>
+
+  export type FollowOrgSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    orgId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    Organizations?: boolean | organizationsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["followOrg"]>
+
+  export type FollowOrgSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    orgId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    Organizations?: boolean | organizationsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["followOrg"]>
+
+  export type FollowOrgSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    orgId?: boolean
+  }
+
+  export type FollowOrgOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "orgId", ExtArgs["result"]["followOrg"]>
+  export type FollowOrgInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    Organizations?: boolean | organizationsDefaultArgs<ExtArgs>
+  }
+  export type FollowOrgIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    Organizations?: boolean | organizationsDefaultArgs<ExtArgs>
+  }
+  export type FollowOrgIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    Organizations?: boolean | organizationsDefaultArgs<ExtArgs>
+  }
+
+  export type $FollowOrgPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FollowOrg"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      Organizations: Prisma.$organizationsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userId: number
+      orgId: number
+    }, ExtArgs["result"]["followOrg"]>
+    composites: {}
+  }
+
+  type FollowOrgGetPayload<S extends boolean | null | undefined | FollowOrgDefaultArgs> = $Result.GetResult<Prisma.$FollowOrgPayload, S>
+
+  type FollowOrgCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FollowOrgFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FollowOrgCountAggregateInputType | true
+    }
+
+  export interface FollowOrgDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FollowOrg'], meta: { name: 'FollowOrg' } }
+    /**
+     * Find zero or one FollowOrg that matches the filter.
+     * @param {FollowOrgFindUniqueArgs} args - Arguments to find a FollowOrg
+     * @example
+     * // Get one FollowOrg
+     * const followOrg = await prisma.followOrg.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FollowOrgFindUniqueArgs>(args: SelectSubset<T, FollowOrgFindUniqueArgs<ExtArgs>>): Prisma__FollowOrgClient<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FollowOrg that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FollowOrgFindUniqueOrThrowArgs} args - Arguments to find a FollowOrg
+     * @example
+     * // Get one FollowOrg
+     * const followOrg = await prisma.followOrg.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FollowOrgFindUniqueOrThrowArgs>(args: SelectSubset<T, FollowOrgFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FollowOrgClient<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FollowOrg that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowOrgFindFirstArgs} args - Arguments to find a FollowOrg
+     * @example
+     * // Get one FollowOrg
+     * const followOrg = await prisma.followOrg.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FollowOrgFindFirstArgs>(args?: SelectSubset<T, FollowOrgFindFirstArgs<ExtArgs>>): Prisma__FollowOrgClient<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FollowOrg that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowOrgFindFirstOrThrowArgs} args - Arguments to find a FollowOrg
+     * @example
+     * // Get one FollowOrg
+     * const followOrg = await prisma.followOrg.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FollowOrgFindFirstOrThrowArgs>(args?: SelectSubset<T, FollowOrgFindFirstOrThrowArgs<ExtArgs>>): Prisma__FollowOrgClient<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FollowOrgs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowOrgFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FollowOrgs
+     * const followOrgs = await prisma.followOrg.findMany()
+     * 
+     * // Get first 10 FollowOrgs
+     * const followOrgs = await prisma.followOrg.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const followOrgWithIdOnly = await prisma.followOrg.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FollowOrgFindManyArgs>(args?: SelectSubset<T, FollowOrgFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FollowOrg.
+     * @param {FollowOrgCreateArgs} args - Arguments to create a FollowOrg.
+     * @example
+     * // Create one FollowOrg
+     * const FollowOrg = await prisma.followOrg.create({
+     *   data: {
+     *     // ... data to create a FollowOrg
+     *   }
+     * })
+     * 
+     */
+    create<T extends FollowOrgCreateArgs>(args: SelectSubset<T, FollowOrgCreateArgs<ExtArgs>>): Prisma__FollowOrgClient<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FollowOrgs.
+     * @param {FollowOrgCreateManyArgs} args - Arguments to create many FollowOrgs.
+     * @example
+     * // Create many FollowOrgs
+     * const followOrg = await prisma.followOrg.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FollowOrgCreateManyArgs>(args?: SelectSubset<T, FollowOrgCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FollowOrgs and returns the data saved in the database.
+     * @param {FollowOrgCreateManyAndReturnArgs} args - Arguments to create many FollowOrgs.
+     * @example
+     * // Create many FollowOrgs
+     * const followOrg = await prisma.followOrg.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FollowOrgs and only return the `id`
+     * const followOrgWithIdOnly = await prisma.followOrg.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FollowOrgCreateManyAndReturnArgs>(args?: SelectSubset<T, FollowOrgCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FollowOrg.
+     * @param {FollowOrgDeleteArgs} args - Arguments to delete one FollowOrg.
+     * @example
+     * // Delete one FollowOrg
+     * const FollowOrg = await prisma.followOrg.delete({
+     *   where: {
+     *     // ... filter to delete one FollowOrg
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FollowOrgDeleteArgs>(args: SelectSubset<T, FollowOrgDeleteArgs<ExtArgs>>): Prisma__FollowOrgClient<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FollowOrg.
+     * @param {FollowOrgUpdateArgs} args - Arguments to update one FollowOrg.
+     * @example
+     * // Update one FollowOrg
+     * const followOrg = await prisma.followOrg.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FollowOrgUpdateArgs>(args: SelectSubset<T, FollowOrgUpdateArgs<ExtArgs>>): Prisma__FollowOrgClient<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FollowOrgs.
+     * @param {FollowOrgDeleteManyArgs} args - Arguments to filter FollowOrgs to delete.
+     * @example
+     * // Delete a few FollowOrgs
+     * const { count } = await prisma.followOrg.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FollowOrgDeleteManyArgs>(args?: SelectSubset<T, FollowOrgDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FollowOrgs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowOrgUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FollowOrgs
+     * const followOrg = await prisma.followOrg.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FollowOrgUpdateManyArgs>(args: SelectSubset<T, FollowOrgUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FollowOrgs and returns the data updated in the database.
+     * @param {FollowOrgUpdateManyAndReturnArgs} args - Arguments to update many FollowOrgs.
+     * @example
+     * // Update many FollowOrgs
+     * const followOrg = await prisma.followOrg.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FollowOrgs and only return the `id`
+     * const followOrgWithIdOnly = await prisma.followOrg.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FollowOrgUpdateManyAndReturnArgs>(args: SelectSubset<T, FollowOrgUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FollowOrg.
+     * @param {FollowOrgUpsertArgs} args - Arguments to update or create a FollowOrg.
+     * @example
+     * // Update or create a FollowOrg
+     * const followOrg = await prisma.followOrg.upsert({
+     *   create: {
+     *     // ... data to create a FollowOrg
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FollowOrg we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FollowOrgUpsertArgs>(args: SelectSubset<T, FollowOrgUpsertArgs<ExtArgs>>): Prisma__FollowOrgClient<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FollowOrgs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowOrgCountArgs} args - Arguments to filter FollowOrgs to count.
+     * @example
+     * // Count the number of FollowOrgs
+     * const count = await prisma.followOrg.count({
+     *   where: {
+     *     // ... the filter for the FollowOrgs we want to count
+     *   }
+     * })
+    **/
+    count<T extends FollowOrgCountArgs>(
+      args?: Subset<T, FollowOrgCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FollowOrgCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FollowOrg.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowOrgAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FollowOrgAggregateArgs>(args: Subset<T, FollowOrgAggregateArgs>): Prisma.PrismaPromise<GetFollowOrgAggregateType<T>>
+
+    /**
+     * Group by FollowOrg.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FollowOrgGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FollowOrgGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FollowOrgGroupByArgs['orderBy'] }
+        : { orderBy?: FollowOrgGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FollowOrgGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFollowOrgGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FollowOrg model
+   */
+  readonly fields: FollowOrgFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FollowOrg.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FollowOrgClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Organizations<T extends organizationsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, organizationsDefaultArgs<ExtArgs>>): Prisma__organizationsClient<$Result.GetResult<Prisma.$organizationsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FollowOrg model
+   */
+  interface FollowOrgFieldRefs {
+    readonly id: FieldRef<"FollowOrg", 'Int'>
+    readonly userId: FieldRef<"FollowOrg", 'Int'>
+    readonly orgId: FieldRef<"FollowOrg", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FollowOrg findUnique
+   */
+  export type FollowOrgFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowOrg to fetch.
+     */
+    where: FollowOrgWhereUniqueInput
+  }
+
+  /**
+   * FollowOrg findUniqueOrThrow
+   */
+  export type FollowOrgFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowOrg to fetch.
+     */
+    where: FollowOrgWhereUniqueInput
+  }
+
+  /**
+   * FollowOrg findFirst
+   */
+  export type FollowOrgFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowOrg to fetch.
+     */
+    where?: FollowOrgWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FollowOrgs to fetch.
+     */
+    orderBy?: FollowOrgOrderByWithRelationInput | FollowOrgOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FollowOrgs.
+     */
+    cursor?: FollowOrgWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FollowOrgs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FollowOrgs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FollowOrgs.
+     */
+    distinct?: FollowOrgScalarFieldEnum | FollowOrgScalarFieldEnum[]
+  }
+
+  /**
+   * FollowOrg findFirstOrThrow
+   */
+  export type FollowOrgFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowOrg to fetch.
+     */
+    where?: FollowOrgWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FollowOrgs to fetch.
+     */
+    orderBy?: FollowOrgOrderByWithRelationInput | FollowOrgOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FollowOrgs.
+     */
+    cursor?: FollowOrgWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FollowOrgs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FollowOrgs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FollowOrgs.
+     */
+    distinct?: FollowOrgScalarFieldEnum | FollowOrgScalarFieldEnum[]
+  }
+
+  /**
+   * FollowOrg findMany
+   */
+  export type FollowOrgFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    /**
+     * Filter, which FollowOrgs to fetch.
+     */
+    where?: FollowOrgWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FollowOrgs to fetch.
+     */
+    orderBy?: FollowOrgOrderByWithRelationInput | FollowOrgOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FollowOrgs.
+     */
+    cursor?: FollowOrgWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FollowOrgs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FollowOrgs.
+     */
+    skip?: number
+    distinct?: FollowOrgScalarFieldEnum | FollowOrgScalarFieldEnum[]
+  }
+
+  /**
+   * FollowOrg create
+   */
+  export type FollowOrgCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FollowOrg.
+     */
+    data: XOR<FollowOrgCreateInput, FollowOrgUncheckedCreateInput>
+  }
+
+  /**
+   * FollowOrg createMany
+   */
+  export type FollowOrgCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FollowOrgs.
+     */
+    data: FollowOrgCreateManyInput | FollowOrgCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FollowOrg createManyAndReturn
+   */
+  export type FollowOrgCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * The data used to create many FollowOrgs.
+     */
+    data: FollowOrgCreateManyInput | FollowOrgCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FollowOrg update
+   */
+  export type FollowOrgUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FollowOrg.
+     */
+    data: XOR<FollowOrgUpdateInput, FollowOrgUncheckedUpdateInput>
+    /**
+     * Choose, which FollowOrg to update.
+     */
+    where: FollowOrgWhereUniqueInput
+  }
+
+  /**
+   * FollowOrg updateMany
+   */
+  export type FollowOrgUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FollowOrgs.
+     */
+    data: XOR<FollowOrgUpdateManyMutationInput, FollowOrgUncheckedUpdateManyInput>
+    /**
+     * Filter which FollowOrgs to update
+     */
+    where?: FollowOrgWhereInput
+    /**
+     * Limit how many FollowOrgs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FollowOrg updateManyAndReturn
+   */
+  export type FollowOrgUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * The data used to update FollowOrgs.
+     */
+    data: XOR<FollowOrgUpdateManyMutationInput, FollowOrgUncheckedUpdateManyInput>
+    /**
+     * Filter which FollowOrgs to update
+     */
+    where?: FollowOrgWhereInput
+    /**
+     * Limit how many FollowOrgs to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FollowOrg upsert
+   */
+  export type FollowOrgUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FollowOrg to update in case it exists.
+     */
+    where: FollowOrgWhereUniqueInput
+    /**
+     * In case the FollowOrg found by the `where` argument doesn't exist, create a new FollowOrg with this data.
+     */
+    create: XOR<FollowOrgCreateInput, FollowOrgUncheckedCreateInput>
+    /**
+     * In case the FollowOrg was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FollowOrgUpdateInput, FollowOrgUncheckedUpdateInput>
+  }
+
+  /**
+   * FollowOrg delete
+   */
+  export type FollowOrgDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
+    /**
+     * Filter which FollowOrg to delete.
+     */
+    where: FollowOrgWhereUniqueInput
+  }
+
+  /**
+   * FollowOrg deleteMany
+   */
+  export type FollowOrgDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FollowOrgs to delete
+     */
+    where?: FollowOrgWhereInput
+    /**
+     * Limit how many FollowOrgs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FollowOrg without action
+   */
+  export type FollowOrgDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FollowOrg
+     */
+    select?: FollowOrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FollowOrg
+     */
+    omit?: FollowOrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FollowOrgInclude<ExtArgs> | null
   }
 
 
@@ -8473,6 +9744,15 @@ export namespace Prisma {
   export type OrganizationsScalarFieldEnum = (typeof OrganizationsScalarFieldEnum)[keyof typeof OrganizationsScalarFieldEnum]
 
 
+  export const FollowOrgScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    orgId: 'orgId'
+  };
+
+  export type FollowOrgScalarFieldEnum = (typeof FollowOrgScalarFieldEnum)[keyof typeof FollowOrgScalarFieldEnum]
+
+
   export const LikeScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -8597,6 +9877,7 @@ export namespace Prisma {
     like?: LikeListRelationFilter
     comment?: CommentListRelationFilter
     organization?: OrganizationsListRelationFilter
+    FollowOrg?: FollowOrgListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -8615,6 +9896,7 @@ export namespace Prisma {
     like?: LikeOrderByRelationAggregateInput
     comment?: CommentOrderByRelationAggregateInput
     organization?: organizationsOrderByRelationAggregateInput
+    FollowOrg?: FollowOrgOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -8636,6 +9918,7 @@ export namespace Prisma {
     like?: LikeListRelationFilter
     comment?: CommentListRelationFilter
     organization?: OrganizationsListRelationFilter
+    FollowOrg?: FollowOrgListRelationFilter
   }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -8873,6 +10156,7 @@ export namespace Prisma {
     submittedBy?: IntFilter<"organizations"> | number
     verified?: BoolFilter<"organizations"> | boolean
     createdAt?: DateTimeFilter<"organizations"> | Date | string
+    Followers?: FollowOrgListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -8887,6 +10171,7 @@ export namespace Prisma {
     submittedBy?: SortOrder
     verified?: SortOrder
     createdAt?: SortOrder
+    Followers?: FollowOrgOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
   }
 
@@ -8904,6 +10189,7 @@ export namespace Prisma {
     submittedBy?: IntFilter<"organizations"> | number
     verified?: BoolFilter<"organizations"> | boolean
     createdAt?: DateTimeFilter<"organizations"> | Date | string
+    Followers?: FollowOrgListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -8939,6 +10225,57 @@ export namespace Prisma {
     submittedBy?: IntWithAggregatesFilter<"organizations"> | number
     verified?: BoolWithAggregatesFilter<"organizations"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"organizations"> | Date | string
+  }
+
+  export type FollowOrgWhereInput = {
+    AND?: FollowOrgWhereInput | FollowOrgWhereInput[]
+    OR?: FollowOrgWhereInput[]
+    NOT?: FollowOrgWhereInput | FollowOrgWhereInput[]
+    id?: IntFilter<"FollowOrg"> | number
+    userId?: IntFilter<"FollowOrg"> | number
+    orgId?: IntFilter<"FollowOrg"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    Organizations?: XOR<OrganizationsScalarRelationFilter, organizationsWhereInput>
+  }
+
+  export type FollowOrgOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orgId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    Organizations?: organizationsOrderByWithRelationInput
+  }
+
+  export type FollowOrgWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    userId_orgId?: FollowOrgUserIdOrgIdCompoundUniqueInput
+    AND?: FollowOrgWhereInput | FollowOrgWhereInput[]
+    OR?: FollowOrgWhereInput[]
+    NOT?: FollowOrgWhereInput | FollowOrgWhereInput[]
+    userId?: IntFilter<"FollowOrg"> | number
+    orgId?: IntFilter<"FollowOrg"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    Organizations?: XOR<OrganizationsScalarRelationFilter, organizationsWhereInput>
+  }, "id" | "userId_orgId">
+
+  export type FollowOrgOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orgId?: SortOrder
+    _count?: FollowOrgCountOrderByAggregateInput
+    _avg?: FollowOrgAvgOrderByAggregateInput
+    _max?: FollowOrgMaxOrderByAggregateInput
+    _min?: FollowOrgMinOrderByAggregateInput
+    _sum?: FollowOrgSumOrderByAggregateInput
+  }
+
+  export type FollowOrgScalarWhereWithAggregatesInput = {
+    AND?: FollowOrgScalarWhereWithAggregatesInput | FollowOrgScalarWhereWithAggregatesInput[]
+    OR?: FollowOrgScalarWhereWithAggregatesInput[]
+    NOT?: FollowOrgScalarWhereWithAggregatesInput | FollowOrgScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"FollowOrg"> | number
+    userId?: IntWithAggregatesFilter<"FollowOrg"> | number
+    orgId?: IntWithAggregatesFilter<"FollowOrg"> | number
   }
 
   export type LikeWhereInput = {
@@ -9012,6 +10349,7 @@ export namespace Prisma {
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -9030,6 +10368,7 @@ export namespace Prisma {
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -9047,6 +10386,7 @@ export namespace Prisma {
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -9065,6 +10405,7 @@ export namespace Prisma {
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -9281,6 +10622,7 @@ export namespace Prisma {
     Address?: string | null
     verified?: boolean
     createdAt?: Date | string
+    Followers?: FollowOrgCreateNestedManyWithoutOrganizationsInput
     user: UserCreateNestedOneWithoutOrganizationInput
   }
 
@@ -9295,6 +10637,7 @@ export namespace Prisma {
     submittedBy: number
     verified?: boolean
     createdAt?: Date | string
+    Followers?: FollowOrgUncheckedCreateNestedManyWithoutOrganizationsInput
   }
 
   export type organizationsUpdateInput = {
@@ -9306,6 +10649,7 @@ export namespace Prisma {
     Address?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Followers?: FollowOrgUpdateManyWithoutOrganizationsNestedInput
     user?: UserUpdateOneRequiredWithoutOrganizationNestedInput
   }
 
@@ -9320,6 +10664,7 @@ export namespace Prisma {
     submittedBy?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Followers?: FollowOrgUncheckedUpdateManyWithoutOrganizationsNestedInput
   }
 
   export type organizationsCreateManyInput = {
@@ -9357,6 +10702,44 @@ export namespace Prisma {
     submittedBy?: IntFieldUpdateOperationsInput | number
     verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FollowOrgCreateInput = {
+    user: UserCreateNestedOneWithoutFollowOrgInput
+    Organizations: organizationsCreateNestedOneWithoutFollowersInput
+  }
+
+  export type FollowOrgUncheckedCreateInput = {
+    id?: number
+    userId: number
+    orgId: number
+  }
+
+  export type FollowOrgUpdateInput = {
+    user?: UserUpdateOneRequiredWithoutFollowOrgNestedInput
+    Organizations?: organizationsUpdateOneRequiredWithoutFollowersNestedInput
+  }
+
+  export type FollowOrgUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    orgId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FollowOrgCreateManyInput = {
+    id?: number
+    userId: number
+    orgId: number
+  }
+
+  export type FollowOrgUpdateManyMutationInput = {
+
+  }
+
+  export type FollowOrgUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    orgId?: IntFieldUpdateOperationsInput | number
   }
 
   export type LikeCreateInput = {
@@ -9496,6 +10879,12 @@ export namespace Prisma {
     none?: organizationsWhereInput
   }
 
+  export type FollowOrgListRelationFilter = {
+    every?: FollowOrgWhereInput
+    some?: FollowOrgWhereInput
+    none?: FollowOrgWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -9518,6 +10907,10 @@ export namespace Prisma {
   }
 
   export type organizationsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FollowOrgOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9870,6 +11263,46 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type OrganizationsScalarRelationFilter = {
+    is?: organizationsWhereInput
+    isNot?: organizationsWhereInput
+  }
+
+  export type FollowOrgUserIdOrgIdCompoundUniqueInput = {
+    userId: number
+    orgId: number
+  }
+
+  export type FollowOrgCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orgId?: SortOrder
+  }
+
+  export type FollowOrgAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orgId?: SortOrder
+  }
+
+  export type FollowOrgMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orgId?: SortOrder
+  }
+
+  export type FollowOrgMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orgId?: SortOrder
+  }
+
+  export type FollowOrgSumOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    orgId?: SortOrder
+  }
+
   export type LikeUserIdPostIdCompoundUniqueInput = {
     userId: number
     postId: number
@@ -9950,6 +11383,13 @@ export namespace Prisma {
     connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
   }
 
+  export type FollowOrgCreateNestedManyWithoutUserInput = {
+    create?: XOR<FollowOrgCreateWithoutUserInput, FollowOrgUncheckedCreateWithoutUserInput> | FollowOrgCreateWithoutUserInput[] | FollowOrgUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FollowOrgCreateOrConnectWithoutUserInput | FollowOrgCreateOrConnectWithoutUserInput[]
+    createMany?: FollowOrgCreateManyUserInputEnvelope
+    connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+  }
+
   export type FollowUncheckedCreateNestedManyWithoutFollowingInput = {
     create?: XOR<FollowCreateWithoutFollowingInput, FollowUncheckedCreateWithoutFollowingInput> | FollowCreateWithoutFollowingInput[] | FollowUncheckedCreateWithoutFollowingInput[]
     connectOrCreate?: FollowCreateOrConnectWithoutFollowingInput | FollowCreateOrConnectWithoutFollowingInput[]
@@ -9990,6 +11430,13 @@ export namespace Prisma {
     connectOrCreate?: organizationsCreateOrConnectWithoutUserInput | organizationsCreateOrConnectWithoutUserInput[]
     createMany?: organizationsCreateManyUserInputEnvelope
     connect?: organizationsWhereUniqueInput | organizationsWhereUniqueInput[]
+  }
+
+  export type FollowOrgUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FollowOrgCreateWithoutUserInput, FollowOrgUncheckedCreateWithoutUserInput> | FollowOrgCreateWithoutUserInput[] | FollowOrgUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FollowOrgCreateOrConnectWithoutUserInput | FollowOrgCreateOrConnectWithoutUserInput[]
+    createMany?: FollowOrgCreateManyUserInputEnvelope
+    connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -10096,6 +11543,20 @@ export namespace Prisma {
     deleteMany?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
   }
 
+  export type FollowOrgUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FollowOrgCreateWithoutUserInput, FollowOrgUncheckedCreateWithoutUserInput> | FollowOrgCreateWithoutUserInput[] | FollowOrgUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FollowOrgCreateOrConnectWithoutUserInput | FollowOrgCreateOrConnectWithoutUserInput[]
+    upsert?: FollowOrgUpsertWithWhereUniqueWithoutUserInput | FollowOrgUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FollowOrgCreateManyUserInputEnvelope
+    set?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    disconnect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    delete?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    update?: FollowOrgUpdateWithWhereUniqueWithoutUserInput | FollowOrgUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FollowOrgUpdateManyWithWhereWithoutUserInput | FollowOrgUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FollowOrgScalarWhereInput | FollowOrgScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -10186,6 +11647,20 @@ export namespace Prisma {
     update?: organizationsUpdateWithWhereUniqueWithoutUserInput | organizationsUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: organizationsUpdateManyWithWhereWithoutUserInput | organizationsUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: organizationsScalarWhereInput | organizationsScalarWhereInput[]
+  }
+
+  export type FollowOrgUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FollowOrgCreateWithoutUserInput, FollowOrgUncheckedCreateWithoutUserInput> | FollowOrgCreateWithoutUserInput[] | FollowOrgUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FollowOrgCreateOrConnectWithoutUserInput | FollowOrgCreateOrConnectWithoutUserInput[]
+    upsert?: FollowOrgUpsertWithWhereUniqueWithoutUserInput | FollowOrgUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FollowOrgCreateManyUserInputEnvelope
+    set?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    disconnect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    delete?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    update?: FollowOrgUpdateWithWhereUniqueWithoutUserInput | FollowOrgUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FollowOrgUpdateManyWithWhereWithoutUserInput | FollowOrgUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FollowOrgScalarWhereInput | FollowOrgScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPostsInput = {
@@ -10342,10 +11817,24 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFollowersInput, UserUpdateWithoutFollowersInput>, UserUncheckedUpdateWithoutFollowersInput>
   }
 
+  export type FollowOrgCreateNestedManyWithoutOrganizationsInput = {
+    create?: XOR<FollowOrgCreateWithoutOrganizationsInput, FollowOrgUncheckedCreateWithoutOrganizationsInput> | FollowOrgCreateWithoutOrganizationsInput[] | FollowOrgUncheckedCreateWithoutOrganizationsInput[]
+    connectOrCreate?: FollowOrgCreateOrConnectWithoutOrganizationsInput | FollowOrgCreateOrConnectWithoutOrganizationsInput[]
+    createMany?: FollowOrgCreateManyOrganizationsInputEnvelope
+    connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutOrganizationInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput>
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type FollowOrgUncheckedCreateNestedManyWithoutOrganizationsInput = {
+    create?: XOR<FollowOrgCreateWithoutOrganizationsInput, FollowOrgUncheckedCreateWithoutOrganizationsInput> | FollowOrgCreateWithoutOrganizationsInput[] | FollowOrgUncheckedCreateWithoutOrganizationsInput[]
+    connectOrCreate?: FollowOrgCreateOrConnectWithoutOrganizationsInput | FollowOrgCreateOrConnectWithoutOrganizationsInput[]
+    createMany?: FollowOrgCreateManyOrganizationsInputEnvelope
+    connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -10360,12 +11849,68 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type FollowOrgUpdateManyWithoutOrganizationsNestedInput = {
+    create?: XOR<FollowOrgCreateWithoutOrganizationsInput, FollowOrgUncheckedCreateWithoutOrganizationsInput> | FollowOrgCreateWithoutOrganizationsInput[] | FollowOrgUncheckedCreateWithoutOrganizationsInput[]
+    connectOrCreate?: FollowOrgCreateOrConnectWithoutOrganizationsInput | FollowOrgCreateOrConnectWithoutOrganizationsInput[]
+    upsert?: FollowOrgUpsertWithWhereUniqueWithoutOrganizationsInput | FollowOrgUpsertWithWhereUniqueWithoutOrganizationsInput[]
+    createMany?: FollowOrgCreateManyOrganizationsInputEnvelope
+    set?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    disconnect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    delete?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    update?: FollowOrgUpdateWithWhereUniqueWithoutOrganizationsInput | FollowOrgUpdateWithWhereUniqueWithoutOrganizationsInput[]
+    updateMany?: FollowOrgUpdateManyWithWhereWithoutOrganizationsInput | FollowOrgUpdateManyWithWhereWithoutOrganizationsInput[]
+    deleteMany?: FollowOrgScalarWhereInput | FollowOrgScalarWhereInput[]
+  }
+
   export type UserUpdateOneRequiredWithoutOrganizationNestedInput = {
     create?: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput>
     connectOrCreate?: UserCreateOrConnectWithoutOrganizationInput
     upsert?: UserUpsertWithoutOrganizationInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOrganizationInput, UserUpdateWithoutOrganizationInput>, UserUncheckedUpdateWithoutOrganizationInput>
+  }
+
+  export type FollowOrgUncheckedUpdateManyWithoutOrganizationsNestedInput = {
+    create?: XOR<FollowOrgCreateWithoutOrganizationsInput, FollowOrgUncheckedCreateWithoutOrganizationsInput> | FollowOrgCreateWithoutOrganizationsInput[] | FollowOrgUncheckedCreateWithoutOrganizationsInput[]
+    connectOrCreate?: FollowOrgCreateOrConnectWithoutOrganizationsInput | FollowOrgCreateOrConnectWithoutOrganizationsInput[]
+    upsert?: FollowOrgUpsertWithWhereUniqueWithoutOrganizationsInput | FollowOrgUpsertWithWhereUniqueWithoutOrganizationsInput[]
+    createMany?: FollowOrgCreateManyOrganizationsInputEnvelope
+    set?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    disconnect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    delete?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+    update?: FollowOrgUpdateWithWhereUniqueWithoutOrganizationsInput | FollowOrgUpdateWithWhereUniqueWithoutOrganizationsInput[]
+    updateMany?: FollowOrgUpdateManyWithWhereWithoutOrganizationsInput | FollowOrgUpdateManyWithWhereWithoutOrganizationsInput[]
+    deleteMany?: FollowOrgScalarWhereInput | FollowOrgScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutFollowOrgInput = {
+    create?: XOR<UserCreateWithoutFollowOrgInput, UserUncheckedCreateWithoutFollowOrgInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFollowOrgInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type organizationsCreateNestedOneWithoutFollowersInput = {
+    create?: XOR<organizationsCreateWithoutFollowersInput, organizationsUncheckedCreateWithoutFollowersInput>
+    connectOrCreate?: organizationsCreateOrConnectWithoutFollowersInput
+    connect?: organizationsWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutFollowOrgNestedInput = {
+    create?: XOR<UserCreateWithoutFollowOrgInput, UserUncheckedCreateWithoutFollowOrgInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFollowOrgInput
+    upsert?: UserUpsertWithoutFollowOrgInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFollowOrgInput, UserUpdateWithoutFollowOrgInput>, UserUncheckedUpdateWithoutFollowOrgInput>
+  }
+
+  export type organizationsUpdateOneRequiredWithoutFollowersNestedInput = {
+    create?: XOR<organizationsCreateWithoutFollowersInput, organizationsUncheckedCreateWithoutFollowersInput>
+    connectOrCreate?: organizationsCreateOrConnectWithoutFollowersInput
+    upsert?: organizationsUpsertWithoutFollowersInput
+    connect?: organizationsWhereUniqueInput
+    update?: XOR<XOR<organizationsUpdateToOneWithWhereWithoutFollowersInput, organizationsUpdateWithoutFollowersInput>, organizationsUncheckedUpdateWithoutFollowersInput>
   }
 
   export type UserCreateNestedOneWithoutLikeInput = {
@@ -10712,6 +12257,7 @@ export namespace Prisma {
     Address?: string | null
     verified?: boolean
     createdAt?: Date | string
+    Followers?: FollowOrgCreateNestedManyWithoutOrganizationsInput
   }
 
   export type organizationsUncheckedCreateWithoutUserInput = {
@@ -10724,6 +12270,7 @@ export namespace Prisma {
     Address?: string | null
     verified?: boolean
     createdAt?: Date | string
+    Followers?: FollowOrgUncheckedCreateNestedManyWithoutOrganizationsInput
   }
 
   export type organizationsCreateOrConnectWithoutUserInput = {
@@ -10733,6 +12280,25 @@ export namespace Prisma {
 
   export type organizationsCreateManyUserInputEnvelope = {
     data: organizationsCreateManyUserInput | organizationsCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FollowOrgCreateWithoutUserInput = {
+    Organizations: organizationsCreateNestedOneWithoutFollowersInput
+  }
+
+  export type FollowOrgUncheckedCreateWithoutUserInput = {
+    id?: number
+    orgId: number
+  }
+
+  export type FollowOrgCreateOrConnectWithoutUserInput = {
+    where: FollowOrgWhereUniqueInput
+    create: XOR<FollowOrgCreateWithoutUserInput, FollowOrgUncheckedCreateWithoutUserInput>
+  }
+
+  export type FollowOrgCreateManyUserInputEnvelope = {
+    data: FollowOrgCreateManyUserInput | FollowOrgCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -10892,6 +12458,31 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"organizations"> | Date | string
   }
 
+  export type FollowOrgUpsertWithWhereUniqueWithoutUserInput = {
+    where: FollowOrgWhereUniqueInput
+    update: XOR<FollowOrgUpdateWithoutUserInput, FollowOrgUncheckedUpdateWithoutUserInput>
+    create: XOR<FollowOrgCreateWithoutUserInput, FollowOrgUncheckedCreateWithoutUserInput>
+  }
+
+  export type FollowOrgUpdateWithWhereUniqueWithoutUserInput = {
+    where: FollowOrgWhereUniqueInput
+    data: XOR<FollowOrgUpdateWithoutUserInput, FollowOrgUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FollowOrgUpdateManyWithWhereWithoutUserInput = {
+    where: FollowOrgScalarWhereInput
+    data: XOR<FollowOrgUpdateManyMutationInput, FollowOrgUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FollowOrgScalarWhereInput = {
+    AND?: FollowOrgScalarWhereInput | FollowOrgScalarWhereInput[]
+    OR?: FollowOrgScalarWhereInput[]
+    NOT?: FollowOrgScalarWhereInput | FollowOrgScalarWhereInput[]
+    id?: IntFilter<"FollowOrg"> | number
+    userId?: IntFilter<"FollowOrg"> | number
+    orgId?: IntFilter<"FollowOrg"> | number
+  }
+
   export type UserCreateWithoutPostsInput = {
     username: string
     email: string
@@ -10906,6 +12497,7 @@ export namespace Prisma {
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -10923,6 +12515,7 @@ export namespace Prisma {
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -10999,6 +12592,7 @@ export namespace Prisma {
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -11016,6 +12610,7 @@ export namespace Prisma {
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LikeUpsertWithWhereUniqueWithoutPostInput = {
@@ -11064,6 +12659,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     like?: LikeCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentInput = {
@@ -11081,6 +12677,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentInput = {
@@ -11141,6 +12738,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     like?: LikeUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentInput = {
@@ -11158,6 +12756,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutCommentInput = {
@@ -11208,6 +12807,7 @@ export namespace Prisma {
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowingInput = {
@@ -11225,6 +12825,7 @@ export namespace Prisma {
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowingInput = {
@@ -11246,6 +12847,7 @@ export namespace Prisma {
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowersInput = {
@@ -11263,6 +12865,7 @@ export namespace Prisma {
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowersInput = {
@@ -11295,6 +12898,7 @@ export namespace Prisma {
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowingInput = {
@@ -11312,6 +12916,7 @@ export namespace Prisma {
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutFollowersInput = {
@@ -11339,6 +12944,7 @@ export namespace Prisma {
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -11356,6 +12962,26 @@ export namespace Prisma {
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type FollowOrgCreateWithoutOrganizationsInput = {
+    user: UserCreateNestedOneWithoutFollowOrgInput
+  }
+
+  export type FollowOrgUncheckedCreateWithoutOrganizationsInput = {
+    id?: number
+    userId: number
+  }
+
+  export type FollowOrgCreateOrConnectWithoutOrganizationsInput = {
+    where: FollowOrgWhereUniqueInput
+    create: XOR<FollowOrgCreateWithoutOrganizationsInput, FollowOrgUncheckedCreateWithoutOrganizationsInput>
+  }
+
+  export type FollowOrgCreateManyOrganizationsInputEnvelope = {
+    data: FollowOrgCreateManyOrganizationsInput | FollowOrgCreateManyOrganizationsInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserCreateWithoutOrganizationInput = {
@@ -11372,6 +12998,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrganizationInput = {
@@ -11389,11 +13016,28 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrganizationInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutOrganizationInput, UserUncheckedCreateWithoutOrganizationInput>
+  }
+
+  export type FollowOrgUpsertWithWhereUniqueWithoutOrganizationsInput = {
+    where: FollowOrgWhereUniqueInput
+    update: XOR<FollowOrgUpdateWithoutOrganizationsInput, FollowOrgUncheckedUpdateWithoutOrganizationsInput>
+    create: XOR<FollowOrgCreateWithoutOrganizationsInput, FollowOrgUncheckedCreateWithoutOrganizationsInput>
+  }
+
+  export type FollowOrgUpdateWithWhereUniqueWithoutOrganizationsInput = {
+    where: FollowOrgWhereUniqueInput
+    data: XOR<FollowOrgUpdateWithoutOrganizationsInput, FollowOrgUncheckedUpdateWithoutOrganizationsInput>
+  }
+
+  export type FollowOrgUpdateManyWithWhereWithoutOrganizationsInput = {
+    where: FollowOrgScalarWhereInput
+    data: XOR<FollowOrgUpdateManyMutationInput, FollowOrgUncheckedUpdateManyWithoutOrganizationsInput>
   }
 
   export type UserUpsertWithoutOrganizationInput = {
@@ -11421,6 +13065,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrganizationInput = {
@@ -11438,6 +13083,159 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutFollowOrgInput = {
+    username: string
+    email: string
+    password: string
+    bio?: string | null
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    lat?: number | null
+    lng?: number | null
+    followers?: FollowCreateNestedManyWithoutFollowingInput
+    following?: FollowCreateNestedManyWithoutFollowerInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    like?: LikeCreateNestedManyWithoutUserInput
+    comment?: CommentCreateNestedManyWithoutUserInput
+    organization?: organizationsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutFollowOrgInput = {
+    id?: number
+    username: string
+    email: string
+    password: string
+    bio?: string | null
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    lat?: number | null
+    lng?: number | null
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowingInput
+    following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutFollowOrgInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFollowOrgInput, UserUncheckedCreateWithoutFollowOrgInput>
+  }
+
+  export type organizationsCreateWithoutFollowersInput = {
+    name: string
+    latitude: number
+    longitude: number
+    description?: string | null
+    website?: string | null
+    Address?: string | null
+    verified?: boolean
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutOrganizationInput
+  }
+
+  export type organizationsUncheckedCreateWithoutFollowersInput = {
+    id?: number
+    name: string
+    latitude: number
+    longitude: number
+    description?: string | null
+    website?: string | null
+    Address?: string | null
+    submittedBy: number
+    verified?: boolean
+    createdAt?: Date | string
+  }
+
+  export type organizationsCreateOrConnectWithoutFollowersInput = {
+    where: organizationsWhereUniqueInput
+    create: XOR<organizationsCreateWithoutFollowersInput, organizationsUncheckedCreateWithoutFollowersInput>
+  }
+
+  export type UserUpsertWithoutFollowOrgInput = {
+    update: XOR<UserUpdateWithoutFollowOrgInput, UserUncheckedUpdateWithoutFollowOrgInput>
+    create: XOR<UserCreateWithoutFollowOrgInput, UserUncheckedCreateWithoutFollowOrgInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFollowOrgInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFollowOrgInput, UserUncheckedUpdateWithoutFollowOrgInput>
+  }
+
+  export type UserUpdateWithoutFollowOrgInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
+    followers?: FollowUpdateManyWithoutFollowingNestedInput
+    following?: FollowUpdateManyWithoutFollowerNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    like?: LikeUpdateManyWithoutUserNestedInput
+    comment?: CommentUpdateManyWithoutUserNestedInput
+    organization?: organizationsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFollowOrgInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
+    followers?: FollowUncheckedUpdateManyWithoutFollowingNestedInput
+    following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type organizationsUpsertWithoutFollowersInput = {
+    update: XOR<organizationsUpdateWithoutFollowersInput, organizationsUncheckedUpdateWithoutFollowersInput>
+    create: XOR<organizationsCreateWithoutFollowersInput, organizationsUncheckedCreateWithoutFollowersInput>
+    where?: organizationsWhereInput
+  }
+
+  export type organizationsUpdateToOneWithWhereWithoutFollowersInput = {
+    where?: organizationsWhereInput
+    data: XOR<organizationsUpdateWithoutFollowersInput, organizationsUncheckedUpdateWithoutFollowersInput>
+  }
+
+  export type organizationsUpdateWithoutFollowersInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    Address?: NullableStringFieldUpdateOperationsInput | string | null
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutOrganizationNestedInput
+  }
+
+  export type organizationsUncheckedUpdateWithoutFollowersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    Address?: NullableStringFieldUpdateOperationsInput | string | null
+    submittedBy?: IntFieldUpdateOperationsInput | number
+    verified?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateWithoutLikeInput = {
@@ -11454,6 +13252,7 @@ export namespace Prisma {
     posts?: PostCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLikeInput = {
@@ -11471,6 +13270,7 @@ export namespace Prisma {
     posts?: PostUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
+    FollowOrg?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLikeInput = {
@@ -11531,6 +13331,7 @@ export namespace Prisma {
     posts?: PostUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikeInput = {
@@ -11548,6 +13349,7 @@ export namespace Prisma {
     posts?: PostUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+    FollowOrg?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutLikeInput = {
@@ -11627,6 +13429,11 @@ export namespace Prisma {
     Address?: string | null
     verified?: boolean
     createdAt?: Date | string
+  }
+
+  export type FollowOrgCreateManyUserInput = {
+    id?: number
+    orgId: number
   }
 
   export type FollowUpdateWithoutFollowingInput = {
@@ -11736,6 +13543,7 @@ export namespace Prisma {
     Address?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Followers?: FollowOrgUpdateManyWithoutOrganizationsNestedInput
   }
 
   export type organizationsUncheckedUpdateWithoutUserInput = {
@@ -11748,6 +13556,7 @@ export namespace Prisma {
     Address?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Followers?: FollowOrgUncheckedUpdateManyWithoutOrganizationsNestedInput
   }
 
   export type organizationsUncheckedUpdateManyWithoutUserInput = {
@@ -11760,6 +13569,20 @@ export namespace Prisma {
     Address?: NullableStringFieldUpdateOperationsInput | string | null
     verified?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FollowOrgUpdateWithoutUserInput = {
+    Organizations?: organizationsUpdateOneRequiredWithoutFollowersNestedInput
+  }
+
+  export type FollowOrgUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    orgId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FollowOrgUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    orgId?: IntFieldUpdateOperationsInput | number
   }
 
   export type LikeCreateManyPostInput = {
@@ -11809,6 +13632,25 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FollowOrgCreateManyOrganizationsInput = {
+    id?: number
+    userId: number
+  }
+
+  export type FollowOrgUpdateWithoutOrganizationsInput = {
+    user?: UserUpdateOneRequiredWithoutFollowOrgNestedInput
+  }
+
+  export type FollowOrgUncheckedUpdateWithoutOrganizationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FollowOrgUncheckedUpdateManyWithoutOrganizationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
   }
 
