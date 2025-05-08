@@ -3,6 +3,8 @@ import maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import axios from "axios";
 import NavBar from "./NavBar";
+import { useAuth } from "../context/Authcontext";
+import OrgCard from "./OrgFollow";
 
 const MAPTILER_KEY = "bs0qTCbmXadT9ZH0pr9h"
 
@@ -25,11 +27,12 @@ const Map = () => {
     const map = useRef<maplibregl.Map | null>(null)
     const [mapStyle, setMapStyle] = useState<"street" | "satellite">("street")
     const [orgs, setOrgs] = useState<Org[]>([])
+
  
     useEffect(() => {
         const fetchOrg = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/eco-orgs')
+                const res = await axios.get('http://localhost:5000/api/eco-orgs', {withCredentials: true})
                 console.log("fetch data", res.data)
                 setOrgs(res.data)
             } catch (error) {
@@ -80,7 +83,8 @@ const Map = () => {
                 
                 <div class="bg-green-100 border border-green-400 text-green-800 p-4 rounded ml-0 py-2 px-2 w-full h-fit">
                     <div class="text-green-800">${org.name}</div>
-                    <div class="text-green-8">${org.description || ""}</div>   
+                    <div class="text-green-8">${org.description || ""}</div> 
+                    ${<OrgCard org={orgs}/>}
                 </div> 
             
             

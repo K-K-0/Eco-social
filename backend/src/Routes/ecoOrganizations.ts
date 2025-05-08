@@ -6,15 +6,11 @@ import { authMiddleware } from "../middleware/middleware";
 const prisma = new PrismaClient()
 const routes = Router()
 
-routes.get("/", async (req, res) => {
+routes.get("/", authMiddleware, async (req: any, res) => {
+    const userId = req.userId
     try {
         const organizations = await prisma.organizations.findMany({
-            include: {
-                _count: { select: {
-                    Followers: true
-                }
-            }
-        }
+            include: { Followers: true }
         })
         res.json(organizations)
     } catch (error) {
@@ -74,9 +70,20 @@ routes.post('/verify/:id', authMiddleware, async (req, res) => {
     }
 });
 
-routes.post('/:orgId', authMiddleware, async (req:any, res: any) => {
-    const { orgId } = req.params
+routes.post('/:id', authMiddleware, async (req:any, res: any) => {
+    console.log("RAW params:", req.params);
+    console.log("req.params.id:", req.params.id);
+    console.log("req.query:", req.query);
+
+    const  orgId  = parseInt(req.params.id)
     const userId = req.userId
+
+    console.log(userId)
+    console.log(req.params)
+
+    if (isNaN(orgId)) {
+        return res.status(400).json({ error: "Invalid organization ID" });
+    }
     
     const follow = await prisma.followOrg.create({
         data: {
@@ -87,18 +94,18 @@ routes.post('/:orgId', authMiddleware, async (req:any, res: any) => {
     res.json({follow})
 })
 
-routes.delete('/:orgId', authMiddleware, async (req: any, res: any) => {
-    const { orgId } = req.params
+routes.delete('/:id', authMiddleware, async (req: any, res: any) => {
+    const orgId  = parseInt(req.params.id)
     const userId = req.userId
 
-    const follow = await prisma.followOrg.delete({
+    const unfollow = await prisma.followOrg.delete({
         where: {
             userId_orgId: {
                 userId,orgId
             }
         }
     })
-    res.json({ follow })
+    res.json({ unfollow })
 })
 
 

@@ -27,7 +27,7 @@ model User {
   like      Like[]
   comment   Comment[]
   organization  organizations[]
-  FollowOrg FollowOrg[]
+  Followers FollowOrg[]
 }
 
 model Post {
