@@ -48,6 +48,11 @@ export type FollowOrg = $Result.DefaultSelection<Prisma.$FollowOrgPayload>
  * 
  */
 export type Like = $Result.DefaultSelection<Prisma.$LikePayload>
+/**
+ * Model Tree
+ * 
+ */
+export type Tree = $Result.DefaultSelection<Prisma.$TreePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -243,6 +248,16 @@ export class PrismaClient<
     * ```
     */
   get like(): Prisma.LikeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tree`: Exposes CRUD operations for the **Tree** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Trees
+    * const trees = await prisma.tree.findMany()
+    * ```
+    */
+  get tree(): Prisma.TreeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -689,7 +704,8 @@ export namespace Prisma {
     Follow: 'Follow',
     organizations: 'organizations',
     FollowOrg: 'FollowOrg',
-    Like: 'Like'
+    Like: 'Like',
+    Tree: 'Tree'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -708,7 +724,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "post" | "comment" | "follow" | "organizations" | "followOrg" | "like"
+      modelProps: "user" | "post" | "comment" | "follow" | "organizations" | "followOrg" | "like" | "tree"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1230,6 +1246,80 @@ export namespace Prisma {
           }
         }
       }
+      Tree: {
+        payload: Prisma.$TreePayload<ExtArgs>
+        fields: Prisma.TreeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TreeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TreeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload>
+          }
+          findFirst: {
+            args: Prisma.TreeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TreeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload>
+          }
+          findMany: {
+            args: Prisma.TreeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload>[]
+          }
+          create: {
+            args: Prisma.TreeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload>
+          }
+          createMany: {
+            args: Prisma.TreeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TreeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload>[]
+          }
+          delete: {
+            args: Prisma.TreeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload>
+          }
+          update: {
+            args: Prisma.TreeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload>
+          }
+          deleteMany: {
+            args: Prisma.TreeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TreeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TreeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload>[]
+          }
+          upsert: {
+            args: Prisma.TreeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TreePayload>
+          }
+          aggregate: {
+            args: Prisma.TreeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTree>
+          }
+          groupBy: {
+            args: Prisma.TreeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TreeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TreeCountArgs<ExtArgs>
+            result: $Utils.Optional<TreeCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1321,6 +1411,7 @@ export namespace Prisma {
     organizations?: organizationsOmit
     followOrg?: FollowOrgOmit
     like?: LikeOmit
+    tree?: TreeOmit
   }
 
   /* Types for Logging */
@@ -1422,6 +1513,7 @@ export namespace Prisma {
     comment: number
     organization: number
     Followers: number
+    tree: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1432,6 +1524,7 @@ export namespace Prisma {
     comment?: boolean | UserCountOutputTypeCountCommentArgs
     organization?: boolean | UserCountOutputTypeCountOrganizationArgs
     Followers?: boolean | UserCountOutputTypeCountFollowersArgs
+    tree?: boolean | UserCountOutputTypeCountTreeArgs
   }
 
   // Custom InputTypes
@@ -1492,6 +1585,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountFollowersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FollowOrgWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTreeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TreeWhereInput
   }
 
 
@@ -1815,6 +1915,7 @@ export namespace Prisma {
     comment?: boolean | User$commentArgs<ExtArgs>
     organization?: boolean | User$organizationArgs<ExtArgs>
     Followers?: boolean | User$FollowersArgs<ExtArgs>
+    tree?: boolean | User$treeArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1863,6 +1964,7 @@ export namespace Prisma {
     comment?: boolean | User$commentArgs<ExtArgs>
     organization?: boolean | User$organizationArgs<ExtArgs>
     Followers?: boolean | User$FollowersArgs<ExtArgs>
+    tree?: boolean | User$treeArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1878,6 +1980,7 @@ export namespace Prisma {
       comment: Prisma.$CommentPayload<ExtArgs>[]
       organization: Prisma.$organizationsPayload<ExtArgs>[]
       Followers: Prisma.$FollowOrgPayload<ExtArgs>[]
+      tree: Prisma.$TreePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2290,6 +2393,7 @@ export namespace Prisma {
     comment<T extends User$commentArgs<ExtArgs> = {}>(args?: Subset<T, User$commentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     organization<T extends User$organizationArgs<ExtArgs> = {}>(args?: Subset<T, User$organizationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$organizationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Followers<T extends User$FollowersArgs<ExtArgs> = {}>(args?: Subset<T, User$FollowersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FollowOrgPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tree<T extends User$treeArgs<ExtArgs> = {}>(args?: Subset<T, User$treeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2881,6 +2985,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FollowOrgScalarFieldEnum | FollowOrgScalarFieldEnum[]
+  }
+
+  /**
+   * User.tree
+   */
+  export type User$treeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    where?: TreeWhereInput
+    orderBy?: TreeOrderByWithRelationInput | TreeOrderByWithRelationInput[]
+    cursor?: TreeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TreeScalarFieldEnum | TreeScalarFieldEnum[]
   }
 
   /**
@@ -9666,6 +9794,1136 @@ export namespace Prisma {
 
 
   /**
+   * Model Tree
+   */
+
+  export type AggregateTree = {
+    _count: TreeCountAggregateOutputType | null
+    _avg: TreeAvgAggregateOutputType | null
+    _sum: TreeSumAggregateOutputType | null
+    _min: TreeMinAggregateOutputType | null
+    _max: TreeMaxAggregateOutputType | null
+  }
+
+  export type TreeAvgAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type TreeSumAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    latitude: number | null
+    longitude: number | null
+  }
+
+  export type TreeMinAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    latitude: number | null
+    longitude: number | null
+    description: string | null
+    ImageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type TreeMaxAggregateOutputType = {
+    id: number | null
+    userId: number | null
+    latitude: number | null
+    longitude: number | null
+    description: string | null
+    ImageUrl: string | null
+    createdAt: Date | null
+  }
+
+  export type TreeCountAggregateOutputType = {
+    id: number
+    userId: number
+    latitude: number
+    longitude: number
+    description: number
+    ImageUrl: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type TreeAvgAggregateInputType = {
+    id?: true
+    userId?: true
+    latitude?: true
+    longitude?: true
+  }
+
+  export type TreeSumAggregateInputType = {
+    id?: true
+    userId?: true
+    latitude?: true
+    longitude?: true
+  }
+
+  export type TreeMinAggregateInputType = {
+    id?: true
+    userId?: true
+    latitude?: true
+    longitude?: true
+    description?: true
+    ImageUrl?: true
+    createdAt?: true
+  }
+
+  export type TreeMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    latitude?: true
+    longitude?: true
+    description?: true
+    ImageUrl?: true
+    createdAt?: true
+  }
+
+  export type TreeCountAggregateInputType = {
+    id?: true
+    userId?: true
+    latitude?: true
+    longitude?: true
+    description?: true
+    ImageUrl?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type TreeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tree to aggregate.
+     */
+    where?: TreeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Trees to fetch.
+     */
+    orderBy?: TreeOrderByWithRelationInput | TreeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TreeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Trees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Trees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Trees
+    **/
+    _count?: true | TreeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TreeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TreeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TreeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TreeMaxAggregateInputType
+  }
+
+  export type GetTreeAggregateType<T extends TreeAggregateArgs> = {
+        [P in keyof T & keyof AggregateTree]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTree[P]>
+      : GetScalarType<T[P], AggregateTree[P]>
+  }
+
+
+
+
+  export type TreeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TreeWhereInput
+    orderBy?: TreeOrderByWithAggregationInput | TreeOrderByWithAggregationInput[]
+    by: TreeScalarFieldEnum[] | TreeScalarFieldEnum
+    having?: TreeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TreeCountAggregateInputType | true
+    _avg?: TreeAvgAggregateInputType
+    _sum?: TreeSumAggregateInputType
+    _min?: TreeMinAggregateInputType
+    _max?: TreeMaxAggregateInputType
+  }
+
+  export type TreeGroupByOutputType = {
+    id: number
+    userId: number
+    latitude: number
+    longitude: number
+    description: string | null
+    ImageUrl: string
+    createdAt: Date
+    _count: TreeCountAggregateOutputType | null
+    _avg: TreeAvgAggregateOutputType | null
+    _sum: TreeSumAggregateOutputType | null
+    _min: TreeMinAggregateOutputType | null
+    _max: TreeMaxAggregateOutputType | null
+  }
+
+  type GetTreeGroupByPayload<T extends TreeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TreeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TreeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TreeGroupByOutputType[P]>
+            : GetScalarType<T[P], TreeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TreeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    description?: boolean
+    ImageUrl?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tree"]>
+
+  export type TreeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    description?: boolean
+    ImageUrl?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tree"]>
+
+  export type TreeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    description?: boolean
+    ImageUrl?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tree"]>
+
+  export type TreeSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    description?: boolean
+    ImageUrl?: boolean
+    createdAt?: boolean
+  }
+
+  export type TreeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "latitude" | "longitude" | "description" | "ImageUrl" | "createdAt", ExtArgs["result"]["tree"]>
+  export type TreeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TreeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type TreeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $TreePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Tree"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      userId: number
+      latitude: number
+      longitude: number
+      description: string | null
+      ImageUrl: string
+      createdAt: Date
+    }, ExtArgs["result"]["tree"]>
+    composites: {}
+  }
+
+  type TreeGetPayload<S extends boolean | null | undefined | TreeDefaultArgs> = $Result.GetResult<Prisma.$TreePayload, S>
+
+  type TreeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TreeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TreeCountAggregateInputType | true
+    }
+
+  export interface TreeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tree'], meta: { name: 'Tree' } }
+    /**
+     * Find zero or one Tree that matches the filter.
+     * @param {TreeFindUniqueArgs} args - Arguments to find a Tree
+     * @example
+     * // Get one Tree
+     * const tree = await prisma.tree.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TreeFindUniqueArgs>(args: SelectSubset<T, TreeFindUniqueArgs<ExtArgs>>): Prisma__TreeClient<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Tree that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TreeFindUniqueOrThrowArgs} args - Arguments to find a Tree
+     * @example
+     * // Get one Tree
+     * const tree = await prisma.tree.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TreeFindUniqueOrThrowArgs>(args: SelectSubset<T, TreeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TreeClient<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tree that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreeFindFirstArgs} args - Arguments to find a Tree
+     * @example
+     * // Get one Tree
+     * const tree = await prisma.tree.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TreeFindFirstArgs>(args?: SelectSubset<T, TreeFindFirstArgs<ExtArgs>>): Prisma__TreeClient<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tree that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreeFindFirstOrThrowArgs} args - Arguments to find a Tree
+     * @example
+     * // Get one Tree
+     * const tree = await prisma.tree.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TreeFindFirstOrThrowArgs>(args?: SelectSubset<T, TreeFindFirstOrThrowArgs<ExtArgs>>): Prisma__TreeClient<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Trees that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Trees
+     * const trees = await prisma.tree.findMany()
+     * 
+     * // Get first 10 Trees
+     * const trees = await prisma.tree.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const treeWithIdOnly = await prisma.tree.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TreeFindManyArgs>(args?: SelectSubset<T, TreeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Tree.
+     * @param {TreeCreateArgs} args - Arguments to create a Tree.
+     * @example
+     * // Create one Tree
+     * const Tree = await prisma.tree.create({
+     *   data: {
+     *     // ... data to create a Tree
+     *   }
+     * })
+     * 
+     */
+    create<T extends TreeCreateArgs>(args: SelectSubset<T, TreeCreateArgs<ExtArgs>>): Prisma__TreeClient<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Trees.
+     * @param {TreeCreateManyArgs} args - Arguments to create many Trees.
+     * @example
+     * // Create many Trees
+     * const tree = await prisma.tree.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TreeCreateManyArgs>(args?: SelectSubset<T, TreeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Trees and returns the data saved in the database.
+     * @param {TreeCreateManyAndReturnArgs} args - Arguments to create many Trees.
+     * @example
+     * // Create many Trees
+     * const tree = await prisma.tree.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Trees and only return the `id`
+     * const treeWithIdOnly = await prisma.tree.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TreeCreateManyAndReturnArgs>(args?: SelectSubset<T, TreeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Tree.
+     * @param {TreeDeleteArgs} args - Arguments to delete one Tree.
+     * @example
+     * // Delete one Tree
+     * const Tree = await prisma.tree.delete({
+     *   where: {
+     *     // ... filter to delete one Tree
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TreeDeleteArgs>(args: SelectSubset<T, TreeDeleteArgs<ExtArgs>>): Prisma__TreeClient<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Tree.
+     * @param {TreeUpdateArgs} args - Arguments to update one Tree.
+     * @example
+     * // Update one Tree
+     * const tree = await prisma.tree.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TreeUpdateArgs>(args: SelectSubset<T, TreeUpdateArgs<ExtArgs>>): Prisma__TreeClient<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Trees.
+     * @param {TreeDeleteManyArgs} args - Arguments to filter Trees to delete.
+     * @example
+     * // Delete a few Trees
+     * const { count } = await prisma.tree.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TreeDeleteManyArgs>(args?: SelectSubset<T, TreeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Trees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Trees
+     * const tree = await prisma.tree.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TreeUpdateManyArgs>(args: SelectSubset<T, TreeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Trees and returns the data updated in the database.
+     * @param {TreeUpdateManyAndReturnArgs} args - Arguments to update many Trees.
+     * @example
+     * // Update many Trees
+     * const tree = await prisma.tree.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Trees and only return the `id`
+     * const treeWithIdOnly = await prisma.tree.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TreeUpdateManyAndReturnArgs>(args: SelectSubset<T, TreeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Tree.
+     * @param {TreeUpsertArgs} args - Arguments to update or create a Tree.
+     * @example
+     * // Update or create a Tree
+     * const tree = await prisma.tree.upsert({
+     *   create: {
+     *     // ... data to create a Tree
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tree we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TreeUpsertArgs>(args: SelectSubset<T, TreeUpsertArgs<ExtArgs>>): Prisma__TreeClient<$Result.GetResult<Prisma.$TreePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Trees.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreeCountArgs} args - Arguments to filter Trees to count.
+     * @example
+     * // Count the number of Trees
+     * const count = await prisma.tree.count({
+     *   where: {
+     *     // ... the filter for the Trees we want to count
+     *   }
+     * })
+    **/
+    count<T extends TreeCountArgs>(
+      args?: Subset<T, TreeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TreeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tree.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TreeAggregateArgs>(args: Subset<T, TreeAggregateArgs>): Prisma.PrismaPromise<GetTreeAggregateType<T>>
+
+    /**
+     * Group by Tree.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TreeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TreeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TreeGroupByArgs['orderBy'] }
+        : { orderBy?: TreeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TreeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTreeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Tree model
+   */
+  readonly fields: TreeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Tree.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TreeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Tree model
+   */
+  interface TreeFieldRefs {
+    readonly id: FieldRef<"Tree", 'Int'>
+    readonly userId: FieldRef<"Tree", 'Int'>
+    readonly latitude: FieldRef<"Tree", 'Float'>
+    readonly longitude: FieldRef<"Tree", 'Float'>
+    readonly description: FieldRef<"Tree", 'String'>
+    readonly ImageUrl: FieldRef<"Tree", 'String'>
+    readonly createdAt: FieldRef<"Tree", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Tree findUnique
+   */
+  export type TreeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    /**
+     * Filter, which Tree to fetch.
+     */
+    where: TreeWhereUniqueInput
+  }
+
+  /**
+   * Tree findUniqueOrThrow
+   */
+  export type TreeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    /**
+     * Filter, which Tree to fetch.
+     */
+    where: TreeWhereUniqueInput
+  }
+
+  /**
+   * Tree findFirst
+   */
+  export type TreeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    /**
+     * Filter, which Tree to fetch.
+     */
+    where?: TreeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Trees to fetch.
+     */
+    orderBy?: TreeOrderByWithRelationInput | TreeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Trees.
+     */
+    cursor?: TreeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Trees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Trees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Trees.
+     */
+    distinct?: TreeScalarFieldEnum | TreeScalarFieldEnum[]
+  }
+
+  /**
+   * Tree findFirstOrThrow
+   */
+  export type TreeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    /**
+     * Filter, which Tree to fetch.
+     */
+    where?: TreeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Trees to fetch.
+     */
+    orderBy?: TreeOrderByWithRelationInput | TreeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Trees.
+     */
+    cursor?: TreeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Trees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Trees.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Trees.
+     */
+    distinct?: TreeScalarFieldEnum | TreeScalarFieldEnum[]
+  }
+
+  /**
+   * Tree findMany
+   */
+  export type TreeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    /**
+     * Filter, which Trees to fetch.
+     */
+    where?: TreeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Trees to fetch.
+     */
+    orderBy?: TreeOrderByWithRelationInput | TreeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Trees.
+     */
+    cursor?: TreeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Trees from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Trees.
+     */
+    skip?: number
+    distinct?: TreeScalarFieldEnum | TreeScalarFieldEnum[]
+  }
+
+  /**
+   * Tree create
+   */
+  export type TreeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Tree.
+     */
+    data: XOR<TreeCreateInput, TreeUncheckedCreateInput>
+  }
+
+  /**
+   * Tree createMany
+   */
+  export type TreeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Trees.
+     */
+    data: TreeCreateManyInput | TreeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tree createManyAndReturn
+   */
+  export type TreeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * The data used to create many Trees.
+     */
+    data: TreeCreateManyInput | TreeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Tree update
+   */
+  export type TreeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Tree.
+     */
+    data: XOR<TreeUpdateInput, TreeUncheckedUpdateInput>
+    /**
+     * Choose, which Tree to update.
+     */
+    where: TreeWhereUniqueInput
+  }
+
+  /**
+   * Tree updateMany
+   */
+  export type TreeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Trees.
+     */
+    data: XOR<TreeUpdateManyMutationInput, TreeUncheckedUpdateManyInput>
+    /**
+     * Filter which Trees to update
+     */
+    where?: TreeWhereInput
+    /**
+     * Limit how many Trees to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tree updateManyAndReturn
+   */
+  export type TreeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * The data used to update Trees.
+     */
+    data: XOR<TreeUpdateManyMutationInput, TreeUncheckedUpdateManyInput>
+    /**
+     * Filter which Trees to update
+     */
+    where?: TreeWhereInput
+    /**
+     * Limit how many Trees to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Tree upsert
+   */
+  export type TreeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Tree to update in case it exists.
+     */
+    where: TreeWhereUniqueInput
+    /**
+     * In case the Tree found by the `where` argument doesn't exist, create a new Tree with this data.
+     */
+    create: XOR<TreeCreateInput, TreeUncheckedCreateInput>
+    /**
+     * In case the Tree was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TreeUpdateInput, TreeUncheckedUpdateInput>
+  }
+
+  /**
+   * Tree delete
+   */
+  export type TreeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+    /**
+     * Filter which Tree to delete.
+     */
+    where: TreeWhereUniqueInput
+  }
+
+  /**
+   * Tree deleteMany
+   */
+  export type TreeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Trees to delete
+     */
+    where?: TreeWhereInput
+    /**
+     * Limit how many Trees to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tree without action
+   */
+  export type TreeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tree
+     */
+    select?: TreeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tree
+     */
+    omit?: TreeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TreeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9761,6 +11019,19 @@ export namespace Prisma {
   };
 
   export type LikeScalarFieldEnum = (typeof LikeScalarFieldEnum)[keyof typeof LikeScalarFieldEnum]
+
+
+  export const TreeScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    latitude: 'latitude',
+    longitude: 'longitude',
+    description: 'description',
+    ImageUrl: 'ImageUrl',
+    createdAt: 'createdAt'
+  };
+
+  export type TreeScalarFieldEnum = (typeof TreeScalarFieldEnum)[keyof typeof TreeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9878,6 +11149,7 @@ export namespace Prisma {
     comment?: CommentListRelationFilter
     organization?: OrganizationsListRelationFilter
     Followers?: FollowOrgListRelationFilter
+    tree?: TreeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9897,6 +11169,7 @@ export namespace Prisma {
     comment?: CommentOrderByRelationAggregateInput
     organization?: organizationsOrderByRelationAggregateInput
     Followers?: FollowOrgOrderByRelationAggregateInput
+    tree?: TreeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -9919,6 +11192,7 @@ export namespace Prisma {
     comment?: CommentListRelationFilter
     organization?: OrganizationsListRelationFilter
     Followers?: FollowOrgListRelationFilter
+    tree?: TreeListRelationFilter
   }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -10334,6 +11608,73 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Like"> | Date | string
   }
 
+  export type TreeWhereInput = {
+    AND?: TreeWhereInput | TreeWhereInput[]
+    OR?: TreeWhereInput[]
+    NOT?: TreeWhereInput | TreeWhereInput[]
+    id?: IntFilter<"Tree"> | number
+    userId?: IntFilter<"Tree"> | number
+    latitude?: FloatFilter<"Tree"> | number
+    longitude?: FloatFilter<"Tree"> | number
+    description?: StringNullableFilter<"Tree"> | string | null
+    ImageUrl?: StringFilter<"Tree"> | string
+    createdAt?: DateTimeFilter<"Tree"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type TreeOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    description?: SortOrderInput | SortOrder
+    ImageUrl?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type TreeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: TreeWhereInput | TreeWhereInput[]
+    OR?: TreeWhereInput[]
+    NOT?: TreeWhereInput | TreeWhereInput[]
+    userId?: IntFilter<"Tree"> | number
+    latitude?: FloatFilter<"Tree"> | number
+    longitude?: FloatFilter<"Tree"> | number
+    description?: StringNullableFilter<"Tree"> | string | null
+    ImageUrl?: StringFilter<"Tree"> | string
+    createdAt?: DateTimeFilter<"Tree"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type TreeOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    description?: SortOrderInput | SortOrder
+    ImageUrl?: SortOrder
+    createdAt?: SortOrder
+    _count?: TreeCountOrderByAggregateInput
+    _avg?: TreeAvgOrderByAggregateInput
+    _max?: TreeMaxOrderByAggregateInput
+    _min?: TreeMinOrderByAggregateInput
+    _sum?: TreeSumOrderByAggregateInput
+  }
+
+  export type TreeScalarWhereWithAggregatesInput = {
+    AND?: TreeScalarWhereWithAggregatesInput | TreeScalarWhereWithAggregatesInput[]
+    OR?: TreeScalarWhereWithAggregatesInput[]
+    NOT?: TreeScalarWhereWithAggregatesInput | TreeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Tree"> | number
+    userId?: IntWithAggregatesFilter<"Tree"> | number
+    latitude?: FloatWithAggregatesFilter<"Tree"> | number
+    longitude?: FloatWithAggregatesFilter<"Tree"> | number
+    description?: StringNullableWithAggregatesFilter<"Tree"> | string | null
+    ImageUrl?: StringWithAggregatesFilter<"Tree"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Tree"> | Date | string
+  }
+
   export type UserCreateInput = {
     username: string
     email: string
@@ -10350,6 +11691,7 @@ export namespace Prisma {
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
     Followers?: FollowOrgCreateNestedManyWithoutUserInput
+    tree?: TreeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10369,6 +11711,7 @@ export namespace Prisma {
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
     Followers?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
+    tree?: TreeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -10387,6 +11730,7 @@ export namespace Prisma {
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUpdateManyWithoutUserNestedInput
+    tree?: TreeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10406,6 +11750,7 @@ export namespace Prisma {
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
+    tree?: TreeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10786,6 +12131,72 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TreeCreateInput = {
+    latitude: number
+    longitude: number
+    description?: string | null
+    ImageUrl: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutTreeInput
+  }
+
+  export type TreeUncheckedCreateInput = {
+    id?: number
+    userId: number
+    latitude: number
+    longitude: number
+    description?: string | null
+    ImageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type TreeUpdateInput = {
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutTreeNestedInput
+  }
+
+  export type TreeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TreeCreateManyInput = {
+    id?: number
+    userId: number
+    latitude: number
+    longitude: number
+    description?: string | null
+    ImageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type TreeUpdateManyMutationInput = {
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TreeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -10885,6 +12296,12 @@ export namespace Prisma {
     none?: FollowOrgWhereInput
   }
 
+  export type TreeListRelationFilter = {
+    every?: TreeWhereInput
+    some?: TreeWhereInput
+    none?: TreeWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -10911,6 +12328,10 @@ export namespace Prisma {
   }
 
   export type FollowOrgOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TreeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11341,6 +12762,50 @@ export namespace Prisma {
     postId?: SortOrder
   }
 
+  export type TreeCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    description?: SortOrder
+    ImageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TreeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
+  export type TreeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    description?: SortOrder
+    ImageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TreeMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    description?: SortOrder
+    ImageUrl?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TreeSumOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+  }
+
   export type FollowCreateNestedManyWithoutFollowingInput = {
     create?: XOR<FollowCreateWithoutFollowingInput, FollowUncheckedCreateWithoutFollowingInput> | FollowCreateWithoutFollowingInput[] | FollowUncheckedCreateWithoutFollowingInput[]
     connectOrCreate?: FollowCreateOrConnectWithoutFollowingInput | FollowCreateOrConnectWithoutFollowingInput[]
@@ -11390,6 +12855,13 @@ export namespace Prisma {
     connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
   }
 
+  export type TreeCreateNestedManyWithoutUserInput = {
+    create?: XOR<TreeCreateWithoutUserInput, TreeUncheckedCreateWithoutUserInput> | TreeCreateWithoutUserInput[] | TreeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TreeCreateOrConnectWithoutUserInput | TreeCreateOrConnectWithoutUserInput[]
+    createMany?: TreeCreateManyUserInputEnvelope
+    connect?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
+  }
+
   export type FollowUncheckedCreateNestedManyWithoutFollowingInput = {
     create?: XOR<FollowCreateWithoutFollowingInput, FollowUncheckedCreateWithoutFollowingInput> | FollowCreateWithoutFollowingInput[] | FollowUncheckedCreateWithoutFollowingInput[]
     connectOrCreate?: FollowCreateOrConnectWithoutFollowingInput | FollowCreateOrConnectWithoutFollowingInput[]
@@ -11437,6 +12909,13 @@ export namespace Prisma {
     connectOrCreate?: FollowOrgCreateOrConnectWithoutUserInput | FollowOrgCreateOrConnectWithoutUserInput[]
     createMany?: FollowOrgCreateManyUserInputEnvelope
     connect?: FollowOrgWhereUniqueInput | FollowOrgWhereUniqueInput[]
+  }
+
+  export type TreeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<TreeCreateWithoutUserInput, TreeUncheckedCreateWithoutUserInput> | TreeCreateWithoutUserInput[] | TreeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TreeCreateOrConnectWithoutUserInput | TreeCreateOrConnectWithoutUserInput[]
+    createMany?: TreeCreateManyUserInputEnvelope
+    connect?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11557,6 +13036,20 @@ export namespace Prisma {
     deleteMany?: FollowOrgScalarWhereInput | FollowOrgScalarWhereInput[]
   }
 
+  export type TreeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TreeCreateWithoutUserInput, TreeUncheckedCreateWithoutUserInput> | TreeCreateWithoutUserInput[] | TreeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TreeCreateOrConnectWithoutUserInput | TreeCreateOrConnectWithoutUserInput[]
+    upsert?: TreeUpsertWithWhereUniqueWithoutUserInput | TreeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TreeCreateManyUserInputEnvelope
+    set?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
+    disconnect?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
+    delete?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
+    connect?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
+    update?: TreeUpdateWithWhereUniqueWithoutUserInput | TreeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TreeUpdateManyWithWhereWithoutUserInput | TreeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TreeScalarWhereInput | TreeScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -11661,6 +13154,20 @@ export namespace Prisma {
     update?: FollowOrgUpdateWithWhereUniqueWithoutUserInput | FollowOrgUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: FollowOrgUpdateManyWithWhereWithoutUserInput | FollowOrgUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: FollowOrgScalarWhereInput | FollowOrgScalarWhereInput[]
+  }
+
+  export type TreeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TreeCreateWithoutUserInput, TreeUncheckedCreateWithoutUserInput> | TreeCreateWithoutUserInput[] | TreeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TreeCreateOrConnectWithoutUserInput | TreeCreateOrConnectWithoutUserInput[]
+    upsert?: TreeUpsertWithWhereUniqueWithoutUserInput | TreeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TreeCreateManyUserInputEnvelope
+    set?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
+    disconnect?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
+    delete?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
+    connect?: TreeWhereUniqueInput | TreeWhereUniqueInput[]
+    update?: TreeUpdateWithWhereUniqueWithoutUserInput | TreeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TreeUpdateManyWithWhereWithoutUserInput | TreeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TreeScalarWhereInput | TreeScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutPostsInput = {
@@ -11939,6 +13446,20 @@ export namespace Prisma {
     upsert?: PostUpsertWithoutLikeInput
     connect?: PostWhereUniqueInput
     update?: XOR<XOR<PostUpdateToOneWithWhereWithoutLikeInput, PostUpdateWithoutLikeInput>, PostUncheckedUpdateWithoutLikeInput>
+  }
+
+  export type UserCreateNestedOneWithoutTreeInput = {
+    create?: XOR<UserCreateWithoutTreeInput, UserUncheckedCreateWithoutTreeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTreeInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutTreeNestedInput = {
+    create?: XOR<UserCreateWithoutTreeInput, UserUncheckedCreateWithoutTreeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTreeInput
+    upsert?: UserUpsertWithoutTreeInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTreeInput, UserUpdateWithoutTreeInput>, UserUncheckedUpdateWithoutTreeInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -12302,6 +13823,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TreeCreateWithoutUserInput = {
+    latitude: number
+    longitude: number
+    description?: string | null
+    ImageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type TreeUncheckedCreateWithoutUserInput = {
+    id?: number
+    latitude: number
+    longitude: number
+    description?: string | null
+    ImageUrl: string
+    createdAt?: Date | string
+  }
+
+  export type TreeCreateOrConnectWithoutUserInput = {
+    where: TreeWhereUniqueInput
+    create: XOR<TreeCreateWithoutUserInput, TreeUncheckedCreateWithoutUserInput>
+  }
+
+  export type TreeCreateManyUserInputEnvelope = {
+    data: TreeCreateManyUserInput | TreeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type FollowUpsertWithWhereUniqueWithoutFollowingInput = {
     where: FollowWhereUniqueInput
     update: XOR<FollowUpdateWithoutFollowingInput, FollowUncheckedUpdateWithoutFollowingInput>
@@ -12483,6 +14031,35 @@ export namespace Prisma {
     orgId?: IntFilter<"FollowOrg"> | number
   }
 
+  export type TreeUpsertWithWhereUniqueWithoutUserInput = {
+    where: TreeWhereUniqueInput
+    update: XOR<TreeUpdateWithoutUserInput, TreeUncheckedUpdateWithoutUserInput>
+    create: XOR<TreeCreateWithoutUserInput, TreeUncheckedCreateWithoutUserInput>
+  }
+
+  export type TreeUpdateWithWhereUniqueWithoutUserInput = {
+    where: TreeWhereUniqueInput
+    data: XOR<TreeUpdateWithoutUserInput, TreeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type TreeUpdateManyWithWhereWithoutUserInput = {
+    where: TreeScalarWhereInput
+    data: XOR<TreeUpdateManyMutationInput, TreeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type TreeScalarWhereInput = {
+    AND?: TreeScalarWhereInput | TreeScalarWhereInput[]
+    OR?: TreeScalarWhereInput[]
+    NOT?: TreeScalarWhereInput | TreeScalarWhereInput[]
+    id?: IntFilter<"Tree"> | number
+    userId?: IntFilter<"Tree"> | number
+    latitude?: FloatFilter<"Tree"> | number
+    longitude?: FloatFilter<"Tree"> | number
+    description?: StringNullableFilter<"Tree"> | string | null
+    ImageUrl?: StringFilter<"Tree"> | string
+    createdAt?: DateTimeFilter<"Tree"> | Date | string
+  }
+
   export type UserCreateWithoutPostsInput = {
     username: string
     email: string
@@ -12498,6 +14075,7 @@ export namespace Prisma {
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
     Followers?: FollowOrgCreateNestedManyWithoutUserInput
+    tree?: TreeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -12516,6 +14094,7 @@ export namespace Prisma {
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
     Followers?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
+    tree?: TreeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -12593,6 +14172,7 @@ export namespace Prisma {
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUpdateManyWithoutUserNestedInput
+    tree?: TreeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -12611,6 +14191,7 @@ export namespace Prisma {
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
+    tree?: TreeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LikeUpsertWithWhereUniqueWithoutPostInput = {
@@ -12660,6 +14241,7 @@ export namespace Prisma {
     like?: LikeCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
     Followers?: FollowOrgCreateNestedManyWithoutUserInput
+    tree?: TreeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCommentInput = {
@@ -12678,6 +14260,7 @@ export namespace Prisma {
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
     Followers?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
+    tree?: TreeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCommentInput = {
@@ -12739,6 +14322,7 @@ export namespace Prisma {
     like?: LikeUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUpdateManyWithoutUserNestedInput
+    tree?: TreeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCommentInput = {
@@ -12757,6 +14341,7 @@ export namespace Prisma {
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
+    tree?: TreeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutCommentInput = {
@@ -12808,6 +14393,7 @@ export namespace Prisma {
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
     Followers?: FollowOrgCreateNestedManyWithoutUserInput
+    tree?: TreeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowingInput = {
@@ -12826,6 +14412,7 @@ export namespace Prisma {
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
     Followers?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
+    tree?: TreeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowingInput = {
@@ -12848,6 +14435,7 @@ export namespace Prisma {
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
     Followers?: FollowOrgCreateNestedManyWithoutUserInput
+    tree?: TreeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowersInput = {
@@ -12866,6 +14454,7 @@ export namespace Prisma {
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
     Followers?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
+    tree?: TreeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutFollowersInput = {
@@ -12899,6 +14488,7 @@ export namespace Prisma {
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUpdateManyWithoutUserNestedInput
+    tree?: TreeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowingInput = {
@@ -12917,6 +14507,7 @@ export namespace Prisma {
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
+    tree?: TreeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutFollowersInput = {
@@ -12945,6 +14536,7 @@ export namespace Prisma {
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUpdateManyWithoutUserNestedInput
+    tree?: TreeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -12963,6 +14555,7 @@ export namespace Prisma {
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
+    tree?: TreeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type FollowOrgCreateWithoutOrganizationsInput = {
@@ -12999,6 +14592,7 @@ export namespace Prisma {
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
     Followers?: FollowOrgCreateNestedManyWithoutUserInput
+    tree?: TreeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrganizationInput = {
@@ -13017,6 +14611,7 @@ export namespace Prisma {
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     Followers?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
+    tree?: TreeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrganizationInput = {
@@ -13066,6 +14661,7 @@ export namespace Prisma {
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUpdateManyWithoutUserNestedInput
+    tree?: TreeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrganizationInput = {
@@ -13084,6 +14680,7 @@ export namespace Prisma {
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
+    tree?: TreeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutFollowersInput = {
@@ -13101,6 +14698,7 @@ export namespace Prisma {
     like?: LikeCreateNestedManyWithoutUserInput
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
+    tree?: TreeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutFollowersInput = {
@@ -13119,6 +14717,7 @@ export namespace Prisma {
     like?: LikeUncheckedCreateNestedManyWithoutUserInput
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
+    tree?: TreeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type organizationsCreateWithoutFollowersInput = {
@@ -13177,6 +14776,7 @@ export namespace Prisma {
     like?: LikeUpdateManyWithoutUserNestedInput
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
+    tree?: TreeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -13195,6 +14795,7 @@ export namespace Prisma {
     like?: LikeUncheckedUpdateManyWithoutUserNestedInput
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+    tree?: TreeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type organizationsUpsertWithoutFollowersInput = {
@@ -13248,6 +14849,7 @@ export namespace Prisma {
     comment?: CommentCreateNestedManyWithoutUserInput
     organization?: organizationsCreateNestedManyWithoutUserInput
     Followers?: FollowOrgCreateNestedManyWithoutUserInput
+    tree?: TreeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLikeInput = {
@@ -13266,6 +14868,7 @@ export namespace Prisma {
     comment?: CommentUncheckedCreateNestedManyWithoutUserInput
     organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
     Followers?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
+    tree?: TreeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLikeInput = {
@@ -13327,6 +14930,7 @@ export namespace Prisma {
     comment?: CommentUpdateManyWithoutUserNestedInput
     organization?: organizationsUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUpdateManyWithoutUserNestedInput
+    tree?: TreeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLikeInput = {
@@ -13345,6 +14949,7 @@ export namespace Prisma {
     comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
     organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
     Followers?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
+    tree?: TreeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PostUpsertWithoutLikeInput = {
@@ -13379,6 +14984,96 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     likes?: IntFieldUpdateOperationsInput | number
     comment?: CommentUncheckedUpdateManyWithoutPostNestedInput
+  }
+
+  export type UserCreateWithoutTreeInput = {
+    username: string
+    email: string
+    password: string
+    bio?: string | null
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    lat?: number | null
+    lng?: number | null
+    followers?: FollowCreateNestedManyWithoutFollowingInput
+    following?: FollowCreateNestedManyWithoutFollowerInput
+    posts?: PostCreateNestedManyWithoutUserInput
+    like?: LikeCreateNestedManyWithoutUserInput
+    comment?: CommentCreateNestedManyWithoutUserInput
+    organization?: organizationsCreateNestedManyWithoutUserInput
+    Followers?: FollowOrgCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutTreeInput = {
+    id?: number
+    username: string
+    email: string
+    password: string
+    bio?: string | null
+    avatarUrl?: string | null
+    createdAt?: Date | string
+    lat?: number | null
+    lng?: number | null
+    followers?: FollowUncheckedCreateNestedManyWithoutFollowingInput
+    following?: FollowUncheckedCreateNestedManyWithoutFollowerInput
+    posts?: PostUncheckedCreateNestedManyWithoutUserInput
+    like?: LikeUncheckedCreateNestedManyWithoutUserInput
+    comment?: CommentUncheckedCreateNestedManyWithoutUserInput
+    organization?: organizationsUncheckedCreateNestedManyWithoutUserInput
+    Followers?: FollowOrgUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutTreeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTreeInput, UserUncheckedCreateWithoutTreeInput>
+  }
+
+  export type UserUpsertWithoutTreeInput = {
+    update: XOR<UserUpdateWithoutTreeInput, UserUncheckedUpdateWithoutTreeInput>
+    create: XOR<UserCreateWithoutTreeInput, UserUncheckedCreateWithoutTreeInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTreeInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTreeInput, UserUncheckedUpdateWithoutTreeInput>
+  }
+
+  export type UserUpdateWithoutTreeInput = {
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
+    followers?: FollowUpdateManyWithoutFollowingNestedInput
+    following?: FollowUpdateManyWithoutFollowerNestedInput
+    posts?: PostUpdateManyWithoutUserNestedInput
+    like?: LikeUpdateManyWithoutUserNestedInput
+    comment?: CommentUpdateManyWithoutUserNestedInput
+    organization?: organizationsUpdateManyWithoutUserNestedInput
+    Followers?: FollowOrgUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTreeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    bio?: NullableStringFieldUpdateOperationsInput | string | null
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lat?: NullableFloatFieldUpdateOperationsInput | number | null
+    lng?: NullableFloatFieldUpdateOperationsInput | number | null
+    followers?: FollowUncheckedUpdateManyWithoutFollowingNestedInput
+    following?: FollowUncheckedUpdateManyWithoutFollowerNestedInput
+    posts?: PostUncheckedUpdateManyWithoutUserNestedInput
+    like?: LikeUncheckedUpdateManyWithoutUserNestedInput
+    comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
+    organization?: organizationsUncheckedUpdateManyWithoutUserNestedInput
+    Followers?: FollowOrgUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type FollowCreateManyFollowingInput = {
@@ -13429,6 +15124,15 @@ export namespace Prisma {
   export type FollowOrgCreateManyUserInput = {
     id?: number
     orgId: number
+  }
+
+  export type TreeCreateManyUserInput = {
+    id?: number
+    latitude: number
+    longitude: number
+    description?: string | null
+    ImageUrl: string
+    createdAt?: Date | string
   }
 
   export type FollowUpdateWithoutFollowingInput = {
@@ -13578,6 +15282,32 @@ export namespace Prisma {
   export type FollowOrgUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     orgId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TreeUpdateWithoutUserInput = {
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TreeUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TreeUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    ImageUrl?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LikeCreateManyPostInput = {

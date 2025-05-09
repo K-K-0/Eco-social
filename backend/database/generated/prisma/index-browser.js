@@ -183,6 +183,16 @@ exports.Prisma.LikeScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.TreeScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  description: 'description',
+  ImageUrl: 'ImageUrl',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -206,7 +216,8 @@ exports.Prisma.ModelName = {
   Follow: 'Follow',
   organizations: 'organizations',
   FollowOrg: 'FollowOrg',
-  Like: 'Like'
+  Like: 'Like',
+  Tree: 'Tree'
 };
 
 /**

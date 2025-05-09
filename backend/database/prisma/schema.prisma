@@ -28,6 +28,7 @@ model User {
   comment   Comment[]
   organization  organizations[]
   Followers FollowOrg[]
+  tree      Tree[]
 }
 
 model Post {
@@ -108,4 +109,17 @@ model Like {
 
   @@unique([userId, postId])
 
+}
+
+
+
+model Tree {
+  id          Int @id @default(autoincrement())
+  userId      Int
+  user        User @relation(fields: [userId], references: [id])
+  latitude    Float
+  longitude   Float
+  description String?
+  ImageUrl    String
+  createdAt   DateTime @default(now())
 }
