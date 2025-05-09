@@ -7,10 +7,16 @@ const prisma = new PrismaClient()
 const routes = Router()
 
 routes.get("/", authMiddleware, async (req: any, res) => {
-    const userId = req.userId
+    // const userId = req.userId
     try {
         const organizations = await prisma.organizations.findMany({
-            include: { Followers: true }
+            include: { 
+                Followers: {
+                    select: {
+                        id: true
+                    }
+                } 
+            }
         })
         res.json(organizations)
     } catch (error) {
@@ -87,8 +93,8 @@ routes.post('/:id', authMiddleware, async (req:any, res: any) => {
     
     const follow = await prisma.followOrg.create({
         data: {
-            userId,
-            orgId
+            user: {connect: {id: userId}},
+            Organizations: {connect: {id: orgId}}
         }
     })
     res.json({follow})
