@@ -11,8 +11,7 @@ import Protected from "./components/ProtectRoute"
 import Profile from "./pages/profilePage"
 import Feed from "./pages/feed"
 import { Signup } from "./components/SignUp"
-import Loader from "./components/loader"
-import OrgCard from "./components/OrgFollow"
+
 
 
 function App() {
