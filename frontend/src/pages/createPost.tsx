@@ -45,7 +45,7 @@ const CreatePost =  () => {
     return (
         <div>
             <NavBar />
-            <div className="max-w-xl mx-auto p-4 ">
+            <div className="max-w-xl mx-auto p-4 pt-40">
                 <h2 className="text-2xl font-bold mb-4"> Create Eco-Post</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <input type="text" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
