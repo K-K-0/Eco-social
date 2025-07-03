@@ -10,7 +10,7 @@ import SetLocation from "./components/setLocation"
 import Protected from "./components/ProtectRoute"
 import Profile from "./pages/profilePage"
 import Feed from "./pages/feed"
-import { SignUp } from "./components/signup"
+import { SignUp } from "./components/SignUp"
 
 
 
