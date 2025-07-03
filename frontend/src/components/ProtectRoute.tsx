@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect } from "react";
-import { useAuth } from "../context/Authcontext";
+import { useAuth } from "../context/AuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
 
 type Props = {
