@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
 
 interface Signup2Props {
   heading?: string;
@@ -22,7 +22,7 @@ interface Signup2Props {
   loginUrl?: `http://localhost:5173/login`;
 }
 
-const Signup = ({
+const SignUp = ({
   heading = "Signup",
   subheading = "Create a new account",
   logo = {
@@ -38,7 +38,7 @@ const Signup = ({
 }: Signup2Props) => {
 
   const [form, setForm] = useState({ username: "", email: "", password: "" })
-  const [error, setError] = useState("")
+  const [, setError] = useState("")
   const navigate = useNavigate()
 
 
@@ -145,4 +145,4 @@ const Signup = ({
   );
 };
 
-export { Signup };
+export { SignUp };
