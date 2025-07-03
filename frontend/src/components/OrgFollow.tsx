@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "../context/Authcontext";
+import { useAuth } from "../context/AuthContext";
 
 type orgType = {
     id: string

@@ -2,7 +2,7 @@
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
 import image from '../assets/undraw_connected-world_anke.svg'
-import { useAuth } from "../context/Authcontext";
+import { useAuth } from "../context/AuthContext";
 import Loader from "../components/loader";
 
 const Dashboard = ({ children = "" }: { children?: React.ReactNode }) => {
