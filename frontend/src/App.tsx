@@ -10,7 +10,7 @@ import SetLocation from "./components/setLocation"
 import Protected from "./components/ProtectRoute"
 import Profile from "./pages/profilePage"
 import Feed from "./pages/feed"
-import { Signup } from "./components/SignUp"
+import { Signup } from "./components/signup"
 
 
 
@@ -29,7 +29,12 @@ function App() {
           <Route path="/Hello" element={<SetLocation />} />
           <Route path="/posts" element={<Protected><Feed /></Protected>} />
           <Route path="/profile" element={<Protected><Profile /></Protected>} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup logo={{
+            url: "",
+            src: "",
+            alt: "",
+            title: ""
+          }} />} />
 
         </Routes>
       </Router>
