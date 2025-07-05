@@ -14,8 +14,8 @@ router.get('/:userId', authMiddleware,  async (req:any, res: any) => {
             where: {id: userId},
             include: {
                 posts: true,
-                followers: true,
-                following: true
+                userFollowers: true,
+                userFollowing: true
             }
         })
 
@@ -28,8 +28,8 @@ router.get('/:userId', authMiddleware,  async (req:any, res: any) => {
             username: user.username,
             email: user.email,
             postsCount: user.posts.length,
-            followersCount: user.followers.length,
-            followingCount: user.following.length,
+            followersCount: user.userFollowers.length,
+            followingCount: user.userFollowing.length,
             posts: user.posts
         })
     } catch (error) {

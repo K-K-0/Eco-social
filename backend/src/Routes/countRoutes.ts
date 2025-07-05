@@ -12,7 +12,7 @@ routes.get('/stats', authMiddleware, async (req: any, res: any) => {
     try {
         const followerCount = await prisma.user.count({
             where: {
-                following: {
+                userFollowing: {
                     some: {
                         id: userId
                     }
@@ -22,7 +22,7 @@ routes.get('/stats', authMiddleware, async (req: any, res: any) => {
 
         const followingCount = await prisma.user.count({
             where: {
-                followers: {
+                userFollowers: {
                     some: {
                         id: userId
                     }
