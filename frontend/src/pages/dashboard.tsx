@@ -1,13 +1,14 @@
-// src/components/layout/DashboardLayout.tsx
-import React from "react";
+
 import { Link, Navigate } from "react-router-dom";
 import image from '../assets/undraw_connected-world_anke.svg'
 import { useAuth } from "../context/AuthContext";
 import Loader from "../components/loader";
 
-const Dashboard = ({ children = "" }: { children?: React.ReactNode }) => {
+const Dashboard = () => {
 
-    const { isAuthenticated, loading } = useAuth()
+    const auth = useAuth();
+    const isAuthenticated = auth?.isAuthenticated;
+    const loading = auth?.loading;
 
     if(loading) return <div> <Loader/></div>
 
