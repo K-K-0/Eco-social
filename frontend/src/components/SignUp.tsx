@@ -51,7 +51,7 @@ const SignUp = ({
     setError("")
 
     try {
-      const BASE_URL = import.meta.env.VITEE_BACKEND_URL
+      const BASE_URL = import.meta.env.VITE_BACKEND_URL
       await axios.post(`${BASE_URL}/api/auth/register`, form, { withCredentials: true })
       navigate('/login')
     } catch (error) {
