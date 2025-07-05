@@ -35,9 +35,11 @@ app.use("/api/eco-orgs", ecoOrganizations)
 app.use(setLocation)
 
 
-const PORT = process.env.PORT || 5000
 
-app.listen(PORT, () => {
-    console.log(`server on running ${PORT}`);
-})
+
+app.listen(8080, '0.0.0.0', () => {
+    console.log('server on running 8080');
+});
+  
+  
 
