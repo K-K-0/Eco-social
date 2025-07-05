@@ -20,15 +20,16 @@ model User {
   lat       Float?
   lng       Float?
 
-  followers Follow[] @relation("followers")
-  following Follow[] @relation("following")
-
   posts     Post[]
   like      Like[]
   comment   Comment[]
   organization  organizations[]
   Followers FollowOrg[]
   tree      Tree[]
+
+  // 👇 Only use @relation(<name>) with NO fields/references here
+  userFollowers Follow[] @relation("UserFollowers")  // people who follow this user
+  userFollowing Follow[] @relation("UserFollowing")  // people this user follows
 }
 
 model Post {
@@ -59,12 +60,13 @@ model Comment {
 
 
 model Follow {
-  id           Int      @id @default(autoincrement())
+  id           Int  @id @default(autoincrement())
   followerId   Int
   followingId  Int
 
-  follower     User     @relation("following", fields: [followerId], references: [id])
-  following    User     @relation("followers", fields: [followingId], references: [id])
+  // 👇 Use @relation with fields/references here
+  follower     User @relation("UserFollowing", fields: [followerId], references: [id])
+  following    User @relation("UserFollowers", fields: [followingId], references: [id])
 
   @@unique([followerId, followingId])
 }
