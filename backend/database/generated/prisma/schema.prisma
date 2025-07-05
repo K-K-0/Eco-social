@@ -1,0 +1,121 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "windows", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://neondb_owner:npg_y4jXASM5rbYZ@ep-sparkling-king-a44dw7n7-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  bio       String?
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  lat       Float?
+  lng       Float?
+
+  posts        Post[]
+  like         Like[]
+  comment      Comment[]
+  organization organizations[]
+  Followers    FollowOrg[]
+  tree         Tree[]
+
+  // 👇 Only use @relation(<name>) with NO fields/references here
+  userFollowers Follow[] @relation("UserFollowers") // people who follow this user
+  userFollowing Follow[] @relation("UserFollowing") // people this user follows
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String
+  content   String
+  mediaUrl  String
+  mediaType String
+  createdAt DateTime  @default(now())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  like      Like[]
+  comment   Comment[]
+  likes     Int       @default(0)
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  postId Int
+  post   Post @relation(fields: [postId], references: [id])
+}
+
+model Follow {
+  id          Int @id @default(autoincrement())
+  followerId  Int
+  followingId Int
+
+  // 👇 Use @relation with fields/references here
+  follower  User @relation("UserFollowing", fields: [followerId], references: [id])
+  following User @relation("UserFollowers", fields: [followingId], references: [id])
+
+  @@unique([followerId, followingId])
+}
+
+model organizations {
+  id          Int      @id @default(autoincrement())
+  name        String
+  latitude    Float
+  longitude   Float
+  description String?
+  website     String?
+  Address     String?
+  submittedBy Int
+  verified    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  Followers FollowOrg[]
+
+  user User @relation(fields: [submittedBy], references: [id])
+}
+
+model FollowOrg {
+  id            Int           @id @default(autoincrement())
+  userId        Int
+  user          User          @relation(fields: [userId], references: [id])
+  orgId         Int
+  Organizations organizations @relation(fields: [orgId], references: [id])
+
+  @@unique([userId, orgId])
+}
+
+model Like {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  post   Post @relation(fields: [postId], references: [id])
+  postId Int
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
+}
+
+model Tree {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  latitude    Float
+  longitude   Float
+  description String?
+  ImageUrl    String
+  createdAt   DateTime @default(now())
+}
