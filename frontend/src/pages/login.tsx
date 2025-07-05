@@ -2,6 +2,8 @@ import React,{ useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser, getMe } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
+
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -66,8 +68,13 @@ const Login = () => {
                             </a>
 
                             <button type="submit" className="w-full h-12 text-white text-center text-base font-semibold leading-6 cursor-pointer rounded-full hover:bg-lime-500 transition-all duration-700  bg-indigo-600 shadow-sm mb-11">Login</button>
-                            <a href="/signup" className="flex justify-center text-gray-900 text-base font-medium leading-6"> Don’t have an account? <span className="text-indigo-600 font-semibold pl-3"> Sign Up</span>
-                            </a>
+
+                            <Link to="/signup" className="flex justify-center text-gray-900 text-base font-medium leading-6">
+                                Don’t have an account?
+                                <span className="text-indigo-600 font-semibold pl-3"> Sign Up</span>
+                            </Link>
+
+                            
                         </form>
                     </div>
                 </div>
