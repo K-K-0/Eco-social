@@ -19,7 +19,7 @@ const prisma = new PrismaClient()
 
 app.use(express.json())
 app.use(cors({
-    origin: '*',
+    origin: ['https://eco-social.vercel.app'],
     credentials: true,
 }))
 app.use(cookieParser())
