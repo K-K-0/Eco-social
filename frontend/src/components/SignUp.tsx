@@ -52,7 +52,7 @@ const SignUp = ({
 
     try {
       const BASE_URL = import.meta.env.VITE_BACKEND_URL
-      await axios.post(`${BASE_URL}/register`, form, { withCredentials: true })
+      await axios.post(`${BASE_URL}/api/auth/register`, form, { withCredentials: true })
       navigate('/login')
     } catch (error) {
       console.log(error)
