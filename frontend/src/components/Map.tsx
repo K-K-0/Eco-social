@@ -64,15 +64,15 @@ const Map = () => {
 
     useEffect(() => {
         if (!map.current || orgs.length === 0) return
-        function createCustomMarker(imageUrl: string) {
-            const el = document.createElement("div");
-            el.style.backgroundImage = `url(${imageUrl})`
-            el.style.width = "40px";
-            el.style.height = "40px";
-            el.style.backgroundSize = "contain";
-            el.style.borderRadius = "50%";
-            return el;
-        }
+        // function createCustomMarker(imageUrl: string) {
+        //     const el = document.createElement("div");
+        //     el.style.backgroundImage = `url(${imageUrl})`
+        //     el.style.width = "40px";
+        //     el.style.height = "40px";
+        //     el.style.backgroundSize = "contain";
+        //     el.style.borderRadius = "50%";
+        //     return el;
+        // }
 
         orgs.forEach((org) => {
             console.log("hello")

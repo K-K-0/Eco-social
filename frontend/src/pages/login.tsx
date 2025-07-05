@@ -8,8 +8,12 @@ import { Link } from "react-router-dom";
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { setUser, setIsAuthenticated } = useAuth();
-    const [error, setError] = useState('')
+    const auth = useAuth();
+    if (!auth) {
+        throw new Error("AuthContext is undefined. Make sure your component is wrapped in AuthProvider.");
+    }
+    const { setUser, setIsAuthenticated } = auth;
+    const [, setError] = useState('')
     const navigate = useNavigate()
     const location = useLocation()
     const from = location.state?.from || "/dashboard"

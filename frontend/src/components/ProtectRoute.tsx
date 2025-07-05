@@ -9,7 +9,9 @@ type Props = {
 const Protected = ({ children } : Props) => {
     const navigate = useNavigate()
     const location = useLocation()
-    const { isAuthenticated, loading } = useAuth()
+    const auth = useAuth();
+    const isAuthenticated = auth?.isAuthenticated;
+    const loading = auth?.loading;
 
     useEffect(() => {
         if(!loading && !isAuthenticated) {

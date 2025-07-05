@@ -28,7 +28,7 @@ const CreatePost =  () => {
 
         try {
             setLoading(true)
-            const res = await createPost(formData)
+            await createPost(formData)
             alert("Post created")
             setTitle("")
             setContent("")

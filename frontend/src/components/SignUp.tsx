@@ -122,7 +122,7 @@ const SignUp = ({
                   <Button type="submit" className="mt-2 w-full">
                     {signupText}
                   </Button>
-                  <Button variant="outline" className="w-full">
+                  <Button className="w-full">
                     <FcGoogle className="mr-2 size-5" />
                     {googleText}
                   </Button>

@@ -10,7 +10,7 @@ type orgType = {
 }
 
 const OrgCard = ({ org }: {org: orgType}) => {
-    const { user } = useAuth()
+    const user = useAuth()?.user
     const [isFollowing, setIsFollowing] = useState(false);
 
     useEffect(() => {

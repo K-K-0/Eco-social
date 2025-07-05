@@ -27,7 +27,7 @@ const SetLocation = () => {
 
         map.current = new maplibregl.Map({
             container: mapRef.current,
-            style: "https://api.maptiler.com/maps/streets/style.json?key=bs0qTCbmXadT9ZH0pr9h",
+            style: `https://api.maptiler.com/maps/streets/style.json?key=${MAPTILER_KEY}`,
             center: [coords.lng, coords.lat],
             zoom: 14
         })
@@ -41,7 +41,7 @@ const SetLocation = () => {
             const lnglat = marker.current!.getLngLat()
             setCoords({lat: lnglat!.lat, lng: lnglat!.lng})
         })
-    }, [])
+    }, [coords.lat, coords.lng])
 
 
     return (

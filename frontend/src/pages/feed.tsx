@@ -15,6 +15,11 @@ type CommentType = {
     }
 }
 
+type Like = {
+    userId: string;
+    postId: string;
+};
+
 type FeedType = {
     id: string;
     content: string;
@@ -33,7 +38,8 @@ type FeedType = {
 const Feed = () => {
     const [ feeds, setFeeds ] = useState<FeedType[]>([])
     const [ loading, setLoading ] = useState(true)
-    const { user } = useAuth()
+    const auth = useAuth();
+    const user = auth?.user;
     const currentUserId = user?.id
     const [comment, setComment] = useState("")
     const [posting, setPosting] = useState(false)

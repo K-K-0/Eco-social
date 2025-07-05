@@ -2,9 +2,16 @@ import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+interface ProfileType {
+    username: string;
+    email: string;
+    avatarUrl?: string;
+    bio?: string;
+}
+
 const Profile = () => {
-    const [ profile, setProfile ] = useState<any>(null)
-    const { user } = useAuth()
+    const [ profile, setProfile ] = useState<ProfileType | null>(null)
+    useAuth();
 
     useEffect(() => {
         const fetchProfile = async () => {
