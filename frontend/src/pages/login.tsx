@@ -66,7 +66,7 @@ const Login = () => {
                             </a>
 
                             <button type="submit" className="w-full h-12 text-white text-center text-base font-semibold leading-6 cursor-pointer rounded-full hover:bg-lime-500 transition-all duration-700  bg-indigo-600 shadow-sm mb-11">Login</button>
-                            <a href="http://localhost:5173/signup" className="flex justify-center text-gray-900 text-base font-medium leading-6"> Don’t have an account? <span className="text-indigo-600 font-semibold pl-3"> Sign Up</span>
+                            <a href="/signup" className="flex justify-center text-gray-900 text-base font-medium leading-6"> Don’t have an account? <span className="text-indigo-600 font-semibold pl-3"> Sign Up</span>
                             </a>
                         </form>
                     </div>
