@@ -23,7 +23,9 @@ export const logoutUser = async () => {
 }
 
 export const userStats = async () => {
-    return API.get('/posts/stats')
+    return API.get('/posts/stats', {
+        withCredentials: true
+    })
 }
 
 export const createPost = async (formData: FormData) => {

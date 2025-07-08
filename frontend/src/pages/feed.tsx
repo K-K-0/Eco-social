@@ -99,7 +99,7 @@ const Feed = () => {
         try {
             setPosting(true)
             const BASE_URL = import.meta.env.VITE_BACKEND_URL
-            await axios.post(`${BASE_URL}/api/posts/:${postId}/comment`, {
+            await axios.post(`${BASE_URL}/api/posts/${postId}/comment`, {
                 postId,
                 content: comment
             }, { withCredentials: true })
