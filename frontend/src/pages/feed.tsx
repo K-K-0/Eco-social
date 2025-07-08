@@ -48,7 +48,8 @@ const Feed = () => {
     useEffect(() => {
         const fetchFeed = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/', { withCredentials: true })
+                const BASE_URL = import.meta.env.VITE_BACKEND_URL
+                const res = await axios.get(`${BASE_URL}/`, { withCredentials: true })
                 console.log(res.data.feeds)
                 setFeeds(Array.isArray(res.data.feeds) ? res.data.feeds : res.data || [])
             } catch (error) {
@@ -67,7 +68,8 @@ const Feed = () => {
 
     const handleLike = async (postId: string) => {
         try {
-            await axios.post(`http://localhost:5000/api/posts/${postId}/like`, {}, { withCredentials: true })
+            const BASE_URL = import.meta.env.VITE_BACKEND_URL
+            await axios.post(`${BASE_URL}/api/posts/${postId}/like`, {}, { withCredentials: true })
 
 
             setFeeds((prevPosts) =>
@@ -96,8 +98,8 @@ const Feed = () => {
 
         try {
             setPosting(true)
-
-            await axios.post(`http://localhost:5000/api/posts/:${postId}/comment`, {
+            const BASE_URL = import.meta.env.VITE_BACKEND_URL
+            await axios.post(`${BASE_URL}/api/posts/:${postId}/comment`, {
                 postId,
                 content: comment
             }, { withCredentials: true })

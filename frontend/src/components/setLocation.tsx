@@ -15,7 +15,8 @@ const SetLocation = () => {
     const [coords, setCoords] = useState({lat: 28.6139, lng: 77.2090})
 
     const handleLocation = async () => {
-        await axios.post("http://localhost:5000/location", {
+        const BASE_URL = import.meta.env.VITE_BACKEND_URL
+        await axios.post(`${BASE_URL}/location`, {
             lat: coords.lat,
             lng: coords.lng
         })

@@ -23,7 +23,8 @@ const OrgCard = ({ org }: {org: orgType}) => {
 
     const toggleFollow = async () => {
         try {
-            const endpoint = `http://localhost:5000/api/eco-orgs/${org.id}`;
+            const BASE_URL = import.meta.env.VITE_BACKEND_URL
+            const endpoint = `${BASE_URL}/eco-orgs/${org.id}`;
 
             if (isFollowing) {
                 await axios.delete(endpoint, { withCredentials: true });

@@ -15,7 +15,8 @@ const OrgForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            await axios.post(" http://localhost:5000/api/eco-orgs/register", {
+            const BASE_URL = import.meta.env.VITE_BACKEND_URL
+            await axios.post(`${BASE_URL}/api/eco-orgs/register`, {
                 name: form.name,
                 description: form.description,
                 latitude: parseFloat(form.latitude),

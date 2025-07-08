@@ -34,7 +34,8 @@ const Map = () => {
     useEffect(() => {
         const fetchOrg = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/eco-orgs', {withCredentials: true})
+                const BASE_URL = import.meta.env.VITE_BACKEND_URL
+                const res = await axios.get(`${BASE_URL}/api/eco-orgs`, {withCredentials: true})
                 console.log("fetch data", res.data)
                 setOrgs(res.data)
             } catch (error) {

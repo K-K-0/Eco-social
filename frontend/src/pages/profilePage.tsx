@@ -16,7 +16,9 @@ const Profile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/me', {withCredentials: true})
+                const BASE_URL = import.meta.env.VITE_BACKEND_URL
+
+                const res = await axios.get(`${BASE_URL}/api/me`, {withCredentials: true})
                 setProfile(res.data.user)
                 console.log(res)
             } catch (error) {

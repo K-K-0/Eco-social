@@ -9,7 +9,8 @@ const CommentSection = ({ postId }: { postId: string }) => {
             if (!postId) return;
 
             try {
-                const res = await axios.get(`http://localhost:5000/api/posts/${postId}/comment`, {
+                const BASE_URL = import.meta.env.VITE_BACKEND_URL
+                const res = await axios.get(`${BASE_URL}/api/posts/${postId}/comment`, {
                     withCredentials: true
                 });
                 setNewComments(res.data.comment);
