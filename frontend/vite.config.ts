@@ -10,6 +10,11 @@ export default defineConfig({
     tailwindcss(),
     svgr()
   ],
+  build: {
+    outDir: 'dist'
+  },
+  server: {
+  },
   resolve : {
     alias: {
       "@": path.resolve(__dirname, './src')
