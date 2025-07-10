@@ -60,6 +60,9 @@ router.get('/me', authMiddleware, async (req:any, res:any) => {
 
         if(!user) return res.status(404).json({massage: "user not found"})
         
+
+        console.log("User ID:", req.userId); // should print a number
+        
         res.json({user})
     } catch (error) {
         res.status(500).json({massage: 'server error'})
