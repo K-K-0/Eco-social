@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 import { signToken } from '../utils/jwt'
 import { authMiddleware } from "../middleware/middleware";
+import Jwt  from "jsonwebtoken";
 
 
 const router = Router()
@@ -38,7 +39,8 @@ router.post('/login', async (req: any, res: any) => {
     const validPassword = await bcrypt.compare(password, user.password)
     if (!validPassword) return res.status(401).json({ error: "invalid password" })
 
-    const token = signToken({ userId: user.id })
+    const token = Jwt.sign({ userId: user.id }, "All", { expiresIn: "7d" });
+
 
     res.cookie('token', token, {
         httpOnly: true,
@@ -53,6 +55,8 @@ router.post('/login', async (req: any, res: any) => {
 
 router.get('/me', authMiddleware, async (req:any, res:any) => {
     try {
+        console.log("👉 Reached /me route");
+        console.log("👉 req.userId:", req.userId);
         const user = await prisma.user.findUnique({
             where: {id: req.userId},
             select: {id: true, email: true}
@@ -66,7 +70,7 @@ router.get('/me', authMiddleware, async (req:any, res:any) => {
         res.json({user})
     } catch (error) {
         res.status(500).json({massage: 'server error'})
-        console.error('this is error', error)
+        console.error(error)
     }
 })
 
