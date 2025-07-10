@@ -66,7 +66,7 @@ router.get('/me', authMiddleware, async (req:any, res:any) => {
         res.json({user})
     } catch (error) {
         res.status(500).json({massage: 'server error'})
-        console.log(error)
+        console.error('this is error', error)
     }
 })
 
