@@ -96,8 +96,8 @@ const Map = () => {
                             bg-white shadow rounded-lg
                             hover:bg-gray-100
                             z-50
+                            map-toggle-btn
                         "
-                style={{ width: "auto", height: "auto" }}
             >
                 {mapStyle === "street" ? "Satellite View" : "Street View"}
             </button>
