@@ -82,11 +82,26 @@ const Map = () => {
 
             
             <button
-                onClick={() => setMapStyle((p) => (p === "street" ? "satellite" : "street"))}
-                className="fixed lg:top-28 lg:right-6 bottom-6 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow text-sm font-medium hover:bg-gray-100 z-40"
+                onClick={() =>
+                    setMapStyle((p) => (p === "street" ? "satellite" : "street"))
+                }
+                className="
+                            fixed
+                            right-4 bottom-6
+                            lg:bottom-auto lg:top-30 lg:right-6
+
+                            inline-flex items-center justify-center
+                            px-6 py-2
+                            text-sm font-medium
+                            bg-white shadow rounded-lg
+                            hover:bg-gray-100
+                            z-50
+                        "
+                style={{ width: "auto", height: "auto" }}
             >
                 {mapStyle === "street" ? "Satellite View" : "Street View"}
             </button>
+
 
     
             {selectedOrg && (
