@@ -9988,7 +9988,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description: string | null
-    ImageUrl: string
+    ImageUrl: string | null
     createdAt: Date
     _count: TreeCountAggregateOutputType | null
     _avg: TreeAvgAggregateOutputType | null
@@ -10076,7 +10076,7 @@ export namespace Prisma {
       latitude: number
       longitude: number
       description: string | null
-      ImageUrl: string
+      ImageUrl: string | null
       createdAt: Date
     }, ExtArgs["result"]["tree"]>
     composites: {}
@@ -11617,7 +11617,7 @@ export namespace Prisma {
     latitude?: FloatFilter<"Tree"> | number
     longitude?: FloatFilter<"Tree"> | number
     description?: StringNullableFilter<"Tree"> | string | null
-    ImageUrl?: StringFilter<"Tree"> | string
+    ImageUrl?: StringNullableFilter<"Tree"> | string | null
     createdAt?: DateTimeFilter<"Tree"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -11628,7 +11628,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     description?: SortOrderInput | SortOrder
-    ImageUrl?: SortOrder
+    ImageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -11642,7 +11642,7 @@ export namespace Prisma {
     latitude?: FloatFilter<"Tree"> | number
     longitude?: FloatFilter<"Tree"> | number
     description?: StringNullableFilter<"Tree"> | string | null
-    ImageUrl?: StringFilter<"Tree"> | string
+    ImageUrl?: StringNullableFilter<"Tree"> | string | null
     createdAt?: DateTimeFilter<"Tree"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -11653,7 +11653,7 @@ export namespace Prisma {
     latitude?: SortOrder
     longitude?: SortOrder
     description?: SortOrderInput | SortOrder
-    ImageUrl?: SortOrder
+    ImageUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: TreeCountOrderByAggregateInput
     _avg?: TreeAvgOrderByAggregateInput
@@ -11671,7 +11671,7 @@ export namespace Prisma {
     latitude?: FloatWithAggregatesFilter<"Tree"> | number
     longitude?: FloatWithAggregatesFilter<"Tree"> | number
     description?: StringNullableWithAggregatesFilter<"Tree"> | string | null
-    ImageUrl?: StringWithAggregatesFilter<"Tree"> | string
+    ImageUrl?: StringNullableWithAggregatesFilter<"Tree"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Tree"> | Date | string
   }
 
@@ -12135,7 +12135,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description?: string | null
-    ImageUrl: string
+    ImageUrl?: string | null
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutTreeInput
   }
@@ -12146,7 +12146,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description?: string | null
-    ImageUrl: string
+    ImageUrl?: string | null
     createdAt?: Date | string
   }
 
@@ -12154,7 +12154,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    ImageUrl?: StringFieldUpdateOperationsInput | string
+    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutTreeNestedInput
   }
@@ -12165,7 +12165,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    ImageUrl?: StringFieldUpdateOperationsInput | string
+    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12175,7 +12175,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description?: string | null
-    ImageUrl: string
+    ImageUrl?: string | null
     createdAt?: Date | string
   }
 
@@ -12183,7 +12183,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    ImageUrl?: StringFieldUpdateOperationsInput | string
+    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -12193,7 +12193,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    ImageUrl?: StringFieldUpdateOperationsInput | string
+    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13789,7 +13789,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description?: string | null
-    ImageUrl: string
+    ImageUrl?: string | null
     createdAt?: Date | string
   }
 
@@ -13798,7 +13798,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description?: string | null
-    ImageUrl: string
+    ImageUrl?: string | null
     createdAt?: Date | string
   }
 
@@ -14015,7 +14015,7 @@ export namespace Prisma {
     latitude?: FloatFilter<"Tree"> | number
     longitude?: FloatFilter<"Tree"> | number
     description?: StringNullableFilter<"Tree"> | string | null
-    ImageUrl?: StringFilter<"Tree"> | string
+    ImageUrl?: StringNullableFilter<"Tree"> | string | null
     createdAt?: DateTimeFilter<"Tree"> | Date | string
   }
 
@@ -15126,7 +15126,7 @@ export namespace Prisma {
     latitude: number
     longitude: number
     description?: string | null
-    ImageUrl: string
+    ImageUrl?: string | null
     createdAt?: Date | string
   }
 
@@ -15265,7 +15265,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    ImageUrl?: StringFieldUpdateOperationsInput | string
+    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15274,7 +15274,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    ImageUrl?: StringFieldUpdateOperationsInput | string
+    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -15283,7 +15283,7 @@ export namespace Prisma {
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    ImageUrl?: StringFieldUpdateOperationsInput | string
+    ImageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

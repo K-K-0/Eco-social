@@ -27,7 +27,6 @@ model User {
   Followers    FollowOrg[]
   tree         Tree[]
 
-  // 👇 Only use @relation(<name>) with NO fields/references here
   userFollowers Follow[] @relation("UserFollowers") // people who follow this user
   userFollowing Follow[] @relation("UserFollowing") // people this user follows
 }
@@ -63,7 +62,6 @@ model Follow {
   followerId  Int
   followingId Int
 
-  // 👇 Use @relation with fields/references here
   follower  User @relation("UserFollowing", fields: [followerId], references: [id])
   following User @relation("UserFollowers", fields: [followingId], references: [id])
 
@@ -116,6 +114,6 @@ model Tree {
   latitude    Float
   longitude   Float
   description String?
-  ImageUrl    String
+  ImageUrl    String?
   createdAt   DateTime @default(now())
 }
