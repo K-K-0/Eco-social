@@ -24,11 +24,9 @@ type Org = {
 
 type Tree = {
     _id: string;
-    species?: string;
-    lat: number;
-    lng: number;
+    latitude: number;
+    longitude: number;
     imageUrl?: string;
-    plantedAt: string;
 };
 
 
@@ -57,8 +55,9 @@ const Map = () => {
         (async () => {
             try {
                 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-                const res = await axios.get(`${BASE_URL}/api/tree`);
+                const res = await axios.get(`${BASE_URL}/api/tree`, {withCredentials: true});
                 setTrees(res.data);
+                console.log(res)
             } catch (error) {
                 console.error("Error fetching trees:", error);
             }
@@ -105,7 +104,7 @@ const Map = () => {
             // Optional tooltip: el.title = tree.species || "Tree";
 
             new maplibregl.Marker({ element: el, anchor: "bottom" })
-                .setLngLat([tree.lng, tree.lat])
+                .setLngLat([tree.longitude, tree.latitude])
                 .addTo(map.current!);
         });
     }, [trees]);
