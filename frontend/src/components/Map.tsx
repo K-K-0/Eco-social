@@ -23,10 +23,11 @@ type Org = {
 };
 
 type Tree = {
-    _id: string;
+    id: string;
     latitude: number;
     longitude: number;
     imageUrl?: string;
+    description?: string;
 };
 
 
@@ -99,14 +100,10 @@ const Map = () => {
 
         trees.forEach((tree) => {
             // Custom HTML element for leafy emoji
-            const el = document.createElement("div");
-            el.className = "text-xl";          // Tailwind size
-            el.textContent = "🌳";             // any icon/svg works
-            // Optional tooltip: el.title = tree.species || "Tree";
-
-            new maplibregl.Marker({ element: el, anchor: "bottom" })
+            const marker = new maplibregl.Marker({ color: "#10B981" })
                 .setLngLat([tree.longitude, tree.latitude])
                 .addTo(map.current!);
+            marker.getElement().addEventListener("click", () => setTrees(trees));
         });
     }, [trees]);
 
