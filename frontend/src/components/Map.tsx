@@ -57,7 +57,7 @@ const Map = () => {
         (async () => {
             try {
                 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-                const res = await axios.get(`${BASE_URL}/api/trees`);
+                const res = await axios.get(`${BASE_URL}/api/tree`);
                 setTrees(res.data);
             } catch (error) {
                 console.error("Error fetching trees:", error);
