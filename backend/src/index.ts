@@ -39,13 +39,12 @@ app.use("/api/eco-orgs", ecoOrganizations)
 app.use(setLocation)
 
 
-
-
 const PORT = Number(process.env.PORT) || 3000;
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`✅ Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
 
-  
+console.log("🔍 Railway PORT:", process.env.PORT);
+
 

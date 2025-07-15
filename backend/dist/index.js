@@ -25,7 +25,7 @@ app.use((0, cors_1.default)({
     origin: ['https://eco-social.vercel.app',
         'https://eco-social-git-main-k-k-0s-projects.vercel.app',
         'https://eco-social-79gfu7mzs-k-k-0s-projects.vercel.app',
-        'http://localhost:5173'],
+    ],
     credentials: true,
 }));
 app.use((0, cookie_parser_1.default)());
@@ -38,6 +38,8 @@ app.use(feedRoute_1.default);
 app.use(countRoutes_1.default);
 app.use("/api/eco-orgs", ecoOrganizations_1.default);
 app.use(setLocation_1.default);
-app.listen(8080, '0.0.0.0', () => {
-    console.log('server on running 8080');
+const PORT = Number(process.env.PORT) || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is running on port ${PORT}`);
 });
+console.log("🔍 Railway PORT:", process.env.PORT);
