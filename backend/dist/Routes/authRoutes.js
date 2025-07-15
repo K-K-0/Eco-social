@@ -36,6 +36,8 @@ router.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 }));
 router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Login hit");
+    console.log("Request body:", req.body);
     const { email, password } = req.body;
     const user = yield prisma.user.findUnique({
         where: { email },
