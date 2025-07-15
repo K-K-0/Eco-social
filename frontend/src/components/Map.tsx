@@ -45,6 +45,7 @@ const Map = () => {
                 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
                 const res = await axios.get(`${BASE_URL}/api/eco-orgs`, { withCredentials: true });
                 setOrgs(res.data);
+                console.log(res)
             } catch (error) {
                 console.error("Error fetching orgs:", error);
             }
