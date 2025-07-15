@@ -10,7 +10,7 @@ const CreatePost = () => {
     const [preview, setPreview] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
-    /* ───── Handlers ───── */
+    
     const handleMediaChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {

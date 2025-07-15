@@ -11,6 +11,7 @@ import Protected from "./components/ProtectRoute"
 import Profile from "./pages/profilePage"
 import Feed from "./pages/feed"
 import { SignUp } from "./components/SignUp"
+import Plant from "./pages/treePlant"
 
 
 
@@ -22,6 +23,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/plant" element={<Plant />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Dashboard" element={<Protected><Dashboard /></Protected>} />
           <Route path="/logout" element={<LogoutButton />} />
