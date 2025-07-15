@@ -22,12 +22,21 @@ type Org = {
     followers: any;
 };
 
+type Tree = {
+    _id: string;
+    species?: string;
+    lat: number;
+    lng: number;
+    imageUrl?: string;
+    plantedAt: string;
+};
 
 
 const Map = () => {
     const mapContainer = useRef<HTMLDivElement>(null);
     const map = useRef<maplibregl.Map | null>(null);
     const [mapStyle, setMapStyle] = useState<"street" | "satellite">("street");
+    const [trees, setTrees] = useState<Tree[]>([]);
     const [orgs, setOrgs] = useState<Org[]>([]);
     const [selectedOrg, setSelectedOrg] = useState<Org | null>(null);
 
@@ -40,6 +49,18 @@ const Map = () => {
                 setOrgs(res.data);
             } catch (error) {
                 console.error("Error fetching orgs:", error);
+            }
+        })();
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+                const res = await axios.get(`${BASE_URL}/api/trees`);
+                setTrees(res.data);
+            } catch (error) {
+                console.error("Error fetching trees:", error);
             }
         })();
     }, []);
@@ -72,6 +93,22 @@ const Map = () => {
             marker.getElement().addEventListener("click", () => setSelectedOrg(org));
         });
     }, [orgs]);
+
+    useEffect(() => {
+        if (!map.current || trees.length === 0) return;
+
+        trees.forEach((tree) => {
+            // Custom HTML element for leafy emoji
+            const el = document.createElement("div");
+            el.className = "text-xl";          // Tailwind size
+            el.textContent = "🌳";             // any icon/svg works
+            // Optional tooltip: el.title = tree.species || "Tree";
+
+            new maplibregl.Marker({ element: el, anchor: "bottom" })
+                .setLngLat([tree.lng, tree.lat])
+                .addTo(map.current!);
+        });
+    }, [trees]);
 
     return (
         <div className="min-h-screen flex flex-col">
