@@ -12,11 +12,13 @@ import countRoutes from './Routes/countRoutes'
 import ecoOrganizations from './Routes/ecoOrganizations'
 import setLocation from './Routes/setLocation'
 import  Tree  from './Routes/tree'
+import  session  from "express-session";
+
+
 
 dotenv.config()
 
 const app = express()
-const session = require("express-session");
 
 app.use('*',cors({
     origin: ['https://eco-social.vercel.app',
@@ -25,6 +27,7 @@ app.use('*',cors({
         ],
     credentials: true,
 }))
+
 
 app.use(session({
     secret: "yourSecret",
@@ -35,6 +38,8 @@ app.use(session({
         sameSite: "none"
     }
 }));
+
+
 
 
 app.use(cookieParser())
