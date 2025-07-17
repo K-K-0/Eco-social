@@ -76,7 +76,7 @@ routes.post('/verify/:id', authMiddleware, async (req, res) => {
     }
 });
 
-routes.post('/:id', authMiddleware, async (req:any, res: any) => {
+routes.post('orgs/:id', authMiddleware, async (req:any, res: any) => {
     console.log("RAW params:", req.params);
     console.log("req.params.id:", req.params.id);
     console.log("req.query:", req.query);
@@ -100,7 +100,7 @@ routes.post('/:id', authMiddleware, async (req:any, res: any) => {
     res.json({follow})
 })
 
-routes.delete('/:id', authMiddleware, async (req: any, res: any) => {
+routes.delete('org/:id', authMiddleware, async (req: any, res: any) => {
     const orgId  = parseInt(req.params.id)
     const userId = req.userId
 

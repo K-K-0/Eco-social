@@ -91,7 +91,7 @@ routes.post('/:postId/like', authMiddleware, async (req:any, res:any) => {
     }
 })
 
-routes.post('/:id/like', async (req:any, res:any) => {
+routes.post('/:postId/like', async (req:any, res:any) => {
     const postId = req.params.id;
 
     try {

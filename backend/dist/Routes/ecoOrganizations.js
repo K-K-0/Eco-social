@@ -76,7 +76,7 @@ routes.post('/verify/:id', middleware_1.authMiddleware, (req, res) => __awaiter(
         res.status(500).json({ error: 'Failed to verify org' });
     }
 }));
-routes.post('/:id', middleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+routes.post('orgs/:id', middleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("RAW params:", req.params);
     console.log("req.params.id:", req.params.id);
     console.log("req.query:", req.query);
@@ -95,7 +95,7 @@ routes.post('/:id', middleware_1.authMiddleware, (req, res) => __awaiter(void 0,
     });
     res.json({ follow });
 }));
-routes.delete('/:id', middleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+routes.delete('org/:id', middleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orgId = parseInt(req.params.id);
     const userId = req.userId;
     const unfollow = yield prisma.followOrg.delete({

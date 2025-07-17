@@ -18,7 +18,7 @@ const setLocation_1 = __importDefault(require("./Routes/setLocation"));
 const tree_1 = __importDefault(require("./Routes/tree"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-app.use('*', (0, cors_1.default)({
+app.use((0, cors_1.default)({
     origin: ['https://eco-social.vercel.app',
         'https://eco-social-k-k-0s-projects.vercel.app',
         'https://eco-social-r9on43lmp-k-k-0s-projects.vercel.app',

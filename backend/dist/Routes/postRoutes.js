@@ -86,7 +86,7 @@ routes.post('/:postId/like', middleware_1.authMiddleware, (req, res) => __awaite
         return res.status(500).json({ message: 'Something went wrong' });
     }
 }));
-routes.post('/:id/like', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+routes.post('/:postId/like', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const postId = req.params.id;
     try {
         const updatedPost = yield prisma.post.update({

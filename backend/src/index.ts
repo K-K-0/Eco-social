@@ -18,31 +18,16 @@ dotenv.config()
 
 const app = express()
 
-<<<<<<< HEAD
-
-app.use(cors({
-    origin: 'http://localhost:5173',
-=======
 app.use('*',cors({
     origin: ['https://eco-social.vercel.app',
         'https://eco-social-k-k-0s-projects.vercel.app',
         'https://eco-social-r9on43lmp-k-k-0s-projects.vercel.app',
         ],
->>>>>>> f530e1660a2aba38bf76e02a7f56e520b684420d
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }))
-<<<<<<< HEAD
 app.use(express.json())
-=======
-
-
-
-
-
-
->>>>>>> f530e1660a2aba38bf76e02a7f56e520b684420d
 app.use(cookieParser())
 app.use(express.json())
 
