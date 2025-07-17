@@ -55,8 +55,8 @@ const Map = () => {
     useEffect(() => {
         (async () => {
             try {
-                // const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-                const res = await axios.get(`https://eco-social-production-00a1.up.railway.app/api/`, { withCredentials: true });
+                const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+                const res = await axios.get(`${BASE_URL}/api/`, { withCredentials: true });
                 setTrees(res.data);
                 console.log(res)
             } catch (error) {
@@ -65,7 +65,7 @@ const Map = () => {
         })();
     }, []);
 
-    
+
     useEffect(() => {
         if (map.current || !mapContainer.current) return;
 
@@ -82,7 +82,7 @@ const Map = () => {
         map.current?.setStyle(styles[mapStyle]);
     }, [mapStyle]);
 
-    
+
     useEffect(() => {
         if (!map.current || orgs.length === 0) return;
         orgs.forEach((org) => {
@@ -101,7 +101,6 @@ const Map = () => {
 
     useEffect(() => {
         if (!map.current || trees.length === 0) return;
-
         trees.forEach((tree) => {
             const el = document.createElement("div");
             el.innerHTML = "🌳";
@@ -120,7 +119,7 @@ const Map = () => {
                 justifyContent: "center",
                 cursor: "pointer",
                 transition: "transform 0.2s",
-                PointerEvents: "auto", 
+                PointerEvents: "auto",
             });
 
             el.title = "Planted Tree 🌱";
@@ -142,10 +141,10 @@ const Map = () => {
         <div className="min-h-screen flex flex-col">
             <NavBar />
 
-        
+
             <div ref={mapContainer} className="flex-1 w-full" />
 
-            
+
             <button
                 onClick={() =>
                     setMapStyle((p) => (p === "street" ? "satellite" : "street"))
@@ -168,7 +167,7 @@ const Map = () => {
             </button>
 
 
-    
+
             {selectedOrg && (
                 <div className="fixed bottom-6 lg:bottom-auto lg:top-28 left-1/2 lg:left-8 -translate-x-1/2 lg:translate-x-0 w-[calc(100%-2rem)] sm:w-96 lg:w-80 max-w-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow z-40">
                     <button
