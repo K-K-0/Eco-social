@@ -16,17 +16,30 @@ import  Tree  from './Routes/tree'
 dotenv.config()
 
 const app = express()
-const prisma = new PrismaClient()
+const session = require("express-session");
 
-app.use(express.json())
-app.use(cors({
+app.use('*',cors({
     origin: ['https://eco-social.vercel.app',
         'https://eco-social-k-k-0s-projects.vercel.app',
         'https://eco-social-r9on43lmp-k-k-0s-projects.vercel.app',
         ],
     credentials: true,
 }))
+
+app.use(session({
+    secret: "yourSecret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true,
+        sameSite: "none"
+    }
+}));
+
+
 app.use(cookieParser())
+app.use(express.json())
+
 
 app.use('/api/auth', authRoutes)
 app.use('/api/posts',postRoutes)
