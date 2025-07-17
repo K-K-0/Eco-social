@@ -56,8 +56,8 @@ const Map = () => {
     useEffect(() => {
         (async () => {
             try {
-                const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-                const res = await axios.get(`${BASE_URL}/api/tree`, {withCredentials: true});
+                // const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+                const res = await axios.get(`https://eco-social-production-00a1.up.railway.app/api/tree`, { withCredentials: true });
                 setTrees(res.data);
                 console.log(res)
             } catch (error) {
