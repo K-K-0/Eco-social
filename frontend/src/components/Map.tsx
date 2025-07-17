@@ -123,7 +123,7 @@ const Map = () => {
                 justifyContent: "center",
                 cursor: "pointer",
                 transition: "transform 0.2s",
-                PointerEvent: "auto"
+                PointerEvents: "auto"
 
             });
 
