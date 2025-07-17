@@ -55,8 +55,8 @@ const Map = () => {
     useEffect(() => {
         (async () => {
             try {
-                const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-                const res = await axios.get(`${BASE_URL}/api/tree`, {withCredentials: true});
+                // const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+                const res = await axios.get(`https://eco-social-production-00a1.up.railway.app/api/`, { withCredentials: true });
                 setTrees(res.data);
                 console.log(res)
             } catch (error) {
@@ -103,51 +103,13 @@ const Map = () => {
         if (!map.current || trees.length === 0) return;
 
         trees.forEach((tree) => {
-            const el = document.createElement("div");
-            el.style.display = "flex";
-            el.style.alignItems = "center";
-            el.style.justifyContent = "center";
-            el.style.width = "40px";
-            el.style.height = "40px";
-
-            el.innerHTML = "🌳"; // you can replace with SVG if needed
-
-            Object.assign(el.style, {
-                fontSize: "24px",             // make it larger
-                lineHeight: "24px",
-                width: "40px",
-                height: "40px",
-                textAlign: "center",
-                backgroundColor: "white",
-                borderRadius: "50%",
-                border: "2px solid #22c55e",  // emerald green border
-                boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                transition: "transform 0.2s",
-                PointerEvents: "auto"
-                
-            });
-
-            el.title = "Planted Tree 🌱"; // or use tree.species if you have it
-
-            el.addEventListener("mouseenter", () => {
-                el.style.transform = "scale(1.3)";
-            });
-
-            el.addEventListener("mouseleave", () => {
-                el.style.transform = "scale(1)";
-            });
-
-            new maplibregl.Marker({ element: el, anchor: "bottom" })
+            // Custom HTML element for leafy emoji
+            const marker = new maplibregl.Marker({ color: "#10B981" })
                 .setLngLat([tree.longitude, tree.latitude])
                 .addTo(map.current!);
         });
 
     }, [trees]);
-
     return (
         <div className="min-h-screen flex flex-col">
             <NavBar />

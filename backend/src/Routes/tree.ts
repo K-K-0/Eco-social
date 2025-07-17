@@ -28,7 +28,7 @@ router.post('/plant', authMiddleware, async (req:any, res) => {
 })
 
 
-router.get('/tree', async (req,res) => {
+router.get('/', authMiddleware, async (req,res) => {
     try {
         const trees = await prisma.tree.findMany({
             include:{
