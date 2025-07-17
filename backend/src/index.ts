@@ -18,7 +18,7 @@ dotenv.config()
 
 const app = express()
 
-app.use('*',cors({
+app.use(cors({
     origin: ['https://eco-social.vercel.app',
         'https://eco-social-k-k-0s-projects.vercel.app',
         'https://eco-social-r9on43lmp-k-k-0s-projects.vercel.app',
