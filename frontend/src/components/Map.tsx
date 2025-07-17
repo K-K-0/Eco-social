@@ -1,187 +1,96 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import axios from "axios";
-import NavBar from "./NavBar";
-import OrgCard from "./OrgFollow";
-import { X } from "lucide-react";
 
-const MAPTILER_KEY = "bs0qTCbmXadT9ZH0pr9h";
-
-const styles = {
-    street: `https://api.maptiler.com/maps/streets/style.json?key=${MAPTILER_KEY}`,
-    satellite: `https://api.maptiler.com/maps/hybrid/style.json?key=${MAPTILER_KEY}`,
-} as const;
-
-type Org = {
-    id: string;
-    name: string;
-    description: string;
-    latitude: number;
-    longitude: number;
-    followers: any;
-};
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || "https://your-backend.com"; // Fallback URL
 
 type Tree = {
-    id: string;
+    id: number;
     latitude: number;
     longitude: number;
-    imageUrl?: string;
-    description?: string;
 };
 
+type EcoOrg = {
+    id: number;
+    name: string;
+    description: string;
+    location: string;
+    latitude: number;
+    longitude: number;
+};
 
-const Map = () => {
-    const mapContainer = useRef<HTMLDivElement>(null);
-    const map = useRef<maplibregl.Map | null>(null);
-    const [mapStyle, setMapStyle] = useState<"street" | "satellite">("street");
+export default function TreesMap() {
+    const mapContainer = useRef<HTMLDivElement | null>(null);
+    const mapRef = useRef<maplibregl.Map | null>(null);
     const [trees, setTrees] = useState<Tree[]>([]);
-    const [orgs, setOrgs] = useState<Org[]>([]);
-    const [selectedOrg, setSelectedOrg] = useState<Org | null>(null);
+    const [ecoOrgs, setEcoOrgs] = useState<EcoOrg[]>([]);
 
+    // Fetch data
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [treeRes, orgRes] = await Promise.all([
+                    axios.get(`${BASE_URL}/api/tree/all-trees`, { withCredentials: true }),
+                    axios.get(`${BASE_URL}/api/eco-orgs/all-verified-orgs`, { withCredentials: true }),
+                ]);
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-                const res = await axios.get(`${BASE_URL}/api/eco-orgs`, { withCredentials: true });
-                setOrgs(res.data);
-                console.log(res)
+                setTrees(treeRes.data.trees || []);
+                setEcoOrgs(orgRes.data.verifiedOrgs || []);
             } catch (error) {
-                console.error("Error fetching orgs:", error);
+                console.error("Error fetching data:", error);
             }
-        })();
-    }, []);
-    useEffect(() => {
-        (async () => {
-            try {
-                const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-                const res = await axios.get(`${BASE_URL}/api/`, { withCredentials: true });
-                setTrees(res.data);
-                console.log(res)
-            } catch (error) {
-                console.error("Error fetching trees:", error);
-            }
-        })();
+        };
+
+        fetchData();
     }, []);
 
-
+    // Initialize map
     useEffect(() => {
-        if (map.current || !mapContainer.current) return;
+        if (!mapContainer.current || mapRef.current) return;
 
-        map.current = new maplibregl.Map({
+        mapRef.current = new maplibregl.Map({
             container: mapContainer.current,
-            style: styles.street,
-            center: [77.209, 28.6139],
-            zoom: 9,
+            style: `https://api.maptiler.com/maps/streets/style.json?key=${import.meta.env.VITE_MAPTILER_KEY}`,
+            center: [78.9629, 20.5937],
+            zoom: 4,
         });
+
+        mapRef.current.addControl(new maplibregl.NavigationControl(), "top-right");
     }, []);
 
-
+    // Add markers when map + data ready
     useEffect(() => {
-        map.current?.setStyle(styles[mapStyle]);
-    }, [mapStyle]);
+        const map = mapRef.current;
+        if (!map || !trees.length || !ecoOrgs.length || !map.isStyleLoaded()) return;
 
+        // Remove old markers if any
+        document.querySelectorAll(".tree-marker, .org-marker").forEach((el) => el.remove());
 
-    useEffect(() => {
-        if (!map.current || orgs.length === 0) return;
-        orgs.forEach((org) => {
-            const el = document.createElement("div");
-            el.className = "custom-org-marker";
-            el.title = org.name;
-
-            el.addEventListener("click", () => setSelectedOrg(org));
-
-            new maplibregl.Marker({ element: el, anchor: "bottom" })
-                .setLngLat([org.longitude, org.latitude])
-                .addTo(map.current!);
-        });
-
-    }, [orgs]);
-
-    useEffect(() => {
-        if (!map.current || trees.length === 0) return;
+        // Add tree markers
         trees.forEach((tree) => {
             const el = document.createElement("div");
+            el.className = "tree-marker";
             el.innerHTML = "🌳";
 
-            Object.assign(el.style, {
-                fontSize: "24px",
-                width: "40px",
-                height: "40px",
-                textAlign: "center",
-                backgroundColor: "white",
-                borderRadius: "50%",
-                border: "2px solid #22c55e",
-                boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-                transition: "transform 0.2s",
-                PointerEvents: "auto",
-            });
-
-            el.title = "Planted Tree 🌱";
-
-            el.addEventListener("mouseenter", () => {
-                el.style.transform = "scale(1.3)";
-            });
-
-            el.addEventListener("mouseleave", () => {
-                el.style.transform = "scale(1)";
-            });
-
-            new maplibregl.Marker({ element: el, anchor: "bottom" })
-                .setLngLat([tree.longitude, tree.latitude])
-                .addTo(map.current!);
+            new maplibregl.Marker(el).setLngLat([tree.longitude, tree.latitude]).addTo(map);
         });
-    }, [trees]);
+
+        // Add org markers
+        ecoOrgs.forEach((org) => {
+            const el = document.createElement("div");
+            el.className = "org-marker custom-org-marker";
+
+            new maplibregl.Marker(el).setLngLat([org.longitude, org.latitude]).addTo(map);
+        });
+    }, [trees, ecoOrgs]);
+
     return (
-        <div className="min-h-screen flex flex-col">
-            <NavBar />
+        <div className="w-full h-[600px] flex items-center justify-center bg-gray-100">
+            <div ref={mapContainer} className="flex-1 w-full h-[600px]" />
 
-
-            <div ref={mapContainer} className="flex-1 w-full h-[600px" />
-
-
-            <button
-                onClick={() =>
-                    setMapStyle((p) => (p === "street" ? "satellite" : "street"))
-                }
-                className="
-                            fixed
-                            right-4 bottom-6
-                            lg:bottom-auto lg:top-30 lg:right-6
-
-                            inline-flex items-center justify-center
-                            px-6 py-2
-                            text-sm font-medium
-                            bg-white shadow rounded-lg
-                            hover:bg-gray-100
-                            z-50
-                            map-toggle-btn
-                        "
-            >
-                {mapStyle === "street" ? "Satellite View" : "Street View"}
-            </button>
-
-
-
-            {selectedOrg && (
-                <div className="fixed bottom-6 lg:bottom-auto lg:top-28 left-1/2 lg:left-8 -translate-x-1/2 lg:translate-x-0 w-[calc(100%-2rem)] sm:w-96 lg:w-80 max-w-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow z-40">
-                    <button
-                        onClick={() => setSelectedOrg(null)}
-                        className="absolute top-2 right-2 text-gray-600 hover:text-red-500"
-                        title="Close organization card"
-                    >
-                        <X size={20} />
-                    </button>
-                    <OrgCard org={selectedOrg} />
-                </div>
-            )}
+            {/* Prevent Tailwind from purging this class */}
+            <span className="hidden custom-org-marker"></span>
         </div>
     );
-};
-
-export default Map;
+}
