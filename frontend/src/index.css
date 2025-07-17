@@ -125,3 +125,36 @@
     @apply bg-background text-foreground;
     }
 }
+
+
+
+/* Org Marker */
+
+.custom-org-marker {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(145deg, #eff2f1, #eff2f1);
+    /* emerald to green */
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.custom-org-marker::before {
+    content: "🌱";
+    /* you can change to 🏛️ 🏢 🧑‍🌾 etc. */
+    font-size: 22px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.custom-org-marker:hover {
+    transform: scale(1.25);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.6);
+    z-index: 20;
+}

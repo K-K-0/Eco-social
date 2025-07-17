@@ -5,7 +5,7 @@ export const registerUser = async (email: string, password: string) => {
 }
 
 export const loginUser = async (email: string, password: string) => {
-    return API.post('/auth/login', { email, password} , {
+    return API.post('/auth/login', { email, password } , {
         withCredentials: true
     })
 }
@@ -18,7 +18,7 @@ export const getMe = async () => {
 
 export const logoutUser = async () => {
     return API.post('/auth/logout', {
-        withCredential: true
+        withCredentials: true
     })
 }
 
@@ -29,7 +29,7 @@ export const userStats = async () => {
 }
 
 export const createPost = async (formData: FormData) => {
-    return API.post('posts/create', formData, {
+    return API.post('/posts/create', formData, {
         headers: {
             "Content-Type": "multipart/form-data"
         },

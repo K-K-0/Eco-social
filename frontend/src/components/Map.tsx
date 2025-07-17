@@ -52,7 +52,6 @@ const Map = () => {
             }
         })();
     }, []);
-
     useEffect(() => {
         (async () => {
             try {
@@ -86,25 +85,67 @@ const Map = () => {
     
     useEffect(() => {
         if (!map.current || orgs.length === 0) return;
-
         orgs.forEach((org) => {
-            const marker = new maplibregl.Marker({ color: "#10B981" })
+            const el = document.createElement("div");
+            el.className = "custom-org-marker";
+            el.title = org.name;
+
+            el.addEventListener("click", () => setSelectedOrg(org));
+
+            new maplibregl.Marker({ element: el, anchor: "bottom" })
                 .setLngLat([org.longitude, org.latitude])
                 .addTo(map.current!);
-            marker.getElement().addEventListener("click", () => setSelectedOrg(org));
         });
+
     }, [orgs]);
 
     useEffect(() => {
         if (!map.current || trees.length === 0) return;
 
         trees.forEach((tree) => {
-            // Custom HTML element for leafy emoji
-            const marker = new maplibregl.Marker({ color: "#10B981" })
+            const el = document.createElement("div");
+            el.style.display = "flex";
+            el.style.alignItems = "center";
+            el.style.justifyContent = "center";
+            el.style.width = "40px";
+            el.style.height = "40px";
+
+            el.innerHTML = "🌳"; // you can replace with SVG if needed
+
+            Object.assign(el.style, {
+                fontSize: "24px",             // make it larger
+                lineHeight: "24px",
+                width: "40px",
+                height: "40px",
+                textAlign: "center",
+                backgroundColor: "white",
+                borderRadius: "50%",
+                border: "2px solid #22c55e",  // emerald green border
+                boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+                transition: "transform 0.2s",
+                PointerEvents: "auto"
+                
+            });
+
+            el.title = "Planted Tree 🌱"; // or use tree.species if you have it
+
+            el.addEventListener("mouseenter", () => {
+                el.style.transform = "scale(1.3)";
+            });
+
+            el.addEventListener("mouseleave", () => {
+                el.style.transform = "scale(1)";
+            });
+
+            new maplibregl.Marker({ element: el, anchor: "bottom" })
                 .setLngLat([tree.longitude, tree.latitude])
                 .addTo(map.current!);
-            marker.getElement().addEventListener("click", () => setTrees(trees));
         });
+
     }, [trees]);
 
     return (

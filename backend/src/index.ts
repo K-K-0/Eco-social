@@ -1,4 +1,3 @@
-import { PrismaClient } from "../database/generated/prisma";
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
@@ -16,16 +15,15 @@ import  Tree  from './Routes/tree'
 dotenv.config()
 
 const app = express()
-const prisma = new PrismaClient()
 
-app.use(express.json())
+
 app.use(cors({
-    origin: ['https://eco-social.vercel.app',
-        'https://eco-social-git-main-k-k-0s-projects.vercel.app',
-        'https://eco-social-79gfu7mzs-k-k-0s-projects.vercel.app',
-        ],
+    origin: 'http://localhost:5173',
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }))
+app.use(express.json())
 app.use(cookieParser())
 
 app.use('/api/auth', authRoutes)
