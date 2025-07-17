@@ -12,7 +12,6 @@ import countRoutes from './Routes/countRoutes'
 import ecoOrganizations from './Routes/ecoOrganizations'
 import setLocation from './Routes/setLocation'
 import  Tree  from './Routes/tree'
-import  session  from "express-session";
 
 
 
@@ -29,15 +28,6 @@ app.use('*',cors({
 }))
 
 
-app.use(session({
-    secret: "yourSecret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: true,
-        sameSite: "none"
-    }
-}));
 
 
 
