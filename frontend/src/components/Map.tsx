@@ -142,7 +142,7 @@ const Map = () => {
             <NavBar />
 
 
-            <div ref={mapContainer} className="flex-1 w-full" />
+            <div ref={mapContainer} className="flex-1 w-full h-[600px" />
 
 
             <button

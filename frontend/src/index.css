@@ -130,11 +130,10 @@
 
 /* Org Marker */
 
-.custom-org-marker {
+.custom-tree-marker {
     width: 44px;
     height: 44px;
-    background: linear-gradient(145deg, #eff2f1, #eff2f1);
-    /* emerald to green */
+    background: linear-gradient(145deg, #d0f5d8, #b2f2bb);
     border: 3px solid white;
     border-radius: 50%;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
@@ -143,9 +142,9 @@
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.custom-org-marker::before {
-    content: "🌱";
-    /* you can change to 🏛️ 🏢 🧑‍🌾 etc. */
+.custom-tree-marker::before {
+    content: "🌳";
+    /* or 🌲 */
     font-size: 22px;
     position: absolute;
     top: 50%;
@@ -153,8 +152,8 @@
     transform: translate(-50%, -50%);
 }
 
-.custom-org-marker:hover {
+.custom-tree-marker:hover {
     transform: scale(1.25);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.6);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.6);
     z-index: 20;
 }
