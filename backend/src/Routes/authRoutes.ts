@@ -30,34 +30,39 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req: any, res: any) => {
 
-    console.log("Login hit");
-    console.log("Request body:", req.body);
-    
-    const { email, password } = req.body;
-    const user = await prisma.user.findUnique({
-        where: { email },
-    })
+        try {
+            console.log("Login hit");
+            console.log("Request body:", req.body);
 
-    if (!user) return res.status(404).json({ error: "user not found" })
+            const { email, password } = req.body;
+            const user = await prisma.user.findUnique({
+                where: { email },
+            })
 
-    const validPassword = await bcrypt.compare(password, user.password)
-    if (!validPassword) return res.status(401).json({ error: "invalid password" })
+            if (!user) return res.status(404).json({ error: "user not found" })
 
-    const token = Jwt.sign({ userId: user.id }, "All", { expiresIn: "7d" });
+            const validPassword = await bcrypt.compare(password, user.password)
+            if (!validPassword) return res.status(401).json({ error: "invalid password" })
+
+            const token = Jwt.sign({ userId: user.id }, "All", { expiresIn: "7d" });
 
 
-    res.cookie('token', token, {
-        httpOnly: true,
-        // secure: process.env.NODE_ENV === "production",
-        secure: false,
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        path: "/"
-    })
+            res.cookie('token', token, {
+                httpOnly: true,
+                // secure: process.env.NODE_ENV === "production",
+                secure: false,
+                sameSite: 'lax',
+                maxAge: 7 * 24 * 60 * 60 * 1000,
+                path: "/"
+            })
 
-    res.status(200).json({ massage: 'Login Successfully' })
+            res.status(200).json({ massage: 'Login Successfully' })
+
+        } catch (error) {
+            console.log(error)
+        }
 })
-
+   
 router.get('/me', authMiddleware, async (req:any, res:any) => {
     try {
         console.log("👉 Reached /me route");

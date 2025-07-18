@@ -19,15 +19,13 @@ dotenv.config()
 const app = express()
 
 app.use(cors({
-    origin: ['https://eco-social.vercel.app',
-        'https://eco-social-k-k-0s-projects.vercel.app',
-        'https://eco-social-r9on43lmp-k-k-0s-projects.vercel.app',
+    origin: ['eco-social.vercel.app',
         ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
 }))
-app.use(express.json())
+
 app.use(cookieParser())
 app.use(express.json())
 
