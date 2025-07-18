@@ -51,7 +51,7 @@ router.post('/login', async (req: any, res: any) => {
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: true,
-                sameSite: 'none',
+                sameSite: 'None',
                 maxAge: 7 * 24 * 60 * 60 * 1000,
                 path: "/"
             })
@@ -91,7 +91,7 @@ router.post('/logout', authMiddleware, (req, res) => {
         httpOnly: true,
         // secure: process.env.NODE_ENV === "production", 
         secure: true,
-        sameSite:'none',
+        sameSite: 'none',
     })
     res.json({ massage: "logged out successfully" })    
 })
