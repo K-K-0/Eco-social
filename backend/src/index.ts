@@ -19,7 +19,7 @@ dotenv.config()
 const app = express()
 
 app.use(cors({
-    origin: ['http://localhost:5173',
+    origin: [
         'https://eco-frontend-9rpn.vercel.app',
         'https://eco-frontend-9rpn-k-k-0s-projects.vercel.app',
         'https://eco-frontend-9rpn-git-main-k-k-0s-projects.vercel.app',
