@@ -19,10 +19,10 @@ dotenv.config()
 const app = express()
 
 app.use(cors({
-    origin: ['eco-social.vercel.app',
-        'eco-social-k-k-0s-projects.vercel.app',
-        'eco-social-git-main-k-k-0s-projects.vercel.app',
-        'eco-social-jz0u6qw4k-k-k-0s-projects.vercel.app'
+    origin: ['https://eco-social.vercel.app',
+        'https://eco-social-k-k-0s-projects.vercel.app',
+        'https://eco-social-git-main-k-k-0s-projects.vercel.app',
+        'https://eco-social-jz0u6qw4k-k-k-0s-projects.vercel.app'
         
         ],
     credentials: true,
