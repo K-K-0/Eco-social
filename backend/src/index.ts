@@ -20,7 +20,7 @@ const app = express()
 
 app.use(cors({
     origin: ['http://localhost:5173',
-        'eco-social.vercel.app'
+        'https://eco-frontend-9rpn.vercel.app'
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
