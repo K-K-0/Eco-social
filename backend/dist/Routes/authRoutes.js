@@ -36,26 +36,32 @@ router.post('/register', (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 }));
 router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Login hit");
-    console.log("Request body:", req.body);
-    const { email, password } = req.body;
-    const user = yield prisma.user.findUnique({
-        where: { email },
-    });
-    if (!user)
-        return res.status(404).json({ error: "user not found" });
-    const validPassword = yield bcrypt_1.default.compare(password, user.password);
-    if (!validPassword)
-        return res.status(401).json({ error: "invalid password" });
-    const token = jsonwebtoken_1.default.sign({ userId: user.id }, "All", { expiresIn: "7d" });
-    res.cookie('token', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: 'none',
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        path: "/"
-    });
-    res.status(200).json({ massage: 'Login Successfully' });
+    try {
+        console.log("Login hit");
+        console.log("Request body:", req.body);
+        const { email, password } = req.body;
+        const user = yield prisma.user.findUnique({
+            where: { email },
+        });
+        if (!user)
+            return res.status(404).json({ error: "user not found" });
+        const validPassword = yield bcrypt_1.default.compare(password, user.password);
+        if (!validPassword)
+            return res.status(401).json({ error: "invalid password" });
+        const token = jsonwebtoken_1.default.sign({ userId: user.id }, "All", { expiresIn: "7d" });
+        res.cookie('token', token, {
+            httpOnly: true,
+            // secure: process.env.NODE_ENV === "production",
+            secure: true,
+            sameSite: 'none',
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            path: "/"
+        });
+        res.status(200).json({ massage: 'Login Successfully' });
+    }
+    catch (error) {
+        console.log(error);
+    }
 }));
 router.get('/me', middleware_1.authMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -79,7 +85,8 @@ router.post('/logout', middleware_1.authMiddleware, (req, res) => {
     console.log(req.cookies);
     res.clearCookie('token', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        // secure: process.env.NODE_ENV === "production", 
+        secure: true,
         sameSite: 'none',
     });
     res.json({ massage: "logged out successfully" });
