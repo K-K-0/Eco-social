@@ -20,6 +20,10 @@ const app = express()
 
 app.use(cors({
     origin: ['eco-social.vercel.app',
+        'eco-social-k-k-0s-projects.vercel.app',
+        'eco-social-git-main-k-k-0s-projects.vercel.app',
+        'eco-social-jz0u6qw4k-k-k-0s-projects.vercel.app'
+        
         ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
