@@ -1,90 +1,92 @@
-import React,{ useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { loginUser, getMe } from "../api/auth";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
-
 
 const Login = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [, setError] = useState('');
     const auth = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from || "/dashboard";
+
     if (!auth) {
         throw new Error("AuthContext is undefined. Make sure your component is wrapped in AuthProvider.");
     }
-    const { setUser, setIsAuthenticated } = auth;
-    const [, setError] = useState('')
-    const navigate = useNavigate()
-    const location = useLocation()
-    const from = location.state?.from || "/dashboard"
 
+    const { setUser, setIsAuthenticated } = auth;
 
     const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            await loginUser(email, password)
+            await loginUser(email, password);
         } catch (e) {
-            setError('Invalid credentials')
-            console.log(e)
+            setError("Invalid credentials");
+            console.log(e);
+            return;
         }
 
         try {
-            const res = await getMe()
-            console.log(res)
+            const res = await getMe();
             setUser(res.data);
-            setIsAuthenticated(true)
-            navigate(from, { replace: true })
-            setError('')
+            setIsAuthenticated(true);
+            navigate(from, { replace: true });
+            setError("");
         } catch (error) {
-            setError("session fetch fails")
-            console.log(error)
+            setError("Session fetch failed");
+            console.log(error);
         }
-    }
-
+    };
 
     return (
-        
-        <div className="font-inter max-h-screen flex flex-col gap items-center justify-center">
-            
-            <section className="flex justify-center">
-                 
-                <div className=" px-6 lg:px-8 absolute py-20 w-[500px] h-[500px] items-center">
-                    <div className=" max-h-screen rounded-2xl bg-[#f7f9f8] shadow-xl mt-30">
-                        <form onSubmit={handleLogin} className="lg:p-11 p-7 mx-auto">
-                            <div className="mb-11">
-                                <h1 className="text-[#002d1f] text-center font-manrope text-3xl font-bold leading-10 mb-2">Welcome Back</h1>
-                                <p className="text-[#002d1f] text-center text-base font-medium leading-6"></p>
-                            </div>
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
+            <div className="w-full max-w-md sm:max-w-lg md:max-w-xl bg-white shadow-xl rounded-2xl px-6 py-10 sm:p-12">
+                <h1 className="text-3xl font-bold text-center text-indigo-700 mb-6">Welcome Back</h1>
 
-                            
-                            <input type="text" placeholder="Email" className="w-full h-12 text-gray-900 placeholder:text-gray-400 
-                                text-lg font-normal leading-7 rounded-full border-gray-300 border shadow-sm focus:outline-none px-4 mb-6"
-                                value={email} onChange={(e) => setEmail(e.target.value)}
-                            /> 
+                <form onSubmit={handleLogin} className="space-y-6">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        required
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full h-12 px-4 text-base border border-gray-300 rounded-full focus:ring-2 focus:ring-indigo-500 outline-none placeholder-gray-400"
+                    />
 
-                            <input type="password" placeholder="Password" className="w-full h-12 text-gray-900 placeholder:text-gray-400
-                                text-lg font-normal leading-7 rounded-full border-gray-300 border shadow-sm focus:outline-none px-4 mb-1"
-                                value={password} onChange={(e) => setPassword(e.target.value)}
-                            />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        required
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full h-12 px-4 text-base border border-gray-300 rounded-full focus:ring-2 focus:ring-indigo-500 outline-none placeholder-gray-400"
+                    />
 
-                            <a href="" className="flex justify-end mb-6">
-                                <span className="text-indigo-600 text-right text-base font-normal leading-6">Forgot Password?</span>
-                            </a>
-
-                            <button type="submit" className="w-full h-12 text-white text-center text-base font-semibold leading-6 cursor-pointer rounded-full hover:bg-lime-500 transition-all duration-700  bg-indigo-600 shadow-sm mb-11">Login</button>
-
-                            <Link to="/signup" className="flex justify-center text-gray-900 text-base font-medium leading-6">
-                                Don’t have an account?
-                                <span className="text-indigo-600 font-semibold pl-3"> Sign Up</span>
-                            </Link>
-
-                            
-                        </form>
+                    <div className="flex justify-end text-sm">
+                        <a href="#" className="text-indigo-600 hover:underline">
+                            Forgot Password?
+                        </a>
                     </div>
-                </div>
-            </section>
-        </div>        
-    )
-}
 
-export default Login
+                    <button
+                        type="submit"
+                        className="w-full h-12 rounded-full bg-indigo-600 hover:bg-indigo-500 transition duration-300 text-white text-base font-semibold"
+                    >
+                        Login
+                    </button>
+                </form>
+
+                <p className="mt-6 text-center text-sm text-gray-600">
+                    Don’t have an account?
+                    <Link to="/signup" className="ml-2 text-indigo-600 font-medium hover:underline">
+                        Sign Up
+                    </Link>
+                </p>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
