@@ -56,10 +56,9 @@
 ## 🖼️ Screenshots
 
 > Add screenshots here (UI, map, planting form, mobile view, etc.)
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-
+> <img width="807" height="791" alt="image" src="https://github.com/user-attachments/assets/ca99f8e6-0491-4814-b600-1d7025a6a588" />
+> > > ![Uploading image.png…]()
+> ![Uploading image.png…]()
 ---
 
 ## 🧪 Local Development
